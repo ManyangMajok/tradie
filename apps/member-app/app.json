@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Tradify Members",
+    "name": "Tradify Kenya Members",
     "slug": "tradify-member",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -12,10 +12,7 @@
       "infoPlist": {
         "NSCameraUsageDescription": "Take photos of the issue for your tradie.",
         "NSPhotoLibraryUsageDescription": "Choose photos from your library to describe the job.",
-        "NSFaceIDUsageDescription": "Unlock Tradify with Face ID.",
-        "UIBackgroundModes": [
-          "remote-notification"
-        ]
+        "NSFaceIDUsageDescription": "Unlock Tradify with Face ID."
       }
     },
     "android": {
@@ -24,20 +21,16 @@
       "permissions": [
         "CAMERA",
         "READ_MEDIA_IMAGES",
-        "POST_NOTIFICATIONS",
         "USE_BIOMETRIC"
       ]
     },
     "plugins": [
       "expo-secure-store",
       "expo-local-authentication",
-      "@sentry/react-native",
       "expo-font"
     ],
-    "extra": {
-      "eas": {
-        "projectId": "REPLACE_WITH_EAS_PROJECT_ID"
-      }
+    "updates": {
+      "enabled": false
     }
   }
 }

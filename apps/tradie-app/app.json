@@ -1,6 +1,6 @@
 {
   "expo": {
-    "name": "Tradify — Tradie",
+    "name": "Tradify Kenya Fundis",
     "slug": "tradify-tradie",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -27,13 +27,10 @@
     "plugins": [
       "expo-font",
       "expo-secure-store",
-      "expo-local-authentication",
-      "@sentry/react-native"
+      "expo-local-authentication"
     ],
-    "extra": {
-      "eas": {
-        "projectId": "REPLACE_WITH_EAS_PROJECT_ID"
-      }
+    "updates": {
+      "enabled": false
     }
   }
 }

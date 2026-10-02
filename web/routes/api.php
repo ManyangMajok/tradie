@@ -14,6 +14,7 @@ use App\Http\Controllers\Api\V1\Tradie\PerformanceController;
 use App\Http\Controllers\Api\V1\Tradie\ServiceAreaController;
 use App\Http\Controllers\Api\V1\Tradie\SettingsController;
 use App\Http\Controllers\Api\V1\Tradie\SubscriptionController;
+use App\Models\Suburb;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -97,6 +98,9 @@ Route::prefix('v1')->middleware('auth:sanctum')->group(function () {
 
         // Jobs
         Route::get('/jobs', [MemberJobController::class, 'index']);
+        Route::get('/jobs/available-tradies', [MemberJobController::class, 'availableTradies']);
+        Route::post('/jobs/{publicId}/choose-tradie', [MemberJobController::class, 'chooseTradie']);
+        Route::get('/locations', fn () => response()->json(['data' => Suburb::where('is_active', true)->orderBy('name')->get(['id', 'name', 'state', 'postcode'])]));
         Route::get('/jobs/create', [MemberJobController::class, 'create']);
         Route::post('/jobs', [MemberJobController::class, 'store']);
         Route::get('/jobs/{publicId}', [MemberJobController::class, 'show']);

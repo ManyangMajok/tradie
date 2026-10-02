@@ -55,9 +55,9 @@ export function ProfileScreen() {
   const clearAuth = useAuthStore((s) => s.clearAuth);
   const user = useAuthStore((s) => s.user);
 
-  const { data: company } = useQuery<CompanyProfile>({
+  const { data: company } = useQuery<CompanyProfile | null>({
     queryKey: ['tradie-profile'],
-    queryFn: () => client.get<{ company: CompanyProfile | null }>('/api/v1/tradie/settings').then((r) => r.data.company ?? undefined),
+    queryFn: () => client.get<{ company: CompanyProfile | null }>('/api/v1/tradie/settings').then((r) => r.data.company),
   });
 
   async function doSignOut() {
@@ -101,7 +101,7 @@ export function ProfileScreen() {
             <Text style={styles.profileEmail}>{user?.email}</Text>
             {company?.rating_average != null && (
               <Text style={styles.profileRating}>
-                ★ {company.rating_average.toFixed(1)} · {company.rating_count} review{company.rating_count !== 1 ? 's' : ''}
+                ★ {Number(company.rating_average).toFixed(1)} · {company.rating_count} review{company.rating_count !== 1 ? 's' : ''}
               </Text>
             )}
           </View>
@@ -161,10 +161,10 @@ export function ProfileScreen() {
               <View style={styles.rowIcon}><Bell size={16} color={colors.onSurfaceVariant} /></View>
               <View style={styles.notifInfo}>
                 <Text style={styles.rowLabel}>Lead notifications</Text>
-                <Text style={styles.notifSub}>Required to receive leads</Text>
+                <Text style={styles.notifSub}>Demo: refresh the inbox to see leads</Text>
               </View>
               <Switch
-                value={true}
+                value={false}
                 disabled
                 thumbColor={colors.background}
                 trackColor={{ false: colors.surfaceContainer, true: colors.primary }}

@@ -27,7 +27,6 @@ interface TimePickerState {
   minute: number;
 }
 
-const HOURS = Array.from({ length: 24 }, (_, i) => i);
 const MINUTES = [0, 15, 30, 45];
 
 function pad(n: number) {

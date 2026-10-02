@@ -1,11 +1,12 @@
+import { demoWebUrl } from '@tradify/shared';
 import React, { useState } from 'react';
 import {
   View, Text, StyleSheet, TextInput, TouchableOpacity,
-  KeyboardAvoidingView, Platform, ScrollView, Alert, Linking,
+  KeyboardAvoidingView, Platform, ScrollView, Linking,
 } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Eye, EyeOff } from 'lucide-react-native';
-import { GlassCard, Button, colors, typography, spacing, radii } from '@tradify/ui';
+import { GlassCard, Button, colors, typography, spacing } from '@tradify/ui';
 import { authApi } from '@tradify/shared';
 import { useAuthStore } from '../../store/authStore';
 
@@ -26,14 +27,16 @@ export function LoginScreen() {
     setError(null);
     try {
       const deviceName = `${Platform.OS} device`;
-      const res = await authApi.login(email.trim(), password, deviceName);
+      const { data: res } = await authApi.login(email.trim().toLowerCase(), password, deviceName, 'member');
       if (res.user.role !== 'member') {
         setError('This account is for tradies. Download the Tradify Tradies app to access your account.');
         return;
       }
       await setAuth(res.access_token, res.refresh_token, res.user);
     } catch (err: any) {
-      if (err?.response?.status === 401) {
+      if (err?.response?.status === 403) {
+        setError(err.response.data.message ?? 'Use the correct app for your account.');
+      } else if (err?.response?.status === 401) {
         setError('Wrong email or password.');
       } else if (err?.response?.status === 422) {
         setError('Wrong email or password.');
@@ -123,14 +126,14 @@ export function LoginScreen() {
 
         {/* Aux links */}
         <TouchableOpacity
-          onPress={() => Linking.openURL('https://tradify.au/password/forgot')}
+          onPress={() => Linking.openURL(demoWebUrl('/password/forgot'))}
           style={styles.auxLink}
         >
           <Text style={styles.auxLinkText}>Forgot password?</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
-          onPress={() => Linking.openURL('https://tradify.au/register/member')}
+          onPress={() => Linking.openURL(demoWebUrl('/register/member'))}
           style={styles.auxLink}
         >
           <Text style={styles.auxLinkText}>

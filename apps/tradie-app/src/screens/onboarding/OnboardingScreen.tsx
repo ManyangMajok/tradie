@@ -2,8 +2,7 @@ import React, { useRef, useState } from 'react';
 import { View, Text, FlatList, StyleSheet, Dimensions, TouchableOpacity } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Zap, Shield, Calendar } from 'lucide-react-native';
-import * as Notifications from 'expo-notifications';
-import { Button, GlassCard, colors, typography, spacing, radii } from '@tradify/ui';
+import { Button, GlassCard, colors, typography, spacing } from '@tradify/ui';
 import { useAuthStore } from '../../store/authStore';
 
 // Stitch ref: docs/stitch/onboarding_step_1/, onboarding_step_2/, onboarding_step_3/
@@ -14,8 +13,8 @@ const SLIDES = [
   {
     icon: Zap,
     title: 'Leads arrive fast',
-    body: 'Get notified the moment a member near you submits a job. Accept in seconds — no call-out fee battles.',
-    cta: 'Enable Notifications',
+    body: 'Members choose you from nearby fundis. Keep the demo app open or refresh Leads to see requests.',
+    cta: 'Next',
   },
   {
     icon: Shield,
@@ -44,11 +43,6 @@ export function OnboardingScreen() {
 
   async function handleCta() {
     if (activeIndex === 0) {
-      // Request notification permission on slide 1 then advance
-      const { status } = await Notifications.getPermissionsAsync();
-      if (status !== 'granted') {
-        await Notifications.requestPermissionsAsync();
-      }
       listRef.current?.scrollToIndex({ index: 1 });
       setActiveIndex(1);
       return;

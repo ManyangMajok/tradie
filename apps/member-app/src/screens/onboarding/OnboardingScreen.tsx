@@ -1,12 +1,12 @@
 import React from 'react';
-import { View, Text, StyleSheet, Image, Platform } from 'react-native';
+import { View, Text, StyleSheet, Linking } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Button, colors, typography, spacing } from '@tradify/ui';
-import { useAuthStore } from '../../store/authStore';
+import { demoWebUrl } from '@tradify/shared';
 
 export function OnboardingScreen({ navigation }: any) {
   const insets = useSafeAreaInsets();
-  const setHasSeenOnboarding = useAuthStore((s) => s.setHasSeenOnboarding);
+
 
   return (
     <View style={styles.container}>
@@ -23,7 +23,7 @@ export function OnboardingScreen({ navigation }: any) {
         <View style={styles.textStack}>
           <Text style={styles.title}>Welcome to Tradify</Text>
           <Text style={styles.subtitle}>
-            Book trusted, verified local tradies in seconds.
+            Choose local Kenyan fundis by service area and rating.
           </Text>
         </View>
       </View>
@@ -36,9 +36,9 @@ export function OnboardingScreen({ navigation }: any) {
           style={styles.button}
         />
         <Button
-          label="Browse Tradies"
-          variant="outline"
-          onPress={setHasSeenOnboarding}
+          label="Join the Kenyan demo"
+          variant="secondary"
+          onPress={() => Linking.openURL(demoWebUrl('/register/member'))}
           fullWidth
         />
       </View>

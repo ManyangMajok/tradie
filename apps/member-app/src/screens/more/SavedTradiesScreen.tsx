@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, FlatList, TouchableOpacity, RefreshControl, Image, Alert } from 'react-native';
+import { View, Text, StyleSheet, FlatList, TouchableOpacity, RefreshControl, Alert } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Trash2, Star, ChevronLeft } from 'lucide-react-native';
 import { GlassCard, Button, colors, typography, spacing } from '@tradify/ui';
@@ -58,7 +58,7 @@ export function SavedTradiesScreen({ navigation }: any) {
           <Trash2 size={20} color={colors.error} />
         </TouchableOpacity>
       </View>
-      <Button label="Request Quote" onPress={() => navigation.navigate('SubmitRequest')} variant="outline" style={styles.actionBtn} />
+      <Button label="Find a Fundi" onPress={() => navigation.navigate('SubmitRequest')} variant="secondary" style={styles.actionBtn} />
     </GlassCard>
   );
 

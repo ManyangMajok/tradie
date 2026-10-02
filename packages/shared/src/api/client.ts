@@ -15,12 +15,11 @@ export function configureApiClient(opts: {
 }
 
 export const client: AxiosInstance = axios.create({
-  baseURL: 'https://pretty-planets-rhyme.loca.lt',
+  baseURL: 'http://127.0.0.1:8000',
   timeout: 15_000,
   headers: {
     Accept: 'application/json',
     'Content-Type': 'application/json',
-    'Bypass-Tunnel-Reminder': 'true'
   },
 });
 
@@ -45,3 +44,5 @@ client.interceptors.response.use(
     return Promise.reject(error);
   },
 );
+
+export function demoWebUrl(path: string): string { return `${(client.defaults.baseURL ?? '').replace(/\/$/, '')}${path}`; }

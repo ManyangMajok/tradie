@@ -35,7 +35,7 @@ function groupByDay(jobs: Job[]): { title: string; data: Job[] }[] {
     let key: string;
     if (d.toDateString() === today.toDateString()) key = 'TODAY';
     else if (d.toDateString() === tomorrow.toDateString()) key = 'TOMORROW';
-    else key = d.toLocaleDateString('en-AU', { weekday: 'long', day: 'numeric', month: 'short' }).toUpperCase();
+    else key = d.toLocaleDateString('en-KE', { weekday: 'long', day: 'numeric', month: 'short' }).toUpperCase();
     (groups[key] ??= []).push(job);
   }
   return Object.entries(groups).map(([title, data]) => ({ title, data }));

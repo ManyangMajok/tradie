@@ -2,17 +2,17 @@
 
 namespace App\Http\Controllers\Api\V1\Member;
 
-use App\Actions\Dispatch\DispatchJobAction;
+use App\Actions\Dispatch\SelectTradieAction;
 use App\Actions\Job\SubmitReviewAction;
 use App\Enums\JobStatus;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Member\StoreJobRequest;
+use App\Http\Requests\Member\StoreChosenJobRequest;
 use App\Http\Requests\Member\StoreReviewRequest;
 use App\Models\IssueType;
 use App\Models\Job;
-use App\Models\JobImage;
 use App\Models\JobStatusLog;
 use App\Models\TradieCategory;
+use App\Services\AvailableTradies;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -78,57 +78,26 @@ class JobController extends Controller
     /**
      * POST /api/v1/jobs
      */
-    public function store(StoreJobRequest $request, DispatchJobAction $dispatch): JsonResponse
+    public function store(StoreChosenJobRequest $request, SelectTradieAction $select): JsonResponse
     {
-        $data = $request->validated();
-        $user = $request->user();
+        $request->headers->set('Accept', 'application/json');
 
-        // Duplicate guard
-        $dedup = config('dispatch.duplicate_submission_seconds', 60);
-        $existing = Job::where('member_user_id', $user->id)
-            ->where('property_id', $data['property_id'])
-            ->where('tradie_category_id', $data['tradie_category_id'])
-            ->where('submitted_at', '>=', now()->subSeconds($dedup))
-            ->whereNotIn('status', [JobStatus::Cancelled->value, JobStatus::Confirmed->value])
-            ->first();
+        return app(\App\Http\Controllers\Member\JobController::class)->store($request, $select);
+    }
 
-        if ($existing) {
-            return response()->json([
-                'job' => $existing->only(['id', 'public_id']),
-                'public_id' => $existing->public_id,
-            ]);
-        }
+    public function availableTradies(Request $request, AvailableTradies $available): JsonResponse
+    {
+        return app(\App\Http\Controllers\Member\JobController::class)->availableTradies($request, $available);
+    }
 
-        $job = DB::transaction(function () use ($data, $user): Job {
-            $job = Job::create([
-                'member_user_id' => $user->id,
-                'property_id' => $data['property_id'],
-                'tradie_category_id' => $data['tradie_category_id'],
-                'issue_type_id' => $data['issue_type_id'] ?? null,
-                'custom_issue' => $data['custom_issue'] ?? null,
-                'urgency' => $data['urgency'],
-                'description' => $data['description'],
-                'best_contact_time' => $data['best_contact_time'] ?? null,
-                'status' => JobStatus::PendingDispatch,
-                'submitted_at' => now(),
-            ]);
+    public function chooseTradie(Request $request, string $publicId, SelectTradieAction $select): JsonResponse
+    {
+        $job = Job::where('public_id', $publicId)->where('member_user_id', $request->user()->id)->firstOrFail();
+        abort_unless($job->selected_tradie_company_id !== null, 409);
+        $data = $request->validate(['selected_tradie_company_id' => ['required', 'integer', 'exists:tradie_companies,id']]);
+        $select->execute($job, (int) $data['selected_tradie_company_id']);
 
-            if (! empty($data['image_ids'])) {
-                JobImage::whereIn('id', $data['image_ids'])
-                    ->where('uploaded_by_user_id', $user->id)
-                    ->whereNull('job_id')
-                    ->update(['job_id' => $job->id]);
-            }
-
-            return $job;
-        });
-
-        $dispatch->execute($job);
-
-        return response()->json([
-            'job' => $job->only(['id', 'public_id', 'status']),
-            'public_id' => $job->public_id,
-        ], 201);
+        return response()->json(['data' => $job, 'available_tradies' => $job->selected_tradie_company_id && $job->status === JobStatus::PendingDispatch ? app(AvailableTradies::class)->forJob($job) : []]);
     }
 
     /**
@@ -145,12 +114,13 @@ class JobController extends Controller
                 'images',
                 'statusLogs' => fn ($q) => $q->orderBy('created_at'),
                 'assignedCompany',
+                'selectedCompany:id,business_name,rating_average,rating_count',
                 'completionReport',
                 'review',
             ])
             ->firstOrFail();
 
-        return response()->json(['data' => $job]);
+        return response()->json(['data' => $job, 'available_tradies' => $job->selected_tradie_company_id && $job->status === JobStatus::PendingDispatch ? app(AvailableTradies::class)->forJob($job) : []]);
     }
 
     /**

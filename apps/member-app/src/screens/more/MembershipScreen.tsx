@@ -1,7 +1,8 @@
+import { demoWebUrl } from '@tradify/shared';
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, ScrollView, Linking } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ChevronLeft, CheckCircle, AlertCircle } from 'lucide-react-native';
+import { ChevronLeft, AlertCircle } from 'lucide-react-native';
 import { GlassCard, Button, colors, typography, spacing } from '@tradify/ui';
 import { memberApi } from '@tradify/shared';
 
@@ -25,7 +26,7 @@ export function MembershipScreen({ navigation }: any) {
   }, []);
 
   const handlePortal = () => {
-    Linking.openURL('https://tradify.au/membership');
+    Linking.openURL(demoWebUrl('/membership'));
   };
 
   return (

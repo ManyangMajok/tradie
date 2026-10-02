@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Linking, Alert } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Heart, CreditCard, HelpCircle, LogOut, User } from 'lucide-react-native';
 import { GlassCard, colors, typography, spacing } from '@tradify/ui';
@@ -22,10 +22,10 @@ export function MoreScreen({ navigation }: any) {
   };
 
   const menuItems = [
-    { icon: User, label: 'Profile Settings', action: () => Linking.openURL('https://tradify.au/settings') },
+    { icon: User, label: 'Account details', action: () => Alert.alert('Account details', `${user?.first_name ?? ''} ${user?.last_name ?? ''}\n${user?.email ?? ''}`) },
     { icon: Heart, label: 'Saved Tradies', action: () => navigation.navigate('SavedTradies') },
     { icon: CreditCard, label: 'Membership & Billing', action: () => navigation.navigate('Membership') },
-    { icon: HelpCircle, label: 'Support & Help', action: () => Linking.openURL('https://tradify.au/support') },
+    { icon: HelpCircle, label: 'Support & Help', action: () => Alert.alert('Demo help', 'Keep the local Laravel server running. Refresh screens to see updates. Ask your demo organiser for help.') },
   ];
 
   return (

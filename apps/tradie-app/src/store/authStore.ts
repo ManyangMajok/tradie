@@ -1,3 +1,4 @@
+import { Platform } from 'react-native';
 import { create } from 'zustand';
 import * as SecureStore from 'expo-secure-store';
 import type { AuthUser } from '@tradify/shared';
@@ -53,7 +54,7 @@ export const useAuthStore = create<AuthState>((set) => ({
     ]);
     const user = userJson ? (JSON.parse(userJson) as AuthUser) : null;
     configureApiClient({
-      baseURL: process.env.EXPO_PUBLIC_API_URL ?? 'http://localhost:8000',
+      baseURL: process.env.EXPO_PUBLIC_API_URL ?? (Platform.OS === 'android' ? 'http://10.0.2.2:8000' : 'http://127.0.0.1:8000'),
       getToken: () => SecureStore.getItemAsync(TOKEN_KEY),
       onUnauthorized: () => useAuthStore.getState().clearAuth(),
     });

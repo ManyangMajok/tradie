@@ -1,22 +1,21 @@
 import React, { useState } from 'react';
 import {
   View, Text, StyleSheet, ScrollView, TextInput,
-  TouchableOpacity, Image, Alert,
+  TouchableOpacity, Alert,
 } from 'react-native';
 import { NativeStackScreenProps } from '@react-navigation/native-stack';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import * as ImagePicker from 'expo-image-picker';
-import { X, Plus, CheckCircle } from 'lucide-react-native';
+import { CheckCircle } from 'lucide-react-native';
 import { TopBar, GlassCard, Button, colors, typography, spacing, radii } from '@tradify/ui';
-import { client } from '@tradify/shared';
+import { client, apiError } from '@tradify/shared';
 import type { RootStackParamList } from '../../navigation/RootNavigator';
 
 // Stitch ref: docs/stitch/completion_form_step_1/ through completion_form_step_5/
 
 type Props = NativeStackScreenProps<RootStackParamList, 'CompletionForm'>;
 
-const TOTAL_STEPS = 5;
+const TOTAL_STEPS = 4;
 
 interface FormData {
   summary: string;
@@ -24,7 +23,6 @@ interface FormData {
   callout_fee_waived: boolean;
   discount_applied: boolean;
   discount_amount: string;
-  photos: string[];
 }
 
 export function CompletionFormScreen({ navigation, route }: Props) {
@@ -39,7 +37,6 @@ export function CompletionFormScreen({ navigation, route }: Props) {
     callout_fee_waived: true,
     discount_applied: false,
     discount_amount: '',
-    photos: [],
   });
 
   const submit = useMutation({
@@ -53,26 +50,13 @@ export function CompletionFormScreen({ navigation, route }: Props) {
           ? Math.round(parseFloat(form.discount_amount || '0') * 100)
           : 0,
       }),
+    onError: (error) => Alert.alert('Unable to submit', apiError(error)),
     onSuccess: () => {
       qc.invalidateQueries({ queryKey: ['job', publicId] });
       qc.invalidateQueries({ queryKey: ['tradie-jobs'] });
       navigation.pop(2);
     },
   });
-
-  async function pickPhoto() {
-    const result = await ImagePicker.launchImageLibraryAsync({
-      mediaTypes: ImagePicker.MediaTypeOptions.Images,
-      quality: 0.8,
-    });
-    if (!result.canceled && result.assets[0]) {
-      setForm((f) => ({ ...f, photos: [...f.photos, result.assets[0].uri] }));
-    }
-  }
-
-  function removePhoto(i: number) {
-    setForm((f) => ({ ...f, photos: f.photos.filter((_, idx) => idx !== i) }));
-  }
 
   function canAdvance(): boolean {
     if (step === 1) return form.summary.trim().length >= 10;
@@ -127,7 +111,7 @@ export function CompletionFormScreen({ navigation, route }: Props) {
           <GlassCard style={styles.invoiceCard}>
             <Text style={styles.fieldLabel}>INVOICE AMOUNT</Text>
             <View style={styles.invoiceRow}>
-              <Text style={styles.currencySymbol}>$</Text>
+              <Text style={styles.currencySymbol}>KSh</Text>
               <TextInput
                 style={styles.invoiceInput}
                 value={form.invoice_amount}
@@ -170,7 +154,7 @@ export function CompletionFormScreen({ navigation, route }: Props) {
               <View>
                 <Text style={styles.fieldLabel}>DISCOUNT AMOUNT</Text>
                 <View style={styles.invoiceRow}>
-                  <Text style={styles.currencySymbol}>$</Text>
+                  <Text style={styles.currencySymbol}>KSh</Text>
                   <TextInput
                     style={styles.invoiceInput}
                     value={form.discount_amount}
@@ -185,57 +169,28 @@ export function CompletionFormScreen({ navigation, route }: Props) {
           </GlassCard>
         )}
 
-        {/* Step 4 — Photos */}
+        {/* Step 4 — Review */}
         {step === 4 && (
-          <View>
-            <Text style={styles.stepDesc}>Attach photos of completed work (optional but recommended)</Text>
-            <View style={styles.photoGrid}>
-              <TouchableOpacity style={styles.addPhotoBtn} onPress={pickPhoto}>
-                <Plus size={24} color={colors.primary} />
-                <Text style={styles.addPhotoText}>Add photo</Text>
-              </TouchableOpacity>
-              {form.photos.map((uri, i) => (
-                <View key={i} style={styles.photoThumb}>
-                  <Image source={{ uri }} style={styles.thumbImg} />
-                  <TouchableOpacity style={styles.removePhoto} onPress={() => removePhoto(i)}>
-                    <X size={12} color={colors.onSurface} />
-                  </TouchableOpacity>
-                </View>
-              ))}
-            </View>
-          </View>
-        )}
-
-        {/* Step 5 — Review */}
-        {step === 5 && (
           <View style={{ gap: spacing.md }}>
             <ReviewSection title="Activity summary" onEdit={() => setStep(1)}>
               <Text style={styles.reviewText}>{form.summary}</Text>
             </ReviewSection>
 
             <ReviewSection title="Invoice" onEdit={() => setStep(2)}>
-              <Text style={styles.reviewText}>${parseFloat(form.invoice_amount || '0').toFixed(2)}</Text>
+              <Text style={styles.reviewText}>KSh {parseFloat(form.invoice_amount || '0').toFixed(2)}</Text>
             </ReviewSection>
 
             <ReviewSection title="Benefits" onEdit={() => setStep(3)}>
               {form.callout_fee_waived && <BenefitBadge label="No call-out fee" />}
               {form.discount_applied && (
-                <BenefitBadge label={`$${parseFloat(form.discount_amount || '0').toFixed(2)} discount`} />
+                <BenefitBadge label={`KSh ${parseFloat(form.discount_amount || '0').toFixed(2)} discount`} />
               )}
               {!form.callout_fee_waived && !form.discount_applied && (
                 <Text style={styles.reviewText}>No benefits applied</Text>
               )}
             </ReviewSection>
 
-            {form.photos.length > 0 && (
-              <ReviewSection title="Photos" onEdit={() => setStep(4)}>
-                <View style={styles.reviewPhotoRow}>
-                  {form.photos.map((uri, i) => (
-                    <Image key={i} source={{ uri }} style={styles.reviewPhoto} />
-                  ))}
-                </View>
-              </ReviewSection>
-            )}
+
           </View>
         )}
       </ScrollView>
@@ -285,7 +240,7 @@ function BenefitBadge({ label }: { label: string }) {
   );
 }
 
-const stepTitles = ['Activity Summary', 'Invoice', 'Benefits', 'Photos', 'Review & Submit'];
+const stepTitles = ['Activity Summary', 'Invoice', 'Benefits', 'Review & Submit'];
 
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: colors.background },

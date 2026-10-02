@@ -47,8 +47,8 @@ export function PerformanceScreen() {
   });
 
   const revenue = data
-    ? (data.reported_revenue_cents / 100).toLocaleString('en-AU', {
-        style: 'currency', currency: 'AUD', maximumFractionDigits: 0,
+    ? (data.reported_revenue_cents / 100).toLocaleString('en-KE', {
+        style: 'currency', currency: 'KES', maximumFractionDigits: 0,
       })
     : '—';
 
@@ -78,7 +78,7 @@ export function PerformanceScreen() {
           <View style={styles.ratingRow}>
             <Star size={24} color={colors.tertiary} fill={colors.tertiary} />
             <Text style={styles.ratingValue}>
-              {data?.rating_average != null ? data.rating_average.toFixed(1) : '—'}
+              {data?.rating_average != null ? Number(data.rating_average).toFixed(1) : '—'}
             </Text>
             <Text style={styles.ratingCount}>
               {data?.rating_count ? `${data.rating_count} review${data.rating_count !== 1 ? 's' : ''}` : 'No reviews yet'}

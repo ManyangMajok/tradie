@@ -26,6 +26,9 @@ export const colors = {
   error: '#ffb4ab',
   errorContainer: '#93000a',
 
+  success: '#86efac',
+  warning: '#dac84e',
+  onPrimary: '#171219',
   // Text
   onSurface: '#eadfea',
   onSurfaceVariant: '#d0c2d3',
@@ -48,6 +51,9 @@ export const typography = {
     h2: 24,
     h3: 20,
     bodyLg: 16,
+    bodyMd: 16,
+    bodyXs: 12,
+    h4: 18,
     bodySm: 14,
     labelCaps: 12,
   },

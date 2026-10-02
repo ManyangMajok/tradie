@@ -38,6 +38,8 @@ export function Button({
   if (variant === 'primary') {
     return (
       <TouchableOpacity
+        accessibilityRole="button"
+        accessibilityLabel={label}
         onPress={onPress}
         disabled={isDisabled}
         activeOpacity={0.85}
@@ -73,6 +75,8 @@ export function Button({
 
   return (
     <TouchableOpacity
+      accessibilityRole="button"
+      accessibilityLabel={label}
       onPress={onPress}
       disabled={isDisabled}
       activeOpacity={0.8}

@@ -49,6 +49,8 @@ class DashboardController extends Controller
         return response()->json([
             'stats' => [
                 'jobs_this_year' => $totalJobsThisYear,
+                'active_jobs' => Job::where('member_user_id', $user->id)->whereNotIn('status', ['confirmed', 'cancelled'])->count(),
+                'pending_reviews' => Job::where('member_user_id', $user->id)->where('status', 'completed')->whereDoesntHave('review')->count(),
                 'saved_cents' => $totalSavedCents,
                 'properties' => $propertiesCount,
             ],

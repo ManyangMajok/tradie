@@ -15,7 +15,7 @@ class SavedTradieController extends Controller
     public function index(Request $request): JsonResponse
     {
         $savedTradies = SavedTradie::where('member_user_id', $request->user()->id)
-            ->with(['tradieCompany' => fn ($q) => $q->select('id', 'business_name', 'rating_average', 'rating_count')])
+            ->with(['company' => fn ($q) => $q->select('id', 'business_name', 'rating_average', 'rating_count')])
             ->latest()
             ->get();
 

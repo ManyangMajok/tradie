@@ -69,7 +69,7 @@ The member has a demo home in Westlands, Nairobi. Eight fictional fundi business
 5. To show signup, create a new member, add a property, select a plan, and click **Simulate payment**. For a new tradie, submit the application, approve it as admin, then activate its plan.
 6. Use **Forgot password** to demonstrate email: open `web/storage/logs/laravel.log` and use the reset link recorded there. Notification emails appear after the queue worker processes them.
 
-Annual prices, discounts, acceptance windows, and job state transitions are retained. Web members choose their tradie from a location-filtered, rating-ranked list; premium plans do not boost this list. Location means the property suburb and the tradie’s configured service areas, with no map or geolocation service required. Unrated tradies appear last. Original automatic scoring remains only for legacy/mobile requests. A simulated checkout activates a one-year subscription without collecting card details or making a charge. Repeating the same checkout does not create another subscription. Plan switching, real invoices, automatic renewal charges, and payment-failure scenarios are not simulated. Cancel membership turns off renewal while retaining access for the existing period; the demo does not simulate end-of-year payment-provider webhooks.
+Annual prices, discounts, acceptance windows, and job state transitions are retained. Web and mobile members choose their tradie from a location-filtered, rating-ranked list; premium plans do not boost this list. Location means the property suburb and the tradie’s configured service areas, with no map or geolocation service required. Unrated tradies appear last. Original automatic scoring remains only for legacy requests. A simulated checkout activates a one-year subscription without collecting card details or making a charge. Repeating the same checkout does not create another subscription. Plan switching, real invoices, automatic renewal charges, and payment-failure scenarios are not simulated. Cancel membership turns off renewal while retaining access for the existing period; the demo does not simulate end-of-year payment-provider webhooks.
 
 ## Pull an update
 
@@ -112,7 +112,7 @@ Tests force `DB_DATABASE=tradie_demo_testing` and recreate its tables. Never poi
 
 ## Repository layout
 
-`web/` is the runnable demo. `apps/`, `packages/`, and design references are preserved from the original project but are not required for the web demonstration. Root production deployment guides and `deploy/` are historical reference material; use this README for the demo. Do not run the original VPS deployment scripts for this copy.
+`web/` is the web demo. `apps/` contains the updated Kenyan member and fundi mobile apps, using shared code in `packages/`. See [Mobile setup and walkthrough](docs/MOBILE-DEMO.md) to run them; they are optional for the web demonstration. Root production deployment guides and `deploy/` are historical reference material; use this README for the demo. Do not run the original VPS deployment scripts for this copy.
 
 See [docs/DEMO.md](docs/DEMO.md) for the implementation differences. This is a demonstration build with publicly documented test accounts, not a production deployment.
 

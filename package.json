@@ -18,7 +18,7 @@
     "shared:build": "pnpm --filter @tradify/shared build",
     "ui:build": "pnpm --filter @tradify/ui build",
     "typecheck": "pnpm -r typecheck",
-    "lint": "pnpm -r lint",
+    "lint": "node web/node_modules/eslint/bin/eslint.js apps packages --config eslint.config.mjs",
     "test": "pnpm -r test",
     "demo:start": "composer --working-dir=web run dev"
   },

@@ -1,14 +1,17 @@
+import { TradieChoices } from '../../components/TradieChoices';
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Alert, ActivityIndicator } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { ChevronLeft, MapPin, Clock, Info, ShieldAlert } from 'lucide-react-native';
+import { ChevronLeft, MapPin, Clock } from 'lucide-react-native';
 import { GlassCard, Button, colors, typography, spacing, radii } from '@tradify/ui';
-import { memberApi } from '@tradify/shared';
+import { apiError, memberApi } from '@tradify/shared';
 
 export function JobDetailScreen({ route, navigation }: any) {
   const { publicId } = route.params;
   const insets = useSafeAreaInsets();
   const [job, setJob] = useState<any>(null);
+  const [selected, setSelected] = useState<number | null>(null);
+  const [choosing, setChoosing] = useState(false);
   const [loading, setLoading] = useState(true);
 
   async function loadJob() {
@@ -24,6 +27,7 @@ export function JobDetailScreen({ route, navigation }: any) {
   }
 
   useEffect(() => {
+    void loadJob();
     const unsubscribe = navigation.addListener('focus', loadJob);
     return unsubscribe;
   }, [navigation, publicId]);
@@ -83,6 +87,23 @@ export function JobDetailScreen({ route, navigation }: any) {
           <Text style={styles.description}>{job.description}</Text>
         </GlassCard>
 
+        {job.selected_tradie_company_id && job.status === 'offered' ? <GlassCard style={styles.card}>
+          <Text style={styles.sectionTitle}>Waiting for {job.selected_company?.business_name ?? 'your chosen fundi'} to accept</Text>
+          <Button label="Refresh status" variant="secondary" onPress={loadJob} />
+        </GlassCard> : null}
+        {job.selected_tradie_company_id && job.status === 'pending_dispatch' ? <GlassCard style={styles.card}>
+          <Text style={styles.sectionTitle}>Choose another fundi</Text>
+          <Text style={styles.description}>Your previous choice could not accept. Available providers are ranked by rating.</Text>
+          <TradieChoices tradies={job.available_tradies} selected={selected} onSelect={setSelected} disabled={choosing} />
+          <Button label="Send to chosen fundi" disabled={!selected} loading={choosing} onPress={async () => {
+            if (!selected) return;
+            setChoosing(true);
+            try { await memberApi.chooseTradie(publicId, selected); setSelected(null); await loadJob(); }
+            catch (e) { Alert.alert('Unable to send', apiError(e)); }
+            finally { setChoosing(false); }
+          }} />
+          <Button label="Refresh availability" variant="secondary" onPress={loadJob} disabled={choosing} />
+        </GlassCard> : null}
         {job.tradie && (
           <GlassCard style={styles.card}>
             <Text style={styles.sectionTitle}>Assigned Tradie</Text>
@@ -98,8 +119,8 @@ export function JobDetailScreen({ route, navigation }: any) {
           </GlassCard>
         )}
 
-        {(job.status === 'open' || job.status === 'assigned') && (
-          <Button label="Cancel Request" onPress={handleCancel} variant="outline" style={styles.cancelBtn} />
+        {(['pending_dispatch', 'offered', 'assigned', 'tradie_on_the_way', 'rescheduled'].includes(job.status)) && (
+          <Button label="Cancel Request" onPress={handleCancel} variant="secondary" style={styles.cancelBtn} />
         )}
 
         {job.status === 'completed' && !job.reviewed && (

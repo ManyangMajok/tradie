@@ -1,3 +1,4 @@
+import { demoWebUrl } from '@tradify/shared';
 import React, { useState, useRef } from 'react';
 import {
   View, Text, TextInput, StyleSheet, ScrollView,
@@ -111,14 +112,14 @@ export function LoginScreen() {
 
         <TouchableOpacity
           style={styles.forgotWrap}
-          onPress={() => Linking.openURL('https://tradify.au/password/forgot')}
+          onPress={() => Linking.openURL(demoWebUrl('/password/forgot'))}
         >
           <Text style={styles.forgot}>Forgot password?</Text>
         </TouchableOpacity>
 
         <TouchableOpacity
           style={styles.registerWrap}
-          onPress={() => Linking.openURL('https://tradify.au/register/tradie/step-1')}
+          onPress={() => Linking.openURL(demoWebUrl('/register/tradie/step-1'))}
         >
           <Text style={styles.registerText}>
             Not registered?{' '}

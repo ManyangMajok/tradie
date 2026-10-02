@@ -1,3 +1,4 @@
+import { demoWebUrl } from '@tradify/shared';
 import React from 'react';
 import {
   View, Text, StyleSheet, ScrollView, TouchableOpacity, Linking,
@@ -14,21 +15,8 @@ import type { RootStackParamList } from '../../navigation/RootNavigator';
 
 type Props = NativeStackScreenProps<RootStackParamList, 'Subscription'>;
 
-const PLAN_BENEFITS: Record<string, string[]> = {
-  premium: [
-    'Prioritised in dispatch scoring',
-    'Featured in member search results',
-    'Unlimited lead offers per month',
-    'Performance dashboard with full history',
-    'Priority support',
-  ],
-  standard: [
-    'Standard dispatch scoring',
-    'Up to 40 lead offers per month',
-    'Performance dashboard (last 30 days)',
-    'Email support',
-  ],
-};
+const demoBenefits = ['Member-selected local job requests', 'Search ranking by member ratings', 'Performance dashboard', 'Simulated annual subscription'];
+const PLAN_BENEFITS: Record<string, string[]> = { standard: demoBenefits, premium: demoBenefits };
 
 function statusColor(status: TradieSubscription['status']) {
   if (status === 'active') return colors.primary;
@@ -46,19 +34,19 @@ function statusLabel(status: TradieSubscription['status']) {
 export function SubscriptionScreen({ navigation }: Props) {
   const insets = useSafeAreaInsets();
 
-  const { data: sub } = useQuery<TradieSubscription>({
+  const { data: sub } = useQuery<TradieSubscription | null>({
     queryKey: ['tradie-subscription'],
-    queryFn: () => client.get<{ data: TradieSubscription | null }>('/api/v1/tradie/subscription').then((r) => r.data.data ?? undefined),
+    queryFn: () => client.get<{ data: TradieSubscription | null }>('/api/v1/tradie/subscription').then((r) => r.data.data),
   });
 
   const price = sub
-    ? (sub.yearly_price_cents / 100).toLocaleString('en-AU', {
-        style: 'currency', currency: 'AUD', maximumFractionDigits: 0,
+    ? (sub.yearly_price_cents / 100).toLocaleString('en-KE', {
+        style: 'currency', currency: 'KES', maximumFractionDigits: 0,
       })
     : '—';
 
   const endDate = sub
-    ? new Date(sub.end_date).toLocaleDateString('en-AU', {
+    ? new Date(sub.end_date).toLocaleDateString('en-KE', {
         day: 'numeric', month: 'long', year: 'numeric',
       })
     : '—';
@@ -150,7 +138,7 @@ export function SubscriptionScreen({ navigation }: Props) {
         {/* Manage button */}
         <TouchableOpacity
           style={styles.manageBtn}
-          onPress={() => Linking.openURL('https://tradify.au/tradie/subscription')}
+          onPress={() => Linking.openURL(demoWebUrl('/tradie/subscription'))}
           accessibilityLabel="Manage subscription on web"
         >
           <ExternalLink size={16} color={colors.primaryLight} />
@@ -158,7 +146,7 @@ export function SubscriptionScreen({ navigation }: Props) {
         </TouchableOpacity>
 
         <Text style={styles.note}>
-          Subscription billing is handled securely through the Tradify website.
+          Payments are simulated on the local demo website. Sign in there separately; no money is charged.
         </Text>
       </ScrollView>
     </View>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, ScrollView, TouchableOpacity, RefreshControl } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { Plus, Clock, CheckCircle, AlertCircle, ChevronRight } from 'lucide-react-native';
+import { Clock } from 'lucide-react-native';
 import { GlassCard, Button, colors, typography, spacing } from '@tradify/ui';
 import { memberApi } from '@tradify/shared';
 
@@ -49,10 +49,9 @@ export function HomeScreen({ navigation }: any) {
 
         <GlassCard style={styles.quickActionCard}>
           <Text style={styles.quickActionTitle}>Need a tradie?</Text>
-          <Text style={styles.quickActionDesc}>Get quotes from verified local professionals.</Text>
+          <Text style={styles.quickActionDesc}>Choose a local fundi by location and rating.</Text>
           <Button
             label="Post a Job"
-            icon={<Plus size={18} color={colors.onPrimary} />}
             onPress={() => navigation.navigate('SubmitRequest')}
             style={styles.actionBtn}
           />

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity, RefreshControl } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
 import { Plus, ChevronRight, Clock } from 'lucide-react-native';
-import { GlassCard, Button, colors, typography, spacing } from '@tradify/ui';
+import { GlassCard, Button, colors, typography, spacing, radii } from '@tradify/ui';
 import { memberApi } from '@tradify/shared';
 
 export function JobsScreen({ navigation }: any) {

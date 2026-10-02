@@ -39,7 +39,7 @@ class AuthController extends Controller
         $app = $request->input('app');
         if ($app === 'tradie' && $user->role !== UserRole::Tradie) {
             return response()->json([
-                'message' => 'This account is for members. Use the Tradify Members app (or tradify.au) to access your account.',
+                'message' => 'This account is for members. Use the Tradify Members app (or the local demo website) to access your account.',
             ], 403);
         }
         if ($app === 'member' && $user->role !== UserRole::Member) {

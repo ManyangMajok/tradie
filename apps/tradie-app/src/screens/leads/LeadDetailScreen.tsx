@@ -161,11 +161,11 @@ export function LeadDetailScreen({ navigation, route }: Props) {
         <GlassCard style={styles.timingCard}>
           <Text style={styles.detailLabel}>SUBMITTED</Text>
           <Text style={styles.timingText}>
-            {new Date(job.created_at).toLocaleString('en-AU')}
+            {new Date(job.created_at).toLocaleString('en-KE')}
           </Text>
           <Text style={[styles.detailLabel, { marginTop: spacing.md }]}>OFFER EXPIRES</Text>
           <Text style={styles.timingText}>
-            {new Date(offer.expires_at).toLocaleString('en-AU')}
+            {new Date(offer.expires_at).toLocaleString('en-KE')}
           </Text>
         </GlassCard>
       </ScrollView>

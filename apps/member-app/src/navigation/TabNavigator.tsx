@@ -7,7 +7,7 @@ import { HomeScreen } from '../screens/home/HomeScreen';
 import { JobsScreen } from '../screens/jobs/JobsScreen';
 import { PropertiesScreen } from '../screens/properties/PropertiesScreen';
 import { MoreScreen } from '../screens/more/MoreScreen';
-import { colors, typography, spacing } from '@tradify/ui';
+import { colors, typography } from '@tradify/ui';
 
 export type TabParamList = {
   Home: undefined;

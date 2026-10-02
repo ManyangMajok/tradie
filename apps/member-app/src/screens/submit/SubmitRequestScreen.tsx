@@ -1,140 +1,69 @@
 import React, { useEffect, useState } from 'react';
-import { View, Text, StyleSheet, TextInput, KeyboardAvoidingView, Platform, TouchableOpacity, Alert, ScrollView } from 'react-native';
+import { Text, StyleSheet, TextInput, ScrollView, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { useSafeAreaInsets } from 'react-native-safe-area-context';
-import { X, ChevronDown } from 'lucide-react-native';
-import { GlassCard, Button, colors, typography, spacing } from '@tradify/ui';
-import { memberApi } from '@tradify/shared';
+import { Button, GlassCard, colors, spacing, typography } from '@tradify/ui';
+import { apiError, memberApi, type AvailableTradie } from '@tradify/shared';
+import { TradieChoices } from '../../components/TradieChoices';
 
 export function SubmitRequestScreen({ navigation }: any) {
   const insets = useSafeAreaInsets();
-  const [properties, setProperties] = useState<any[]>([]);
-  const [categories, setCategories] = useState<any[]>([]);
-  const [propertyId, setPropertyId] = useState<number | null>(null);
-  const [categoryId, setCategoryId] = useState<number | null>(null);
-  const [title, setTitle] = useState('');
+  const [reference, setReference] = useState<any>(null);
+  const [property, setProperty] = useState<number | null>(null);
+  const [category, setCategory] = useState<number | null>(null);
+  const [urgency, setUrgency] = useState('flexible');
+  const [issue, setIssue] = useState('');
   const [description, setDescription] = useState('');
-  const [loading, setLoading] = useState(false);
-
-  useEffect(() => {
-    async function loadData() {
-      try {
-        const [propsRes, catsRes] = await Promise.all([
-          memberApi.getProperties(),
-          // Placeholder: ideally an endpoint for categories
-          fetch('http://127.0.0.1:8085/api/v1/tradie/categories').then(r=>r.json()).catch(()=>[]) // hacky fallback, ideally use shared api
-        ]);
-        setProperties(propsRes);
-        // Categories can be hardcoded for member app demo if API isn't exposed
-        setCategories([
-          { id: 1, name: 'Plumbing' },
-          { id: 2, name: 'Electrical' },
-          { id: 3, name: 'Carpentry' },
-        ]);
-        if (propsRes.length > 0) setPropertyId(propsRes[0].id);
-        setCategoryId(1);
-      } catch (err) {
-        console.warn(err);
-      }
-    }
-    loadData();
-  }, []);
-
-  const handleSubmit = async () => {
-    if (!propertyId || !categoryId || !title.trim() || !description.trim()) {
-      Alert.alert('Required', 'Please fill in all fields.');
-      return;
-    }
-    setLoading(true);
+  const [choices, setChoices] = useState<AvailableTradie[] | null>(null);
+  const [location, setLocation] = useState('');
+  const [selected, setSelected] = useState<number | null>(null);
+  const [busy, setBusy] = useState(false);
+  const [error, setError] = useState('');
+  async function load() {
+    setError('');
+    try { const data = await memberApi.getRequestData(); setReference(data); if (data.properties.length === 1) setProperty(data.properties[0].id); }
+    catch (e) { setError(apiError(e)); }
+  }
+  useEffect(() => { void load(); }, []);
+  async function find() {
+    if (!property || !category || !issue.trim() || description.trim().length < 10) { setError('Choose a property and trade, describe the issue, and add at least 10 characters of detail.'); return; }
+    setBusy(true); setError('');
+    try { const data = await memberApi.getAvailableTradies({ property_id: property, tradie_category_id: category, urgency }); setChoices(data.tradies); setLocation(data.location); setSelected(null); }
+    catch (e) { setError(apiError(e)); } finally { setBusy(false); }
+  }
+  async function submit() {
+    if (!property || !category || !selected || busy) return;
+    setBusy(true); setError('');
     try {
-      await memberApi.submitJob({
-        property_id: propertyId,
-        category_id: categoryId,
-        title: title.trim(),
-        description: description.trim(),
-      });
-      Alert.alert('Success', 'Your job request has been matched and sent to tradies!');
-      navigation.goBack();
-    } catch (err) {
-      Alert.alert('Error', 'Could not submit request.');
-    } finally {
-      setLoading(false);
-    }
-  };
-
-  return (
-    <KeyboardAvoidingView style={styles.container} behavior={Platform.OS === 'ios' ? 'padding' : undefined}>
-      <View style={[styles.header, { paddingTop: insets.top + spacing.sm }]}>
-        <Text style={styles.headerTitle}>New Request</Text>
-        <TouchableOpacity style={styles.closeBtn} onPress={() => navigation.goBack()}>
-          <X size={24} color={colors.onSurface} />
-        </TouchableOpacity>
-      </View>
-
-      <ScrollView contentContainerStyle={[styles.content, { paddingBottom: insets.bottom + spacing.xl }]}>
-        <GlassCard style={styles.card}>
-          <View style={styles.field}>
-            <Text style={styles.label}>PROPERTY</Text>
-            <View style={styles.pickerFake}>
-              <Text style={styles.pickerText}>
-                {properties.find(p => p.id === propertyId)?.address || 'Select a property...'}
-              </Text>
-              <ChevronDown size={20} color={colors.outline} />
-            </View>
-          </View>
-
-          <View style={styles.field}>
-            <Text style={styles.label}>CATEGORY</Text>
-            <View style={styles.pickerFake}>
-              <Text style={styles.pickerText}>
-                {categories.find(c => c.id === categoryId)?.name || 'Select a category...'}
-              </Text>
-              <ChevronDown size={20} color={colors.outline} />
-            </View>
-          </View>
-
-          <View style={styles.field}>
-            <Text style={styles.label}>JOB TITLE</Text>
-            <TextInput
-              style={styles.input}
-              value={title}
-              onChangeText={setTitle}
-              placeholder="e.g. Leaking kitchen sink"
-              placeholderTextColor={colors.outline}
-            />
-          </View>
-
-          <View style={styles.field}>
-            <Text style={styles.label}>DESCRIPTION</Text>
-            <TextInput
-              style={[styles.input, styles.textArea]}
-              value={description}
-              onChangeText={setDescription}
-              placeholder="Please describe the issue in detail..."
-              placeholderTextColor={colors.outline}
-              multiline
-              textAlignVertical="top"
-            />
-          </View>
-
-          <Button label="Find a Tradie" onPress={handleSubmit} loading={loading} style={styles.submitBtn} />
-        </GlassCard>
-      </ScrollView>
-    </KeyboardAvoidingView>
-  );
+      const result = await memberApi.submitJob({ property_id: property, tradie_category_id: category, urgency, custom_issue: issue.trim(), description: description.trim(), selected_tradie_company_id: selected });
+      navigation.replace('JobDetail', { publicId: result.public_id });
+    } catch (e) { setError(apiError(e)); } finally { setBusy(false); }
+  }
+  function option(id: number | string, label: string, checked: boolean, select: () => void) {
+    return <TouchableOpacity key={id} accessibilityRole="radio" accessibilityState={{ checked }} accessibilityLabel={label} disabled={busy} onPress={select} style={[styles.option, checked && styles.selected]}><Text style={styles.text}>{label}</Text></TouchableOpacity>;
+  }
+  return <ScrollView keyboardShouldPersistTaps="handled" style={styles.screen} contentContainerStyle={[styles.content, { paddingTop: insets.top + spacing.lg, paddingBottom: insets.bottom + spacing.xl }]}>
+    <Text style={styles.heading}>Request a local fundi</Text>
+    <Button label="Close" variant="ghost" disabled={busy} onPress={() => navigation.goBack()} />
+    {!reference ? <><ActivityIndicator color={colors.primaryLight} /><Button label="Retry loading" onPress={load} /></> : choices === null ? <GlassCard style={styles.form}>
+      <Text style={styles.label}>Property</Text>
+      {reference.properties.map((p: any) => option(p.id, `${p.label}: ${p.address_line_1}, ${p.suburb?.name}`, property === p.id, () => setProperty(p.id)))}
+      {reference.properties.length === 0 && <Button label="Add a property" onPress={() => navigation.replace('PropertyForm', {})} />}
+      <Text style={styles.label}>Trade</Text>
+      {reference.categories.map((c: any) => option(c.id, c.name, category === c.id, () => setCategory(c.id)))}
+      <Text style={styles.label}>Urgency</Text>
+      {[['flexible', 'Flexible'], ['within_48h', 'Within 48 hours'], ['same_day', 'Same day'], ['emergency', 'Emergency']].map(([id, label]) => option(id, label, urgency === id, () => setUrgency(id)))}
+      <Text style={styles.label}>Issue</Text><TextInput accessibilityLabel="Issue" style={styles.input} value={issue} onChangeText={setIssue} maxLength={200} placeholder="Leaking kitchen tap" placeholderTextColor={colors.outline} />
+      <Text style={styles.label}>Description</Text><TextInput accessibilityLabel="Description" style={[styles.input, { minHeight: 100 }]} multiline value={description} onChangeText={setDescription} maxLength={2000} placeholder="Describe the problem" placeholderTextColor={colors.outline} />
+      <Button label="Find local fundis" onPress={find} loading={busy} />
+    </GlassCard> : <GlassCard style={styles.form}>
+      <Text style={styles.label}>Available in {location} · highest rated first</Text>
+      <Text style={styles.text}>Only your chosen fundi receives this request. They must accept before the job is assigned.</Text>
+      <TradieChoices tradies={choices} selected={selected} onSelect={setSelected} disabled={busy} />
+      <Button label="Send to chosen fundi" disabled={!selected} loading={busy} onPress={submit} />
+      <Button label="Refresh availability" variant="secondary" disabled={busy} onPress={find} />
+      <Button label="Edit request" variant="ghost" disabled={busy} onPress={() => { setChoices(null); setSelected(null); }} />
+    </GlassCard>}
+    {!!error && <Text accessibilityRole="alert" style={styles.error}>{error}</Text>}
+  </ScrollView>;
 }
-
-const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: colors.background },
-  header: { flexDirection: 'row', alignItems: 'center', justifyContent: 'center', paddingHorizontal: spacing.xl, paddingBottom: spacing.md, borderBottomWidth: 1, borderBottomColor: colors.glassBorder },
-  headerTitle: { fontFamily: typography.fonts.bold, fontSize: typography.sizes.h3, color: colors.onSurface },
-  closeBtn: { position: 'absolute', right: spacing.md, bottom: spacing.sm, padding: spacing.sm },
-  content: { padding: spacing.xl },
-  card: { gap: spacing.lg },
-  field: { gap: spacing.xs },
-  label: { fontFamily: typography.fonts.bold, fontSize: typography.sizes.labelCaps, color: colors.onSurfaceVariant, textTransform: 'uppercase', letterSpacing: 1 },
-  input: { fontFamily: typography.fonts.regular, fontSize: typography.sizes.bodyMd, color: colors.onSurface, borderWidth: 1, borderColor: colors.glassBorder, borderRadius: 12, paddingHorizontal: spacing.md, height: 48, backgroundColor: `${colors.surface}50` },
-  textArea: { height: 120, paddingVertical: spacing.md },
-  pickerFake: { flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', borderWidth: 1, borderColor: colors.glassBorder, borderRadius: 12, paddingHorizontal: spacing.md, height: 48, backgroundColor: `${colors.surface}50` },
-  pickerText: { fontFamily: typography.fonts.regular, fontSize: typography.sizes.bodyMd, color: colors.onSurface },
-  submitBtn: { marginTop: spacing.md },
-});
+const styles = StyleSheet.create({ screen: { flex: 1, backgroundColor: colors.background }, content: { padding: spacing.xl, gap: spacing.md }, heading: { color: colors.onSurface, fontFamily: typography.fonts.bold, fontSize: 24 }, form: { gap: spacing.md }, label: { color: colors.onSurface, fontFamily: typography.fonts.bold, fontSize: 16 }, text: { color: colors.onSurfaceVariant, fontSize: 16 }, option: { padding: spacing.md, borderWidth: 1, borderColor: colors.glassBorder, borderRadius: 12 }, selected: { borderColor: colors.primaryLight }, input: { color: colors.onSurface, borderWidth: 1, borderColor: colors.glassBorder, borderRadius: 12, padding: spacing.md, fontSize: 16 }, error: { color: colors.error, fontSize: 16 } });
