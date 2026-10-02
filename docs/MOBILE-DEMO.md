@@ -56,3 +56,7 @@ pnpm --filter tradie-app exec expo export --platform android --platform ios --ou
 ```
 
 Root mobile lint reuses the ESLint/TypeScript toolchain installed by `npm ci` in `web/`. Backend tests include bearer-token member login, local ratings discovery, member choice, fundi acceptance, status progression, KSh completion and member review. Bundle and API checks do not replace a hands-on device check; no browser or device was operated during this update.
+
+### iPhone opens Expo Go but does not load the project
+
+The mobile `.env.example` sets `EXPO_NO_REDIRECT_PAGE=1` so the QR code opens Expo Go directly. Keep this value in your local `.env` and restart Metro after changing it. The inherited development-client dependency otherwise displays an app chooser; choosing Development Build cannot work without a separately installed native build. Use the fresh QR code after restarting. If Expo Go itself still closes, capture its version and any iPhone error; this redirect fix does not establish the cause of a native crash.
