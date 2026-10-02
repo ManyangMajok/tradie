@@ -23,7 +23,8 @@
     "demo:start": "composer --working-dir=web run dev"
   },
   "devDependencies": {
-    "typescript": "~6.0.3"
+    "typescript": "~6.0.3",
+    "@expo/dom-webview": "~57.0.1"
   },
   "pnpm": {
     "overrides": {

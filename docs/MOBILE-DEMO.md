@@ -64,3 +64,7 @@ The mobile `.env.example` sets `EXPO_NO_REDIRECT_PAGE=1` so the QR code opens Ex
 ### SDK compatibility
 
 Both apps were upgraded together to SDK 57 after the physical iPhone reported Expo Go SDK 57. Dependencies follow expo@57.0.26 bundledNativeModules.json, including shared UI native modules. The unused NativeWind dependency and obsolete @types/react-native stub were removed; screens continue to use their existing StyleSheet design. babel-preset-expo is now explicit in each app. Use the committed pnpm lockfile, then restart Metro with a cleared cache after pulling this upgrade.
+
+### Connection errors after changing Wi-Fi
+
+Your computer's LAN address can change. Run `ipconfig` again, update EXPO_PUBLIC_API_URL in both local app `.env` files, and restart both Expo servers. Reopen the new QR codes or exp:// links instead of a saved address. On the phone, the same computer address with port 8001 should load the Laravel login page in Safari. Also keep the MySQL instance configured by web/.env running; an unrelated MySQL server on another port will not serve this demo database.
