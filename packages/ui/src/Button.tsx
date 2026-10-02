@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   gradient: {
-    ...StyleSheet.absoluteFillObject,
+    ...StyleSheet.absoluteFill,
     justifyContent: 'center',
     alignItems: 'center',
     paddingHorizontal: spacing.xl,

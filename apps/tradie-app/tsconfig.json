@@ -3,10 +3,21 @@
   "compilerOptions": {
     "strict": true,
     "paths": {
-      "@/*": ["./src/*"],
-      "@tradify/ui": ["../../packages/ui/src/index.ts"],
-      "@tradify/shared": ["../../packages/shared/src/index.ts"]
+      "@/*": [
+        "./src/*"
+      ],
+      "@tradify/ui": [
+        "../../packages/ui/src/index.ts"
+      ],
+      "@tradify/shared": [
+        "../../packages/shared/src/index.ts"
+      ]
     }
   },
-  "include": ["src", "App.tsx", "*.ts", "*.tsx"]
+  "include": [
+    "src",
+    "App.tsx",
+    "*.ts",
+    "*.tsx"
+  ]
 }

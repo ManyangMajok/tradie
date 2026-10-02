@@ -40,3 +40,5 @@ Currency display is KES/KSh and times use Africa/Nairobi. Existing numerical sub
 ## Mobile demo update
 
 The owner requested both mobile apps be updated for this copy. See [MOBILE-DEMO.md](MOBILE-DEMO.md) for runtime, startup, demonstration and limitations. The mobile POST /api/v1/member/jobs now requires selected_tradie_company_id and shares the web validation/transaction path. GET /api/v1/member/jobs/available-tradies and POST /api/v1/member/jobs/{publicId}/choose-tradie mirror web discovery and reselection with bearer authentication and owner checks. GET /api/v1/member/locations returns active seeded locations for property editing. Job detail adds selected_company and available_tradies; dashboard adds active_jobs and pending_reviews counts. Saved provider loading uses the existing company relation. No migrations or external integration credentials are added.
+
+Mobile compatibility update: Expo SDK 57 replaces SDK 54 in both apps to match the owner's installed iPhone Expo Go. React Native 0.86.3 / React 19.2.3 are scoped to the mobile workspace; the Laravel web frontend remains on its existing npm dependency lock. See MOBILE-DEMO.md for setup.

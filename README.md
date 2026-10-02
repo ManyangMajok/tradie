@@ -11,7 +11,7 @@ Install **PHP 8.4+**, **Composer 2**, **Node.js 22.12+**, **Git**, and **MySQL 8
 1. Clone the repository and enter its `web` folder:
 
    ```sh
-   git clone <REPOSITORY_URL> tradie
+   git clone https://github.com/ManyangMajok/tradie.git tradie
    cd tradie/web
    composer install
    ```

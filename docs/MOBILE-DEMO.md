@@ -1,10 +1,10 @@
 # Kenyan mobile demonstration
 
-Both mobile apps in this copy use the same Laravel/MySQL demo and existing native design: `apps/member-app` and `apps/tradie-app`. The retained runtime is Expo SDK 54, React Native 0.81.5 and React 19.1. The historical production mobile specification does not require cloud integrations for this demo.
+Both mobile apps in this copy use the same Laravel/MySQL demo and existing native design: `apps/member-app` and `apps/tradie-app`. The mobile runtime is Expo SDK 57, React Native 0.86.3 and React 19.2.3. The historical production mobile specification does not require cloud integrations for this demo.
 
 ## Install and start
 
-First complete the root README web setup and keep `composer run dev` running in `web/` (web server, queue and scheduler). Install Node 22 and pnpm 9.12.0. From the repository root:
+First complete the root README web setup and keep `composer run dev` running in `web/` (web server, queue and scheduler). Install Node 22.13 or newer and pnpm 9.12.0. From the repository root:
 
 ```sh
 pnpm install --frozen-lockfile
@@ -29,7 +29,7 @@ pnpm --filter member-app exec expo start --go --port 8081
 pnpm --filter tradie-app exec expo start --go --port 8082
 ```
 
-Use an Expo Go installation compatible with **SDK 54**, or a local native development build using the project's pinned runtime. An incompatible Expo Go version cannot open this project. Android emulators work on Windows; iOS simulators require macOS. The terminal QR code opens the app on a phone. No tunnel, EAS account, Sentry, Redis, payment provider or push provider is needed. Native store packages/APKs are not produced by the JavaScript export checks below.
+Use an Expo Go installation compatible with **SDK 57**, or a local native development build using the project's pinned runtime. An incompatible Expo Go version cannot open this project. Android emulators work on Windows; iOS simulators require macOS. The terminal QR code opens the app on a phone. No tunnel, EAS account, Sentry, Redis, payment provider or push provider is needed. Native store packages/APKs are not produced by the JavaScript export checks below.
 
 ## Demonstrate the flow
 
@@ -60,3 +60,7 @@ Root mobile lint reuses the ESLint/TypeScript toolchain installed by `npm ci` in
 ### iPhone opens Expo Go but does not load the project
 
 The mobile `.env.example` sets `EXPO_NO_REDIRECT_PAGE=1` so the QR code opens Expo Go directly. Keep this value in your local `.env` and restart Metro after changing it. The inherited development-client dependency otherwise displays an app chooser; choosing Development Build cannot work without a separately installed native build. Use the fresh QR code after restarting. If Expo Go itself still closes, capture its version and any iPhone error; this redirect fix does not establish the cause of a native crash.
+
+### SDK compatibility
+
+Both apps were upgraded together to SDK 57 after the physical iPhone reported Expo Go SDK 57. Dependencies follow expo@57.0.26 bundledNativeModules.json, including shared UI native modules. The unused NativeWind dependency and obsolete @types/react-native stub were removed; screens continue to use their existing StyleSheet design. babel-preset-expo is now explicit in each app. Use the committed pnpm lockfile, then restart Metro with a cleared cache after pulling this upgrade.
