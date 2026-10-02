@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"/>
+<title>Properties List - PropManage</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#201c00",
+                        "surface-container-low": "#1f1a21",
+                        "on-secondary-container": "#e2a2ed",
+                        "inverse-surface": "#eadfea",
+                        "on-primary-container": "#450069",
+                        "on-primary-fixed-variant": "#6b1a9a",
+                        "primary-container": "#bd6fec",
+                        "surface": "#171219",
+                        "surface-container-lowest": "#110c14",
+                        "on-tertiary": "#373100",
+                        "secondary-container": "#693376",
+                        "surface-variant": "#39333b",
+                        "on-secondary-fixed-variant": "#663073",
+                        "on-background": "#eadfea",
+                        "tertiary-fixed-dim": "#dac84e",
+                        "outline-variant": "#4d4351",
+                        "surface-dim": "#171219",
+                        "error-container": "#93000a",
+                        "on-secondary": "#4d185b",
+                        "surface-container": "#231e25",
+                        "on-error-container": "#ffdad6",
+                        "tertiary": "#dac84e",
+                        "outline": "#998d9d",
+                        "inverse-primary": "#8639b4",
+                        "on-tertiary-fixed-variant": "#504700",
+                        "secondary": "#f2affc",
+                        "on-secondary-fixed": "#340042",
+                        "surface-bright": "#3d373f",
+                        "on-primary-fixed": "#30004b",
+                        "secondary-fixed": "#fdd6ff",
+                        "surface-container-highest": "#39333b",
+                        "on-surface-variant": "#d0c2d3",
+                        "background": "#171219",
+                        "primary-fixed": "#f5d9ff",
+                        "surface-tint": "#e5b4ff",
+                        "primary": "#e5b4ff",
+                        "error": "#ffb4ab",
+                        "on-primary": "#4f0077",
+                        "surface-container-high": "#2e2830",
+                        "secondary-fixed-dim": "#f2affc",
+                        "on-surface": "#eadfea",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#f7e467",
+                        "on-tertiary-container": "#484000",
+                        "primary-fixed-dim": "#e5b4ff",
+                        "tertiary-container": "#bdac35",
+                        "inverse-on-surface": "#342e37"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "inner-padding": "12px",
+                        "container-margin": "20px",
+                        "section-padding": "32px",
+                        "stack-gap": "16px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "label-caps": ["Manrope"],
+                        "body-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h2": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "h3": ["20px", { "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+        .pt-safe { padding-top: env(safe-area-inset-top); }
+        
+        /* Glassmorphism utilities */
+        .glass-card {
+            background-color: rgba(60, 53, 65, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-lg antialiased selection:bg-primary/30">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#3C3541]/80 backdrop-blur-xl flex justify-between items-center h-16 px-5 pt-safe">
+<div class="flex items-center gap-4">
+<button class="flex items-center justify-center text-[#AC5FDB] active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[24px]">menu</span>
+</button>
+<h1 class="font-h2 text-h2 tracking-tight text-white bg-clip-text">PropManage</h1>
+</div>
+<button class="w-8 h-8 rounded-full bg-surface-variant flex items-center justify-center border border-white/10 active:scale-95 duration-200 overflow-hidden">
+<span class="material-symbols-outlined text-on-surface-variant text-[20px]">person</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="min-h-screen pt-[88px] pb-[104px] px-[20px] flex flex-col gap-6 overflow-y-auto">
+<!-- Sticky Action Header -->
+<div class="sticky top-[72px] z-40 bg-background/90 backdrop-blur-md py-2 -mx-[20px] px-[20px]">
+<button class="w-full flex items-center justify-center gap-2 py-[14px] rounded-lg border border-primary text-primary font-h3 text-h3 glass-card active:scale-[0.98] transition-transform duration-200 shadow-[0_4px_24px_rgba(229,180,255,0.08)]">
+<span class="material-symbols-outlined">add</span>
+                Add property
+            </button>
+</div>
+<!-- Properties List -->
+<div class="flex flex-col gap-[16px]">
+<!-- Card 1: Home -->
+<button class="glass-card rounded-xl p-4 flex items-center gap-4 text-left active:scale-[0.98] transition-transform duration-200 w-full group relative overflow-hidden">
+<div class="absolute inset-0 bg-white/0 group-active:bg-white/5 transition-colors duration-200"></div>
+<div class="w-12 h-12 rounded-full bg-surface-container-lowest/50 border border-white/5 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary" style="font-variation-settings: 'FILL' 1;">home</span>
+</div>
+<div class="flex-1 flex flex-col justify-center min-w-0">
+<span class="font-label-caps text-label-caps text-secondary uppercase mb-1 tracking-wider">Primary Residence</span>
+<span class="font-h3 text-h3 text-on-surface truncate w-full">1042 Midnight Blvd, Suite 200</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 truncate w-full">Seattle, WA 98101</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant shrink-0 group-hover:text-primary transition-colors">chevron_right</span>
+</button>
+<!-- Card 2: Rental Property -->
+<button class="glass-card rounded-xl p-4 flex items-center gap-4 text-left active:scale-[0.98] transition-transform duration-200 w-full group relative overflow-hidden">
+<div class="absolute inset-0 bg-white/0 group-active:bg-white/5 transition-colors duration-200"></div>
+<div class="w-12 h-12 rounded-full bg-surface-container-lowest/50 border border-white/5 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">domain</span>
+</div>
+<div class="flex-1 flex flex-col justify-center min-w-0">
+<span class="font-label-caps text-label-caps text-tertiary uppercase mb-1 tracking-wider">Investment • Active</span>
+<span class="font-h3 text-h3 text-on-surface truncate w-full">The Glasshouse Lofts</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 truncate w-full">Unit 4B, 88 Zenith Ave, Austin, TX</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant shrink-0 group-hover:text-primary transition-colors">chevron_right</span>
+</button>
+<!-- Card 3: Commercial -->
+<button class="glass-card rounded-xl p-4 flex items-center gap-4 text-left active:scale-[0.98] transition-transform duration-200 w-full group relative overflow-hidden">
+<div class="absolute inset-0 bg-white/0 group-active:bg-white/5 transition-colors duration-200"></div>
+<div class="w-12 h-12 rounded-full bg-surface-container-lowest/50 border border-white/5 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">storefront</span>
+</div>
+<div class="flex-1 flex flex-col justify-center min-w-0">
+<span class="font-label-caps text-label-caps text-outline-variant uppercase mb-1 tracking-wider">Commercial • Vacant</span>
+<span class="font-h3 text-h3 text-on-surface truncate w-full">Lumina Retail Space</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 truncate w-full">Ground Floor, 1200 Commerce St, NY</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant shrink-0 group-hover:text-primary transition-colors">chevron_right</span>
+</button>
+<!-- Card 4: Vacation -->
+<button class="glass-card rounded-xl p-4 flex items-center gap-4 text-left active:scale-[0.98] transition-transform duration-200 w-full group relative overflow-hidden">
+<div class="absolute inset-0 bg-white/0 group-active:bg-white/5 transition-colors duration-200"></div>
+<div class="w-12 h-12 rounded-full bg-surface-container-lowest/50 border border-white/5 flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-primary">beach_access</span>
+</div>
+<div class="flex-1 flex flex-col justify-center min-w-0">
+<span class="font-label-caps text-label-caps text-secondary uppercase mb-1 tracking-wider">Short-term Rental</span>
+<span class="font-h3 text-h3 text-on-surface truncate w-full">Horizon Villa</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mt-0.5 truncate w-full">45 Ocean Drive, Malibu, CA</span>
+</div>
+<span class="material-symbols-outlined text-on-surface-variant shrink-0 group-hover:text-primary transition-colors">chevron_right</span>
+</button>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 w-full z-50 rounded-t-lg bg-[#3C3541]/90 backdrop-blur-[24px] shadow-2xl flex justify-around items-center h-20 px-4 pb-safe">
+<!-- Active Tab -->
+<button class="flex flex-col items-center justify-center bg-[#AC5FDB]/20 text-[#E3A2EE] rounded-xl px-4 py-1 active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined mb-1 text-[24px]" style="font-variation-settings: 'FILL' 1;">domain</span>
+<span class="font-manrope text-[10px] font-medium">Properties</span>
+</button>
+<!-- Inactive Tabs -->
+<button class="flex flex-col items-center justify-center text-gray-400 px-4 py-1 hover:text-white transition-colors active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined mb-1 text-[24px]">analytics</span>
+<span class="font-manrope text-[10px] font-medium">Insights</span>
+</button>
+<button class="flex flex-col items-center justify-center text-gray-400 px-4 py-1 hover:text-white transition-colors active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined mb-1 text-[24px]">notifications</span>
+<span class="font-manrope text-[10px] font-medium">Activity</span>
+</button>
+<button class="flex flex-col items-center justify-center text-gray-400 px-4 py-1 hover:text-white transition-colors active:scale-90 transition-transform duration-150">
+<span class="material-symbols-outlined mb-1 text-[24px]">settings</span>
+<span class="font-manrope text-[10px] font-medium">Settings</span>
+</button>
+</nav>
+</body></html>

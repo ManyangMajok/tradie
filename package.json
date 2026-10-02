@@ -1,0 +1,35 @@
+{
+  "name": "tradify-monorepo",
+  "version": "0.0.0",
+  "private": true,
+  "description": "Tradify platform monorepo \u2014 web, tradie mobile app, member mobile app, shared packages",
+  "packageManager": "pnpm@9.12.0",
+  "engines": {
+    "node": ">=20",
+    "pnpm": ">=9"
+  },
+  "scripts": {
+    "tradie:dev": "pnpm --filter tradie-app start",
+    "tradie:ios": "pnpm --filter tradie-app ios",
+    "tradie:android": "pnpm --filter tradie-app android",
+    "member:dev": "pnpm --filter member-app start",
+    "member:ios": "pnpm --filter member-app ios",
+    "member:android": "pnpm --filter member-app android",
+    "shared:build": "pnpm --filter @tradify/shared build",
+    "ui:build": "pnpm --filter @tradify/ui build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test",
+    "demo:start": "composer --working-dir=web run dev"
+  },
+  "devDependencies": {
+    "typescript": "^5.5.0"
+  },
+  "pnpm": {
+    "overrides": {
+      "@types/react": "~19.1.0",
+      "react": "19.1.0",
+      "react-native": "0.81.5"
+    }
+  }
+}

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Availability Screen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined.fill {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-bright": "#3d373f",
+                        "on-tertiary-fixed": "#201c00",
+                        "on-tertiary-container": "#484000",
+                        "on-secondary-fixed-variant": "#663073",
+                        "inverse-primary": "#8639b4",
+                        "surface": "#171219",
+                        "tertiary-fixed": "#f7e467",
+                        "on-tertiary-fixed-variant": "#504700",
+                        "primary": "#e5b4ff",
+                        "surface-container-lowest": "#110c14",
+                        "surface-variant": "#39333b",
+                        "surface-container-high": "#2e2830",
+                        "on-tertiary": "#373100",
+                        "secondary": "#f2affc",
+                        "on-secondary-container": "#e2a2ed",
+                        "error-container": "#93000a",
+                        "outline": "#998d9d",
+                        "background": "#171219",
+                        "surface-container-low": "#1f1a21",
+                        "on-primary": "#4f0077",
+                        "surface-container-highest": "#39333b",
+                        "on-secondary-fixed": "#340042",
+                        "secondary-container": "#693376",
+                        "primary-fixed-dim": "#e5b4ff",
+                        "on-primary-fixed-variant": "#6b1a9a",
+                        "on-primary-container": "#450069",
+                        "on-background": "#eadfea",
+                        "on-error": "#690005",
+                        "surface-dim": "#171219",
+                        "surface-container": "#231e25",
+                        "tertiary": "#dac84e",
+                        "secondary-fixed-dim": "#f2affc",
+                        "secondary-fixed": "#fdd6ff",
+                        "primary-fixed": "#f5d9ff",
+                        "surface-tint": "#e5b4ff",
+                        "on-surface-variant": "#d0c2d3",
+                        "tertiary-fixed-dim": "#dac84e",
+                        "tertiary-container": "#bdac35",
+                        "primary-container": "#bd6fec",
+                        "error": "#ffb4ab",
+                        "on-surface": "#eadfea",
+                        "on-primary-fixed": "#30004b",
+                        "outline-variant": "#4d4351",
+                        "on-secondary": "#4d185b",
+                        "inverse-on-surface": "#342e37",
+                        "on-error-container": "#ffdad6",
+                        "inverse-surface": "#eadfea"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "inner-padding": "12px",
+                        "container-margin": "20px",
+                        "stack-gap": "16px",
+                        "section-padding": "32px"
+                    },
+                    "fontFamily": {
+                        "body-lg": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "label-caps": ["Manrope"],
+                        "body-sm": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-lg": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "h3": ["20px", { "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-lg text-body-lg min-h-screen flex flex-col overflow-x-hidden selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar Component -->
+<header class="bg-[#3C3541]/80 backdrop-blur-[20px] fixed top-0 w-full z-50 border-b border-white/15 flex items-center justify-between px-5 h-16 shadow-none">
+<button class="text-white/70 hover:bg-white/5 active:scale-95 transition-all duration-200 p-2 -ml-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="text-[#AC5FDB] font-['Manrope'] font-semibold tracking-tight text-h3">Availability</h1>
+<div class="w-10"></div> <!-- Spacer to balance back button -->
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 pt-24 pb-32 px-5 flex flex-col gap-section-padding">
+<!-- Schedule Section -->
+<section class="flex flex-col gap-4">
+<!-- Monday Row -->
+<div class="flex items-center justify-between py-3 border-b border-white/5">
+<span class="font-h3 text-h3 text-on-surface w-24">Monday</span>
+<div class="flex items-center gap-3">
+<div class="flex gap-2">
+<div class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-on-surface font-body-sm text-body-sm backdrop-blur-md">08:00 AM</div>
+<div class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-on-surface font-body-sm text-body-sm backdrop-blur-md">05:00 PM</div>
+</div>
+<button aria-pressed="true" class="w-12 h-6 rounded-full bg-primary-container relative flex items-center transition-colors duration-300 ml-2">
+<span class="w-5 h-5 bg-white rounded-full absolute right-0.5 shadow-sm transition-all duration-300"></span>
+</button>
+</div>
+</div>
+<!-- Tuesday Row -->
+<div class="flex items-center justify-between py-3 border-b border-white/5">
+<span class="font-h3 text-h3 text-on-surface w-24">Tuesday</span>
+<div class="flex items-center gap-3">
+<div class="flex gap-2">
+<div class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-on-surface font-body-sm text-body-sm backdrop-blur-md">08:00 AM</div>
+<div class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-on-surface font-body-sm text-body-sm backdrop-blur-md">05:00 PM</div>
+</div>
+<button aria-pressed="true" class="w-12 h-6 rounded-full bg-primary-container relative flex items-center transition-colors duration-300 ml-2">
+<span class="w-5 h-5 bg-white rounded-full absolute right-0.5 shadow-sm transition-all duration-300"></span>
+</button>
+</div>
+</div>
+<!-- Wednesday Row -->
+<div class="flex items-center justify-between py-3 border-b border-white/5">
+<span class="font-h3 text-h3 text-on-surface w-24">Wednesday</span>
+<div class="flex items-center gap-3">
+<div class="flex gap-2">
+<div class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-on-surface font-body-sm text-body-sm backdrop-blur-md">08:00 AM</div>
+<div class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-on-surface font-body-sm text-body-sm backdrop-blur-md">05:00 PM</div>
+</div>
+<button aria-pressed="true" class="w-12 h-6 rounded-full bg-primary-container relative flex items-center transition-colors duration-300 ml-2">
+<span class="w-5 h-5 bg-white rounded-full absolute right-0.5 shadow-sm transition-all duration-300"></span>
+</button>
+</div>
+</div>
+<!-- Thursday Row -->
+<div class="flex items-center justify-between py-3 border-b border-white/5">
+<span class="font-h3 text-h3 text-on-surface w-24">Thursday</span>
+<div class="flex items-center gap-3">
+<div class="flex gap-2">
+<div class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-on-surface font-body-sm text-body-sm backdrop-blur-md">08:00 AM</div>
+<div class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-on-surface font-body-sm text-body-sm backdrop-blur-md">05:00 PM</div>
+</div>
+<button aria-pressed="true" class="w-12 h-6 rounded-full bg-primary-container relative flex items-center transition-colors duration-300 ml-2">
+<span class="w-5 h-5 bg-white rounded-full absolute right-0.5 shadow-sm transition-all duration-300"></span>
+</button>
+</div>
+</div>
+<!-- Friday Row -->
+<div class="flex items-center justify-between py-3 border-b border-white/5">
+<span class="font-h3 text-h3 text-on-surface w-24">Friday</span>
+<div class="flex items-center gap-3">
+<div class="flex gap-2">
+<div class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-on-surface font-body-sm text-body-sm backdrop-blur-md">08:00 AM</div>
+<div class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-on-surface font-body-sm text-body-sm backdrop-blur-md">03:00 PM</div>
+</div>
+<button aria-pressed="true" class="w-12 h-6 rounded-full bg-primary-container relative flex items-center transition-colors duration-300 ml-2">
+<span class="w-5 h-5 bg-white rounded-full absolute right-0.5 shadow-sm transition-all duration-300"></span>
+</button>
+</div>
+</div>
+<!-- Saturday Row (Off) -->
+<div class="flex items-center justify-between py-3 border-b border-white/5 opacity-60">
+<span class="font-h3 text-h3 text-on-surface w-24">Saturday</span>
+<div class="flex items-center gap-3">
+<div class="flex gap-2 opacity-0 pointer-events-none">
+<div class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-on-surface font-body-sm text-body-sm">00:00</div>
+</div>
+<button aria-pressed="false" class="w-12 h-6 rounded-full bg-surface-container-highest relative flex items-center transition-colors duration-300 ml-2">
+<span class="w-5 h-5 bg-outline rounded-full absolute left-0.5 shadow-sm transition-all duration-300"></span>
+</button>
+</div>
+</div>
+<!-- Sunday Row (Off) -->
+<div class="flex items-center justify-between py-3 border-b border-white/5 opacity-60">
+<span class="font-h3 text-h3 text-on-surface w-24">Sunday</span>
+<div class="flex items-center gap-3">
+<div class="flex gap-2 opacity-0 pointer-events-none">
+<div class="px-3 py-1.5 rounded-full bg-white/5 border border-white/10 text-on-surface font-body-sm text-body-sm">00:00</div>
+</div>
+<button aria-pressed="false" class="w-12 h-6 rounded-full bg-surface-container-highest relative flex items-center transition-colors duration-300 ml-2">
+<span class="w-5 h-5 bg-outline rounded-full absolute left-0.5 shadow-sm transition-all duration-300"></span>
+</button>
+</div>
+</div>
+</section>
+<!-- Emergency Leads Glass Card -->
+<section class="bg-[#3C3541]/80 backdrop-blur-[16px] border-t border-l border-white/10 rounded-xl p-6 shadow-xl relative overflow-hidden mt-4">
+<div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
+<div class="flex items-start justify-between relative z-10">
+<div class="flex-1 pr-6">
+<h2 class="font-h3 text-h3 text-on-surface mb-2 leading-tight">Accept emergency leads outside my hours</h2>
+<p class="font-body-sm text-body-sm text-[#E3A2EE] opacity-90">Emergency leads pay more, but you're on call.</p>
+</div>
+<button aria-pressed="true" class="w-12 h-6 rounded-full bg-primary-container relative flex items-center transition-colors duration-300 shrink-0 mt-1">
+<span class="w-5 h-5 bg-white rounded-full absolute right-0.5 shadow-sm transition-all duration-300"></span>
+</button>
+</div>
+</section>
+</main>
+<!-- BottomNavBar Component -->
+<nav class="bg-[#3C3541]/90 backdrop-blur-[24px] fixed bottom-0 w-full z-50 rounded-t-lg border-t border-white/15 shadow-none flex justify-around items-center px-6 py-4">
+<!-- Discard Action (Inactive Navigation Style mapping) -->
+<button class="flex items-center justify-center text-white/60 px-6 py-3 hover:bg-white/10 active:scale-[0.97] transition-transform duration-150 rounded-lg flex-1 mr-2 flex-col gap-1">
+<span class="material-symbols-outlined text-[20px]" data-icon="close">close</span>
+<span class="font-['Manrope'] font-bold text-sm">Discard</span>
+</button>
+<!-- Save Action (Active Navigation Style mapping) -->
+<button class="flex items-center justify-center bg-gradient-to-r from-[#AC5FDB] to-[#E3A2EE] text-white rounded-lg px-6 py-3 shadow-lg shadow-[#AC5FDB]/20 hover:bg-white/10 active:scale-[0.97] transition-transform duration-150 flex-1 ml-2 flex-col gap-1">
+<span class="material-symbols-outlined text-[20px] fill" data-icon="check_circle">check_circle</span>
+<span class="font-['Manrope'] font-bold text-sm">Save</span>
+</button>
+</nav>
+</body></html>

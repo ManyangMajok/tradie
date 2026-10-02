@@ -1,0 +1,39 @@
+{
+  "expo": {
+    "name": "Tradify — Tradie",
+    "slug": "tradify-tradie",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "backgroundColor": "#171219",
+    "ios": {
+      "supportsTablet": false,
+      "bundleIdentifier": "au.com.tradify.tradie",
+      "infoPlist": {
+        "NSCameraUsageDescription": "Required to photograph completed work.",
+        "NSPhotoLibraryUsageDescription": "Required to attach photos to job reports.",
+        "NSFaceIDUsageDescription": "Used to securely unlock the app."
+      }
+    },
+    "android": {
+      "package": "au.com.tradify.tradie",
+      "permissions": [
+        "android.permission.CAMERA",
+        "android.permission.READ_MEDIA_IMAGES",
+        "android.permission.USE_BIOMETRIC",
+        "android.permission.USE_FINGERPRINT"
+      ]
+    },
+    "plugins": [
+      "expo-font",
+      "expo-secure-store",
+      "expo-local-authentication",
+      "@sentry/react-native"
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "REPLACE_WITH_EAS_PROJECT_ID"
+      }
+    }
+  }
+}

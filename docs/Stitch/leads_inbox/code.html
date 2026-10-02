@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Leads Inbox</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-container": "#484000",
+                        "inverse-surface": "#eadfea",
+                        "on-secondary-fixed-variant": "#663073",
+                        "on-background": "#eadfea",
+                        "on-error": "#690005",
+                        "primary": "#e5b4ff",
+                        "on-tertiary": "#373100",
+                        "surface-container-highest": "#39333b",
+                        "on-primary-container": "#450069",
+                        "surface-bright": "#3d373f",
+                        "on-secondary-container": "#e2a2ed",
+                        "secondary-fixed": "#fdd6ff",
+                        "secondary-fixed-dim": "#f2affc",
+                        "primary-fixed-dim": "#e5b4ff",
+                        "surface-container-high": "#2e2830",
+                        "surface-variant": "#39333b",
+                        "on-primary-fixed-variant": "#6b1a9a",
+                        "tertiary-fixed-dim": "#dac84e",
+                        "on-error-container": "#ffdad6",
+                        "secondary-container": "#693376",
+                        "surface": "#171219",
+                        "on-secondary": "#4d185b",
+                        "outline-variant": "#4d4351",
+                        "surface-tint": "#e5b4ff",
+                        "tertiary-container": "#bdac35",
+                        "primary-fixed": "#f5d9ff",
+                        "on-surface": "#eadfea",
+                        "on-surface-variant": "#d0c2d3",
+                        "on-tertiary-fixed": "#201c00",
+                        "on-primary": "#4f0077",
+                        "error-container": "#93000a",
+                        "surface-container": "#231e25",
+                        "inverse-primary": "#8639b4",
+                        "surface-container-low": "#1f1a21",
+                        "on-secondary-fixed": "#340042",
+                        "surface-container-lowest": "#110c14",
+                        "outline": "#998d9d",
+                        "error": "#ffb4ab",
+                        "tertiary-fixed": "#f7e467",
+                        "secondary": "#f2affc",
+                        "primary-container": "#bd6fec",
+                        "on-primary-fixed": "#30004b",
+                        "background": "#171219",
+                        "on-tertiary-fixed-variant": "#504700",
+                        "inverse-on-surface": "#342e37",
+                        "tertiary": "#dac84e",
+                        "surface-dim": "#171219"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "inner-padding": "12px",
+                        "stack-gap": "16px",
+                        "section-padding": "32px",
+                        "container-margin": "20px"
+                    },
+                    "fontFamily": {
+                        "h2": ["Manrope"],
+                        "body-sm": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "label-caps": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h2": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "h3": ["20px", { "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .glass-card {
+            background-color: rgba(60, 53, 65, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen font-body-sm antialiased pt-16 pb-24">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-5 h-16 bg-[#3C3541]/80 backdrop-blur-xl border-b border-white/10 shadow-none">
+<div class="flex items-center gap-3">
+<button class="text-[#AC5FDB] hover:bg-white/5 transition-colors active:scale-95 duration-200 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-2xl" data-icon="menu">menu</span>
+</button>
+<h1 class="font-manrope font-bold text-lg tracking-tight text-[#AC5FDB] flex items-center gap-2">
+                Leads Inbox
+                <span class="relative flex h-3 w-3">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+<span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+</span>
+</h1>
+</div>
+<div class="flex items-center">
+<button class="hover:bg-white/5 transition-colors active:scale-95 duration-200 rounded-full overflow-hidden w-8 h-8 flex items-center justify-center border border-white/10">
+<img alt="User profile photo" class="w-full h-full object-cover" data-alt="professional headshot of a person looking forward against a neutral background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuC51SVNvn9JDMp3ZiVxOzaT8_RvB1-NR7-c6yW5Ds-lfdr2QVqQxQsrtjkNvfmpZ49VD2R4K-YfAGJ3c3ZCKhHCP2vm8uH2v567xUsTN7kyao0QSMJqZmIpU9vZbxbyZigTAfTGiBTtmXcK-cLxjBQR-otf6mv4M8N2hEPPfGeh_BnirBGok092yjJ6mLES7H8OaHe-WocWHicFu4EREralgBA-rLfkxOU7yJYsPafKO3USST_KmI_VsiU1yo82cgN1FLs-aRH2WYSa"/>
+</button>
+</div>
+</header>
+<!-- Main Content: Leads List -->
+<main class="px-container-margin pt-stack-gap flex flex-col gap-stack-gap max-w-2xl mx-auto">
+<!-- Lead Card 1: Emergency -->
+<div class="glass-card rounded-xl p-4 flex flex-col gap-3 relative overflow-hidden group cursor-pointer transition-transform hover:scale-[1.01] active:scale-[0.99]">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<span class="font-label-caps text-label-caps text-error bg-error/10 px-2 py-0.5 rounded-full w-fit">EMERGENCY</span>
+<h3 class="font-h3 text-h3 text-on-surface">Plumber — Burst pipe</h3>
+<div class="flex items-center text-on-surface-variant font-body-sm text-body-sm mt-1">
+<span class="material-symbols-outlined text-[16px] mr-1" data-icon="location_on">location_on</span>
+                        Surry Hills, 2010
+                    </div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-error font-body-sm text-body-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="timer">timer</span>
+                        0:15
+                    </span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate border-t border-white/5 pt-3 mt-1">
+                Massive leak under the kitchen sink, water spreading to living room fast. Need someone immediately.
+            </p>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<!-- Lead Card 2: Same Day -->
+<div class="glass-card rounded-xl p-4 flex flex-col gap-3 relative overflow-hidden group cursor-pointer transition-transform hover:scale-[1.01] active:scale-[0.99]">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<span class="font-label-caps text-label-caps text-tertiary bg-tertiary/10 px-2 py-0.5 rounded-full w-fit">SAME DAY</span>
+<h3 class="font-h3 text-h3 text-on-surface">Electrician — Power outage</h3>
+<div class="flex items-center text-on-surface-variant font-body-sm text-body-sm mt-1">
+<span class="material-symbols-outlined text-[16px] mr-1" data-icon="location_on">location_on</span>
+                        Bondi Junction, 2022
+                    </div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-tertiary font-body-sm text-body-sm font-semibold flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="timer">timer</span>
+                        3:45
+                    </span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate border-t border-white/5 pt-3 mt-1">
+                Half the house lost power after plugging in a heater. Breaker won't reset.
+            </p>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<!-- Lead Card 3: Within 48h -->
+<div class="glass-card rounded-xl p-4 flex flex-col gap-3 relative overflow-hidden group cursor-pointer transition-transform hover:scale-[1.01] active:scale-[0.99]">
+<div class="flex justify-between items-start">
+<div class="flex flex-col gap-1">
+<span class="font-label-caps text-label-caps text-[#60A5FA] bg-[#60A5FA]/10 px-2 py-0.5 rounded-full w-fit">WITHIN 48H</span>
+<h3 class="font-h3 text-h3 text-on-surface">Landscaper — Garden cleanup</h3>
+<div class="flex items-center text-on-surface-variant font-body-sm text-body-sm mt-1">
+<span class="material-symbols-outlined text-[16px] mr-1" data-icon="location_on">location_on</span>
+                        Newtown, 2042
+                    </div>
+</div>
+<div class="flex flex-col items-end gap-1">
+<span class="text-on-surface-variant font-body-sm text-body-sm flex items-center gap-1">
+<span class="material-symbols-outlined text-[16px]" data-icon="timer">timer</span>
+                        22:15
+                    </span>
+</div>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant truncate border-t border-white/5 pt-3 mt-1">
+                Looking for a full backyard tidy up before an upcoming party this weekend. Weeding, mowing, and trimming.
+            </p>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="material-symbols-outlined text-on-surface-variant" data-icon="chevron_right">chevron_right</span>
+</div>
+</div>
+<!-- Empty State (Hidden by default for this example, but provided per spec) -->
+<div class="hidden glass-card rounded-xl p-8 flex-col items-center justify-center text-center gap-4 mt-8">
+<div class="w-16 h-16 rounded-full bg-surface-container flex items-center justify-center">
+<span class="material-symbols-outlined text-3xl text-on-surface-variant" data-icon="inbox">inbox</span>
+</div>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-xs mx-auto">No active leads. New leads will appear here.</p>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pb-6 pt-3 bg-[#3C3541]/90 backdrop-blur-2xl border-t border-white/15 shadow-[0_-4px_20px_rgba(0,0,0,0.5)] rounded-t-lg md:hidden">
+<button class="flex flex-col items-center justify-center text-slate-500 hover:text-[#E3A2EE] transition-all active:scale-90 duration-150 py-1 px-3">
+<span class="material-symbols-outlined text-2xl mb-1" data-icon="inbox">inbox</span>
+<span class="font-manrope text-[10px] font-semibold uppercase tracking-wider">Inbox</span>
+</button>
+<button class="flex flex-col items-center justify-center text-[#AC5FDB] bg-[#AC5FDB]/10 rounded-xl py-1 px-3 hover:text-[#E3A2EE] transition-all active:scale-90 duration-150">
+<span class="material-symbols-outlined text-2xl mb-1" data-icon="leaderboard" data-weight="fill" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="font-manrope text-[10px] font-semibold uppercase tracking-wider">Leads</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 hover:text-[#E3A2EE] transition-all active:scale-90 duration-150 py-1 px-3">
+<span class="material-symbols-outlined text-2xl mb-1" data-icon="analytics">analytics</span>
+<span class="font-manrope text-[10px] font-semibold uppercase tracking-wider">Insights</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 hover:text-[#E3A2EE] transition-all active:scale-90 duration-150 py-1 px-3">
+<span class="material-symbols-outlined text-2xl mb-1" data-icon="person">person</span>
+<span class="font-manrope text-[10px] font-semibold uppercase tracking-wider">Profile</span>
+</button>
+</nav>
+<!-- Desktop Nav Placeholder (Hidden on Mobile) -->
+<div class="hidden md:flex fixed top-16 left-0 h-[calc(100vh-64px)] w-64 bg-surface-container-low border-r border-white/5 flex-col py-6 px-4 gap-2 z-40">
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="inbox">inbox</span>
+<span class="font-body-sm text-body-sm font-semibold">Inbox</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-primary bg-primary/10 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="leaderboard" data-weight="fill" style="font-variation-settings: 'FILL' 1;">leaderboard</span>
+<span class="font-body-sm text-body-sm font-semibold">Leads</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="analytics">analytics</span>
+<span class="font-body-sm text-body-sm font-semibold">Insights</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 rounded-lg text-on-surface-variant hover:bg-white/5 transition-colors" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-body-sm text-body-sm font-semibold">Profile</span>
+</a>
+</div>
+</body></html>

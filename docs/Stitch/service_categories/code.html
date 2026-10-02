@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Service Categories</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-secondary-fixed": "#340042",
+                      "on-error": "#690005",
+                      "surface-container-lowest": "#110c14",
+                      "surface-container": "#231e25",
+                      "on-primary-fixed-variant": "#6b1a9a",
+                      "outline-variant": "#4d4351",
+                      "on-tertiary-fixed": "#201c00",
+                      "surface-variant": "#39333b",
+                      "secondary-container": "#693376",
+                      "on-secondary": "#4d185b",
+                      "on-secondary-fixed-variant": "#663073",
+                      "surface-tint": "#e5b4ff",
+                      "surface-container-high": "#2e2830",
+                      "on-background": "#eadfea",
+                      "secondary": "#f2affc",
+                      "on-surface": "#eadfea",
+                      "on-surface-variant": "#d0c2d3",
+                      "primary-container": "#bd6fec",
+                      "on-error-container": "#ffdad6",
+                      "error": "#ffb4ab",
+                      "outline": "#998d9d",
+                      "tertiary-container": "#bdac35",
+                      "secondary-fixed-dim": "#f2affc",
+                      "on-primary-fixed": "#30004b",
+                      "background": "#171219",
+                      "primary-fixed-dim": "#e5b4ff",
+                      "on-primary-container": "#450069",
+                      "inverse-primary": "#8639b4",
+                      "on-secondary-container": "#e2a2ed",
+                      "error-container": "#93000a",
+                      "tertiary": "#dac84e",
+                      "surface-bright": "#3d373f",
+                      "primary": "#e5b4ff",
+                      "surface-container-low": "#1f1a21",
+                      "surface-dim": "#171219",
+                      "inverse-on-surface": "#342e37",
+                      "surface-container-highest": "#39333b",
+                      "on-tertiary-fixed-variant": "#504700",
+                      "surface": "#171219",
+                      "tertiary-fixed": "#f7e467",
+                      "secondary-fixed": "#fdd6ff",
+                      "on-primary": "#4f0077",
+                      "on-tertiary": "#373100",
+                      "primary-fixed": "#f5d9ff",
+                      "inverse-surface": "#eadfea",
+                      "on-tertiary-container": "#484000",
+                      "tertiary-fixed-dim": "#dac84e"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "container-margin": "20px",
+                      "inner-padding": "12px",
+                      "stack-gap": "16px",
+                      "section-padding": "32px"
+              },
+              "fontFamily": {
+                      "body-sm": [
+                              "Manrope"
+                      ],
+                      "body-lg": [
+                              "Manrope"
+                      ],
+                      "h1": [
+                              "Manrope"
+                      ],
+                      "label-caps": [
+                              "Manrope"
+                      ],
+                      "h3": [
+                              "Manrope"
+                      ],
+                      "h2": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "letterSpacing": "0",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h1": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.08em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "h3": [
+                              "20px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "0",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "h2": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            -webkit-tap-highlight-color: transparent;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen font-body-sm antialiased selection:bg-primary/20">
+<!-- TopAppBar from Shared Components -->
+<header class="flex items-center justify-between px-5 h-16 w-full fixed top-0 z-50 bg-[#3C3541]/70 backdrop-blur-xl border-b border-white/10 shadow-none">
+<button class="text-slate-400 hover:bg-white/5 active:scale-95 transition-transform flex items-center justify-center p-2 rounded-full">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">arrow_back</span>
+</button>
+<h1 class="text-purple-400 font-manrope font-bold text-xl tracking-tight">Service Categories</h1>
+<div class="w-10 h-10"></div> <!-- Spacer for symmetry -->
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[88px] pb-[100px] px-container-margin max-w-lg mx-auto">
+<!-- Header Section -->
+<section class="mb-section-padding px-2">
+<h2 class="font-h2 text-h2 text-on-surface mb-3 tracking-tight">Which categories do you service?</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant/80">You can only accept leads in categories you've enabled.</p>
+</section>
+<!-- Categories List -->
+<section class="flex flex-col gap-inner-padding">
+<!-- Plumber (ON) -->
+<div class="flex items-center justify-between p-4 bg-surface-variant/40 backdrop-blur-lg rounded-xl border border-white/5 shadow-[inset_1px_1px_0px_0px_rgba(255,255,255,0.05)] hover:bg-surface-variant/60 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-11 h-11 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined">plumbing</span>
+</div>
+<span class="font-h3 text-h3 text-on-surface">Plumber</span>
+</div>
+<!-- Toggle ON -->
+<div class="w-[50px] h-7 bg-[#AC5FDB] rounded-full relative cursor-pointer shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)]">
+<div class="absolute right-1 top-1 w-5 h-5 bg-white rounded-full shadow-sm transition-transform"></div>
+</div>
+</div>
+<!-- Electrician (ON) -->
+<div class="flex items-center justify-between p-4 bg-surface-variant/40 backdrop-blur-lg rounded-xl border border-white/5 shadow-[inset_1px_1px_0px_0px_rgba(255,255,255,0.05)] hover:bg-surface-variant/60 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-11 h-11 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined">bolt</span>
+</div>
+<span class="font-h3 text-h3 text-on-surface">Electrician</span>
+</div>
+<!-- Toggle ON -->
+<div class="w-[50px] h-7 bg-[#AC5FDB] rounded-full relative cursor-pointer shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)]">
+<div class="absolute right-1 top-1 w-5 h-5 bg-white rounded-full shadow-sm transition-transform"></div>
+</div>
+</div>
+<!-- HVAC (OFF) -->
+<div class="flex items-center justify-between p-4 bg-surface-variant/20 backdrop-blur-lg rounded-xl border border-white/5 shadow-[inset_1px_1px_0px_0px_rgba(255,255,255,0.02)] hover:bg-surface-variant/30 transition-colors opacity-80">
+<div class="flex items-center gap-4">
+<div class="w-11 h-11 rounded-full bg-surface-container-highest/50 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">hvac</span>
+</div>
+<span class="font-h3 text-h3 text-on-surface-variant">HVAC</span>
+</div>
+<!-- Toggle OFF -->
+<div class="w-[50px] h-7 bg-surface-container-highest rounded-full relative cursor-pointer border border-outline-variant shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)]">
+<div class="absolute left-1 top-[3px] w-5 h-5 bg-outline rounded-full shadow-sm transition-transform"></div>
+</div>
+</div>
+<!-- Builder (OFF) -->
+<div class="flex items-center justify-between p-4 bg-surface-variant/20 backdrop-blur-lg rounded-xl border border-white/5 shadow-[inset_1px_1px_0px_0px_rgba(255,255,255,0.02)] hover:bg-surface-variant/30 transition-colors opacity-80">
+<div class="flex items-center gap-4">
+<div class="w-11 h-11 rounded-full bg-surface-container-highest/50 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">architecture</span>
+</div>
+<span class="font-h3 text-h3 text-on-surface-variant">Builder</span>
+</div>
+<!-- Toggle OFF -->
+<div class="w-[50px] h-7 bg-surface-container-highest rounded-full relative cursor-pointer border border-outline-variant shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)]">
+<div class="absolute left-1 top-[3px] w-5 h-5 bg-outline rounded-full shadow-sm transition-transform"></div>
+</div>
+</div>
+<!-- Painter (ON) -->
+<div class="flex items-center justify-between p-4 bg-surface-variant/40 backdrop-blur-lg rounded-xl border border-white/5 shadow-[inset_1px_1px_0px_0px_rgba(255,255,255,0.05)] hover:bg-surface-variant/60 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-11 h-11 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined">format_paint</span>
+</div>
+<span class="font-h3 text-h3 text-on-surface">Painter</span>
+</div>
+<!-- Toggle ON -->
+<div class="w-[50px] h-7 bg-[#AC5FDB] rounded-full relative cursor-pointer shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)]">
+<div class="absolute right-1 top-1 w-5 h-5 bg-white rounded-full shadow-sm transition-transform"></div>
+</div>
+</div>
+<!-- Landscaper (OFF) -->
+<div class="flex items-center justify-between p-4 bg-surface-variant/20 backdrop-blur-lg rounded-xl border border-white/5 shadow-[inset_1px_1px_0px_0px_rgba(255,255,255,0.02)] hover:bg-surface-variant/30 transition-colors opacity-80">
+<div class="flex items-center gap-4">
+<div class="w-11 h-11 rounded-full bg-surface-container-highest/50 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">landscape</span>
+</div>
+<span class="font-h3 text-h3 text-on-surface-variant">Landscaper</span>
+</div>
+<!-- Toggle OFF -->
+<div class="w-[50px] h-7 bg-surface-container-highest rounded-full relative cursor-pointer border border-outline-variant shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)]">
+<div class="absolute left-1 top-[3px] w-5 h-5 bg-outline rounded-full shadow-sm transition-transform"></div>
+</div>
+</div>
+<!-- Roofer (OFF) -->
+<div class="flex items-center justify-between p-4 bg-surface-variant/20 backdrop-blur-lg rounded-xl border border-white/5 shadow-[inset_1px_1px_0px_0px_rgba(255,255,255,0.02)] hover:bg-surface-variant/30 transition-colors opacity-80">
+<div class="flex items-center gap-4">
+<div class="w-11 h-11 rounded-full bg-surface-container-highest/50 flex items-center justify-center text-on-surface-variant">
+<span class="material-symbols-outlined">roofing</span>
+</div>
+<span class="font-h3 text-h3 text-on-surface-variant">Roofer</span>
+</div>
+<!-- Toggle OFF -->
+<div class="w-[50px] h-7 bg-surface-container-highest rounded-full relative cursor-pointer border border-outline-variant shadow-[inset_0_2px_4px_rgba(0,0,0,0.4)]">
+<div class="absolute left-1 top-[3px] w-5 h-5 bg-outline rounded-full shadow-sm transition-transform"></div>
+</div>
+</div>
+<!-- Cleaner (ON) -->
+<div class="flex items-center justify-between p-4 bg-surface-variant/40 backdrop-blur-lg rounded-xl border border-white/5 shadow-[inset_1px_1px_0px_0px_rgba(255,255,255,0.05)] hover:bg-surface-variant/60 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-11 h-11 rounded-full bg-surface-container-highest flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined">cleaning_services</span>
+</div>
+<span class="font-h3 text-h3 text-on-surface">Cleaner</span>
+</div>
+<!-- Toggle ON -->
+<div class="w-[50px] h-7 bg-[#AC5FDB] rounded-full relative cursor-pointer shadow-[inset_0_2px_4px_rgba(0,0,0,0.2)]">
+<div class="absolute right-1 top-1 w-5 h-5 bg-white rounded-full shadow-sm transition-transform"></div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar from Shared Components (Services Active) -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-3 pb-safe bg-[#3C3541]/90 backdrop-blur-3xl border-t border-white/10 shadow-2xl">
+<!-- Home -->
+<button class="flex flex-col items-center justify-center text-slate-400 hover:text-purple-300 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">grid_view</span>
+<span class="font-manrope text-[10px] font-semibold">Home</span>
+</button>
+<!-- Services (Active) -->
+<button class="flex flex-col items-center justify-center text-[#AC5FDB] bg-purple-500/10 rounded-xl px-3 py-1 hover:text-purple-300 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">construction</span>
+<span class="font-manrope text-[10px] font-semibold">Services</span>
+</button>
+<!-- Earnings -->
+<button class="flex flex-col items-center justify-center text-slate-400 hover:text-purple-300 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">payments</span>
+<span class="font-manrope text-[10px] font-semibold">Earnings</span>
+</button>
+<!-- Profile -->
+<button class="flex flex-col items-center justify-center text-slate-400 hover:text-purple-300 active:scale-90 transition-all duration-200">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 0;">person</span>
+<span class="font-manrope text-[10px] font-semibold">Profile</span>
+</button>
+</nav>
+</body></html>

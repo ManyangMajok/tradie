@@ -1,0 +1,148 @@
+# ==============================================================================
+# OS / IDE
+# ==============================================================================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini
+
+.idea/
+.vscode/*
+!.vscode/settings.json.example
+!.vscode/extensions.json
+*.swp
+*.swo
+*~
+.history/
+
+# ==============================================================================
+# Environment / secrets â€” NEVER commit these
+# ==============================================================================
+.env
+.env.*
+!.env.example
+!.env.*.example
+*.pem
+*.key
+*.p12
+*.mobileprovision
+.envrc
+
+# ==============================================================================
+# Node / pnpm (root + workspaces)
+# ==============================================================================
+node_modules/
+**/node_modules/
+.pnpm-store/
+.pnpm-debug.log*
+.npm/
+.yarn/
+.yarn-integrity
+.npmrc.local
+
+# Build outputs
+dist/
+build/
+.turbo/
+.cache/
+coverage/
+*.tsbuildinfo
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# ==============================================================================
+# Laravel / PHP (inside web/)
+# ==============================================================================
+web/vendor/
+web/node_modules/
+web/public/build/
+web/public/hot
+web/public/storage
+web/storage/*.key
+web/storage/logs/*
+!web/storage/logs/.gitkeep
+web/storage/framework/cache/data/*
+!web/storage/framework/cache/data/.gitkeep
+web/storage/framework/sessions/*
+!web/storage/framework/sessions/.gitkeep
+web/storage/framework/testing/*
+!web/storage/framework/testing/.gitkeep
+web/storage/framework/views/*
+!web/storage/framework/views/.gitkeep
+web/storage/app/public/*
+!web/storage/app/public/.gitkeep
+web/storage/app/private/*
+!web/storage/app/private/.gitkeep
+web/bootstrap/cache/*.php
+web/.phpunit.result.cache
+web/.phpunit.cache/
+web/.php-cs-fixer.cache
+web/auth.json
+web/composer.phar
+web/Homestead.yaml
+web/Homestead.json
+
+# ==============================================================================
+# Expo / React Native (inside apps/*)
+# ==============================================================================
+apps/*/.expo/
+apps/*/.expo-shared/
+apps/*/dist/
+apps/*/web-build/
+apps/*/android/
+apps/*/ios/
+apps/*/expo-env.d.ts
+
+# EAS build artifacts
+apps/*/eas.json.local
+apps/*/credentials.json
+
+# Native build outputs
+*.apk
+*.aab
+*.ipa
+
+# Metro / React Native caches
+.metro-health-check*
+apps/*/.metro-cache/
+
+# ==============================================================================
+# Tool-specific
+# ==============================================================================
+.eslintcache
+.stylelintcache
+.parcel-cache/
+
+# ==============================================================================
+# User/data files that must not be committed
+# ==============================================================================
+# User uploads in Laravel (stored on server, backed up separately)
+web/storage/app/private/jobs/
+web/storage/app/private/completion/
+
+# Local DB dumps
+*.sql
+*.dump
+*.sqlite
+*.sqlite-journal
+
+# Misc local work
+.DS_Store
+.scratch/
+TODO.local.md
+memory/
+
+
+/.local/
+web/storage/app/*
+!web/storage/app/private/
+!web/storage/app/public/
+web/.env.testing

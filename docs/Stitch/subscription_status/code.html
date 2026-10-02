@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Subscription Screen</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "tertiary-container": "#bdac35",
+                      "surface-container": "#231e25",
+                      "outline": "#998d9d",
+                      "on-surface-variant": "#d0c2d3",
+                      "tertiary-fixed-dim": "#dac84e",
+                      "on-secondary-fixed-variant": "#663073",
+                      "on-primary": "#4f0077",
+                      "secondary": "#f2affc",
+                      "tertiary-fixed": "#f7e467",
+                      "surface-bright": "#3d373f",
+                      "primary-fixed-dim": "#e5b4ff",
+                      "on-secondary-container": "#e2a2ed",
+                      "secondary-fixed": "#fdd6ff",
+                      "inverse-surface": "#eadfea",
+                      "on-surface": "#eadfea",
+                      "on-tertiary-fixed": "#201c00",
+                      "inverse-on-surface": "#342e37",
+                      "surface-container-highest": "#39333b",
+                      "primary-fixed": "#f5d9ff",
+                      "on-error": "#690005",
+                      "surface-tint": "#e5b4ff",
+                      "surface-variant": "#39333b",
+                      "surface-container-high": "#2e2830",
+                      "primary-container": "#bd6fec",
+                      "primary": "#e5b4ff",
+                      "inverse-primary": "#8639b4",
+                      "error": "#ffb4ab",
+                      "on-primary-fixed": "#30004b",
+                      "secondary-fixed-dim": "#f2affc",
+                      "error-container": "#93000a",
+                      "surface-container-low": "#1f1a21",
+                      "tertiary": "#dac84e",
+                      "surface-container-lowest": "#110c14",
+                      "secondary-container": "#693376",
+                      "surface": "#171219",
+                      "on-primary-container": "#450069",
+                      "on-secondary-fixed": "#340042",
+                      "surface-dim": "#171219",
+                      "on-tertiary-container": "#484000",
+                      "on-tertiary-fixed-variant": "#504700",
+                      "outline-variant": "#4d4351",
+                      "on-error-container": "#ffdad6",
+                      "on-primary-fixed-variant": "#6b1a9a",
+                      "on-background": "#eadfea",
+                      "on-tertiary": "#373100",
+                      "on-secondary": "#4d185b",
+                      "background": "#171219"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.25rem",
+                      "lg": "0.5rem",
+                      "xl": "0.75rem",
+                      "full": "9999px"
+              },
+              "spacing": {
+                      "stack-gap": "16px",
+                      "section-padding": "32px",
+                      "container-margin": "20px",
+                      "inner-padding": "12px"
+              },
+              "fontFamily": {
+                      "label-caps": [
+                              "Manrope"
+                      ],
+                      "body-sm": [
+                              "Manrope"
+                      ],
+                      "h3": [
+                              "Manrope"
+                      ],
+                      "h2": [
+                              "Manrope"
+                      ],
+                      "h1": [
+                              "Manrope"
+                      ],
+                      "body-lg": [
+                              "Manrope"
+                      ]
+              },
+              "fontSize": {
+                      "label-caps": [
+                              "12px",
+                              {
+                                      "lineHeight": "1",
+                                      "letterSpacing": "0.08em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-sm": [
+                              "14px",
+                              {
+                                      "lineHeight": "1.5",
+                                      "letterSpacing": "0.01em",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "h3": [
+                              "20px",
+                              {
+                                      "lineHeight": "1.4",
+                                      "letterSpacing": "0",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "h2": [
+                              "24px",
+                              {
+                                      "lineHeight": "1.3",
+                                      "letterSpacing": "-0.01em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "h1": [
+                              "32px",
+                              {
+                                      "lineHeight": "1.2",
+                                      "letterSpacing": "-0.02em",
+                                      "fontWeight": "700"
+                              }
+                      ],
+                      "body-lg": [
+                              "16px",
+                              {
+                                      "lineHeight": "1.6",
+                                      "letterSpacing": "0",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+      },
+          },
+        }
+      </script>
+<style>
+        body {
+            background-color: #29262B;
+            min-height: 100vh;
+        }
+        
+        /* Custom scrollbar for better appearance */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: transparent;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: rgba(255,255,255,0.1);
+            border-radius: 10px;
+        }
+        
+        .glass-card {
+            background: rgba(60, 53, 65, 0.8);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+        }
+        
+        .glowing-border {
+            box-shadow: 0 0 15px rgba(172, 95, 219, 0.2), inset 0 0 10px rgba(172, 95, 219, 0.1);
+            border: 1px solid rgba(172, 95, 219, 0.4);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-background font-body-sm pb-[100px] md:pb-0">
+<!-- TopAppBar from JSON -->
+<header class="fixed top-0 w-full z-50 bg-[#3C3541]/80 backdrop-blur-xl border-b border-white/10 shadow-none">
+<div class="flex items-center justify-between px-5 h-16 w-full max-w-screen-md mx-auto">
+<button class="text-white/70 hover:bg-white/5 active:scale-95 transition-transform p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-white" data-icon="arrow_back">arrow_back</span>
+</button>
+<h1 class="font-manrope font-semibold tracking-tight text-white text-lg">Subscription</h1>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[88px] px-container-margin max-w-screen-md mx-auto space-y-section-padding">
+<!-- Expired Banner (Hidden by default, shown for visual reference) -->
+<div class="hidden bg-error-container/20 border border-error/30 rounded-xl p-inner-padding flex items-start gap-3 glass-card backdrop-blur-md">
+<span class="material-symbols-outlined text-error shrink-0" data-icon="warning">warning</span>
+<div>
+<h3 class="font-h3 text-h3 text-error mb-1">Subscription Inactive</h3>
+<p class="font-body-sm text-body-sm text-on-surface-variant">Your subscription is inactive. Leads are paused. Please update your payment method to resume services.</p>
+</div>
+</div>
+<!-- Hero Glass Card -->
+<section class="glass-card glowing-border rounded-[24px] p-[24px] flex flex-col gap-stack-gap relative overflow-hidden">
+<!-- Decorative background glow -->
+<div class="absolute -top-20 -right-20 w-64 h-64 bg-primary-container/20 rounded-full blur-[60px] pointer-events-none"></div>
+<div class="relative z-10 flex flex-col items-center text-center gap-2 mb-4">
+<div class="inline-flex items-center gap-1 bg-primary/10 text-primary px-3 py-1 rounded-full mb-2">
+<span class="material-symbols-outlined text-[16px]" data-icon="stars" data-weight="fill" style="font-variation-settings: 'FILL' 1;">stars</span>
+<span class="font-label-caps text-label-caps">ACTIVE PLAN</span>
+</div>
+<h2 class="font-h1 text-h1 text-white">Premium</h2>
+<div class="flex items-end justify-center gap-1 mt-2">
+<span class="font-h2 text-h2 text-primary">$499</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant mb-1">/ year</span>
+</div>
+<p class="font-body-sm text-body-sm text-on-surface-variant mt-2">Auto-renews on Oct 12, 2026</p>
+</div>
+<div class="w-full h-[1px] bg-white/10 my-2"></div>
+<div class="relative z-10 flex flex-col gap-4 py-2">
+<h3 class="font-h3 text-h3 text-white mb-2">Plan Benefits</h3>
+<ul class="flex flex-col gap-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5" data-icon="check_circle">check_circle</span>
+<span class="font-body-lg text-body-lg text-on-surface">Priority leads routing</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5" data-icon="check_circle">check_circle</span>
+<span class="font-body-lg text-body-lg text-on-surface">Advanced analytics dashboard</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5" data-icon="check_circle">check_circle</span>
+<span class="font-body-lg text-body-lg text-on-surface">Multi-area service support</span>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-primary mt-0.5" data-icon="check_circle">check_circle</span>
+<span class="font-body-lg text-body-lg text-on-surface">Direct client messaging</span>
+</li>
+</ul>
+</div>
+<div class="relative z-10 mt-4">
+<button class="w-full py-4 rounded-xl border border-secondary text-secondary font-h3 text-[16px] flex items-center justify-center gap-2 hover:bg-secondary/10 active:scale-95 transition-all duration-200">
+                    Manage subscription
+                    <span class="material-symbols-outlined text-[20px]" data-icon="open_in_new">open_in_new</span>
+</button>
+</div>
+</section>
+<!-- Transaction History Teaser -->
+<section class="glass-card rounded-xl p-inner-padding mb-8">
+<div class="flex items-center justify-between mb-4">
+<h3 class="font-h3 text-h3 text-white">Recent Invoices</h3>
+<button class="text-primary font-body-sm text-body-sm hover:underline">View all</button>
+</div>
+<div class="flex flex-col gap-0 divide-y divide-white/10">
+<div class="py-3 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-body-lg text-body-lg text-on-surface">Oct 12, 2025</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Annual Premium</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-body-lg text-body-lg text-white">$499.00</span>
+<button class="text-on-surface-variant hover:text-white p-1">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+</div>
+</div>
+<div class="py-3 flex items-center justify-between">
+<div class="flex flex-col">
+<span class="font-body-lg text-body-lg text-on-surface">Oct 12, 2024</span>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Annual Premium</span>
+</div>
+<div class="flex items-center gap-3">
+<span class="font-body-lg text-body-lg text-white">$499.00</span>
+<button class="text-on-surface-variant hover:text-white p-1">
+<span class="material-symbols-outlined" data-icon="download">download</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar from JSON (Suppressed on MD+, shown on Mobile) -->
+<!-- The intent of this page is a top-level Settings/Plans destination, so Nav is visible -->
+<nav class="md:hidden fixed bottom-0 w-full z-50 rounded-t-2xl bg-[#3C3541]/90 backdrop-blur-3xl border-t border-white/10 shadow-2xl">
+<div class="flex justify-around items-center h-20 px-6 w-full pb-safe">
+<!-- Home: Inactive -->
+<button class="flex flex-col items-center justify-center text-white/40 gap-1 hover:text-[#E3A2EE] transition-colors active:scale-90 duration-200 w-16">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="text-[10px] font-manrope font-medium uppercase tracking-wider">Home</span>
+</button>
+<!-- Plans/Subscription: Active -->
+<button class="flex flex-col items-center justify-center text-[#AC5FDB] gap-1 hover:text-[#E3A2EE] transition-colors active:scale-90 duration-200 w-16">
+<span class="material-symbols-outlined" data-icon="card_membership" data-weight="fill" style="font-variation-settings: 'FILL' 1;">card_membership</span>
+<span class="text-[10px] font-manrope font-medium uppercase tracking-wider">Plans</span>
+</button>
+<!-- Settings: Inactive -->
+<button class="flex flex-col items-center justify-center text-white/40 gap-1 hover:text-[#E3A2EE] transition-colors active:scale-90 duration-200 w-16">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+<span class="text-[10px] font-manrope font-medium uppercase tracking-wider">Settings</span>
+</button>
+</div>
+</nav>
+</body></html>

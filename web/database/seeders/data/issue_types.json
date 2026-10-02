@@ -1,0 +1,61 @@
+{
+    "plumber": [
+        "Blocked drain",
+        "Leaking tap",
+        "Burst pipe",
+        "Hot water issue",
+        "Toilet issue",
+        "Gas issue",
+        "Other"
+    ],
+    "electrician": [
+        "Power outage",
+        "Faulty switch/outlet",
+        "Lighting issue",
+        "Switchboard issue",
+        "Appliance install",
+        "Other"
+    ],
+    "locksmith": [
+        "Lockout",
+        "Broken lock",
+        "Lock replacement",
+        "Key cutting",
+        "Other"
+    ],
+    "roofer": [
+        "Leak",
+        "Tile/iron damage",
+        "Gutter issue",
+        "Other"
+    ],
+    "pest-control": [
+        "Ants",
+        "Cockroaches",
+        "Termites",
+        "Rodents",
+        "Wasps/bees",
+        "Other"
+    ],
+    "handyman": [
+        "Wall repair",
+        "Hanging/mounting",
+        "Door/window",
+        "Fence/gate",
+        "Other"
+    ],
+    "hvac": [
+        "No cooling",
+        "No heating",
+        "Service/clean",
+        "Install",
+        "Other"
+    ],
+    "appliance-repair": [
+        "Washer/dryer",
+        "Dishwasher",
+        "Oven/stove",
+        "Fridge/freezer",
+        "Other"
+    ]
+}

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Elite Trades - Home</title>
+<!-- Google Fonts: Manrope -->
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&amp;display=swap" rel="stylesheet"/>
+<!-- Material Symbols -->
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<!-- Tailwind CSS -->
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<!-- Tailwind Config from Design System -->
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-container-lowest": "#110c14",
+                        "on-tertiary": "#373100",
+                        "primary-container": "#bd6fec",
+                        "surface": "#171219",
+                        "on-primary-fixed-variant": "#6b1a9a",
+                        "on-primary-container": "#450069",
+                        "on-secondary-container": "#e2a2ed",
+                        "inverse-surface": "#eadfea",
+                        "on-tertiary-fixed": "#201c00",
+                        "surface-container-low": "#1f1a21",
+                        "tertiary": "#dac84e",
+                        "surface-container": "#231e25",
+                        "on-error-container": "#ffdad6",
+                        "on-secondary": "#4d185b",
+                        "surface-dim": "#171219",
+                        "error-container": "#93000a",
+                        "tertiary-fixed-dim": "#dac84e",
+                        "outline-variant": "#4d4351",
+                        "surface-variant": "#39333b",
+                        "on-secondary-fixed-variant": "#663073",
+                        "on-background": "#eadfea",
+                        "secondary-container": "#693376",
+                        "surface-container-highest": "#39333b",
+                        "on-surface-variant": "#d0c2d3",
+                        "background": "#171219",
+                        "secondary-fixed": "#fdd6ff",
+                        "surface-bright": "#3d373f",
+                        "on-primary-fixed": "#30004b",
+                        "secondary": "#f2affc",
+                        "on-secondary-fixed": "#340042",
+                        "on-tertiary-fixed-variant": "#504700",
+                        "outline": "#998d9d",
+                        "inverse-primary": "#8639b4",
+                        "tertiary-container": "#bdac35",
+                        "inverse-on-surface": "#342e37",
+                        "on-tertiary-container": "#484000",
+                        "primary-fixed-dim": "#e5b4ff",
+                        "tertiary-fixed": "#f7e467",
+                        "on-error": "#690005",
+                        "surface-container-high": "#2e2830",
+                        "secondary-fixed-dim": "#f2affc",
+                        "on-surface": "#eadfea",
+                        "on-primary": "#4f0077",
+                        "surface-tint": "#e5b4ff",
+                        "primary": "#e5b4ff",
+                        "error": "#ffb4ab",
+                        "primary-fixed": "#f5d9ff"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "section-padding": "32px",
+                        "stack-gap": "16px",
+                        "inner-padding": "12px",
+                        "container-margin": "20px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Manrope"],
+                        "label-caps": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "h2": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "h3": ["20px", { "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        /* Base styles to ensure consistency */
+        body {
+            background-color: #171219; /* Fallback based on design system background */
+            -webkit-tap-highlight-color: transparent;
+        }
+        /* Hide scrollbar for clean look */
+        ::-webkit-scrollbar {
+            display: none;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen pb-24 font-body-sm antialiased selection:bg-primary-container selection:text-on-primary-container">
+<!-- TopAppBar from JSON -->
+<header class="fixed top-0 left-0 w-full z-50 flex justify-between items-center px-5 h-16 bg-[#3C3541]/70 backdrop-blur-xl border-b border-white/10 shadow-none">
+<div class="flex items-center gap-3">
+<img alt="User Profile Photo" class="w-8 h-8 rounded-full border border-white/20 object-cover" data-alt="close-up portrait of a professional woman with dark hair against a neutral background, soft studio lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAaHpt44rSpZzgiJOe3S-DYotPeKBWTgRQ9dA7JZ3G0i-k11xH37kol4KhncxwAbSlf-W8mOAyOeSxqrkOC6KR433LsrHr1YbO18G9mLuwQq-FjE1Zdf-gLXem05uXq026EEByCNLSucBDT5HnfZIYbrnMbzu6RgiPhthPmGJWq9bYczRsVdlqI7glGWsGJiMyTMgjXAXbsdzz2uf-uzo-j6t9u9YL_-oCvW2ri6nxwAF4RYBxQ2fTATb45Zq22IsITMzZCjC4rs9YK"/>
+<h1 class="text-xl font-bold tracking-tight text-white font-manrope">Elite Trades</h1>
+</div>
+<button class="text-white/60 hover:bg-white/5 active:scale-95 transition-transform p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+</header>
+<!-- Main Content Canvas -->
+<main class="pt-[88px] px-container-margin">
+<!-- Greeting -->
+<section class="mb-section-padding">
+<h2 class="font-h1 text-h1 text-on-background">Hi, Sarah</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant mt-1">Welcome to your property dashboard.</p>
+</section>
+<!-- Hero CTA -->
+<section class="mb-section-padding">
+<button class="w-full relative overflow-hidden bg-gradient-to-r from-primary-container to-secondary-container rounded-xl p-[1px] shadow-[0_4px_24px_-4px_rgba(189,111,236,0.4)] group active:scale-[0.98] transition-all duration-300">
+<div class="bg-primary-container/20 absolute inset-0 backdrop-blur-sm"></div>
+<div class="relative w-full h-full bg-surface/40 backdrop-blur-md rounded-[11px] py-4 px-6 flex items-center justify-center gap-2 border-t border-white/20 border-l border-white/10 hover:bg-surface/30 transition-colors">
+<span class="material-symbols-outlined text-on-primary-container" style="font-variation-settings: 'FILL' 1;">add_circle</span>
+<span class="font-h3 text-h3 text-on-primary-container">Request a tradie</span>
+</div>
+</button>
+</section>
+<!-- Stats Row -->
+<section class="mb-section-padding grid grid-cols-3 gap-3">
+<!-- Tile 1 -->
+<div class="bg-surface-container-highest/80 backdrop-blur-md border-t border-l border-white/10 border-r border-b border-black/20 rounded-xl p-inner-padding flex flex-col items-center justify-center text-center shadow-lg shadow-black/20 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
+<span class="font-h2 text-h2 text-primary-fixed mb-1 relative z-10">3</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase relative z-10">Jobs this year</span>
+</div>
+<!-- Tile 2 -->
+<div class="bg-surface-container-highest/80 backdrop-blur-md border-t border-l border-white/10 border-r border-b border-black/20 rounded-xl p-inner-padding flex flex-col items-center justify-center text-center shadow-lg shadow-black/20 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
+<span class="font-h2 text-h2 text-primary-fixed mb-1 relative z-10">$450</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase relative z-10">Saved in fees</span>
+</div>
+<!-- Tile 3 -->
+<div class="bg-surface-container-highest/80 backdrop-blur-md border-t border-l border-white/10 border-r border-b border-black/20 rounded-xl p-inner-padding flex flex-col items-center justify-center text-center shadow-lg shadow-black/20 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-br from-white/5 to-transparent pointer-events-none"></div>
+<span class="font-h2 text-h2 text-primary-fixed mb-1 relative z-10">1</span>
+<span class="font-label-caps text-label-caps text-on-surface-variant uppercase relative z-10">Properties</span>
+</div>
+</section>
+<!-- Active Jobs Section -->
+<section class="mb-section-padding">
+<div class="flex items-end justify-between mb-stack-gap">
+<h3 class="font-h2 text-h2 text-on-background">Active Requests</h3>
+<a class="font-label-caps text-label-caps text-primary hover:text-primary-fixed transition-colors uppercase" href="#">See all</a>
+</div>
+<div class="flex flex-col gap-stack-gap">
+<!-- Job Card 1 -->
+<div class="bg-surface-variant/80 backdrop-blur-xl border-t border-l border-white/10 border-r border-b border-black/30 rounded-xl p-4 shadow-xl shadow-black/40 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-error-container/10 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>
+<div class="flex justify-between items-start mb-3 relative z-10">
+<div>
+<h4 class="font-h3 text-h3 text-on-surface mb-1">Plumber — Leaking tap</h4>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span>Richmond, VIC</span>
+</div>
+</div>
+<span class="bg-error-container/20 text-error font-label-caps text-label-caps px-2 py-1 rounded-full border border-error/30 uppercase tracking-wider">Urgent</span>
+</div>
+<div class="pt-3 border-t border-white/5 flex items-center justify-between relative z-10">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-tertiary animate-pulse"></div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">Finding Tradie</span>
+</div>
+<button class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-on-surface text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+<!-- Job Card 2 -->
+<div class="bg-surface-variant/80 backdrop-blur-xl border-t border-l border-white/10 border-r border-b border-black/30 rounded-xl p-4 shadow-xl shadow-black/40 relative overflow-hidden group">
+<div class="absolute top-0 right-0 w-32 h-32 bg-error-container/20 rounded-full blur-2xl -mr-10 -mt-10 pointer-events-none"></div>
+<div class="flex justify-between items-start mb-3 relative z-10">
+<div>
+<h4 class="font-h3 text-h3 text-on-surface mb-1">Electrician — Power outage</h4>
+<div class="flex items-center gap-1 text-on-surface-variant font-body-sm text-body-sm">
+<span class="material-symbols-outlined text-[16px]">location_on</span>
+<span>Richmond, VIC</span>
+</div>
+</div>
+<span class="bg-error-container text-on-error-container font-label-caps text-label-caps px-2 py-1 rounded-full border border-error/50 uppercase tracking-wider shadow-[0_0_10px_rgba(147,0,10,0.5)]">Emergency</span>
+</div>
+<div class="pt-3 border-t border-white/5 flex items-center justify-between relative z-10">
+<div class="flex items-center gap-2">
+<div class="w-2 h-2 rounded-full bg-secondary animate-pulse"></div>
+<span class="font-body-sm text-body-sm text-on-surface-variant">In Progress</span>
+</div>
+<button class="w-8 h-8 rounded-full bg-white/5 flex items-center justify-center hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-on-surface text-[20px]">chevron_right</span>
+</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar from JSON -->
+<!-- Displayed on all mobile screens, hidden on md+ -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 pt-2 pb-6 bg-[#3C3541]/90 backdrop-blur-2xl rounded-t-2xl border-t border-white/15 shadow-2xl shadow-black/50 md:hidden">
+<!-- Active Tab: Home -->
+<a class="flex flex-col items-center justify-center bg-gradient-to-br from-[#AC5FDB] to-[#E3A2EE] text-white rounded-xl py-1.5 px-3 active:scale-90 transition-all duration-300 ease-out group" href="#">
+<span class="material-symbols-outlined mb-1" style="font-variation-settings: 'FILL' 1;">grid_view</span>
+<span class="font-manrope text-[10px] font-medium tracking-wide">Home</span>
+</a>
+<!-- Inactive Tab: My Jobs -->
+<a class="flex flex-col items-center justify-center text-white/40 hover:text-white/80 hover:bg-white/5 active:scale-90 transition-all duration-300 ease-out py-1.5 px-3 rounded-xl group" href="#">
+<span class="material-symbols-outlined mb-1">assignment_turned_in</span>
+<span class="font-manrope text-[10px] font-medium tracking-wide">My Jobs</span>
+</a>
+<!-- Inactive Tab: Browse -->
+<a class="flex flex-col items-center justify-center text-white/40 hover:text-white/80 hover:bg-white/5 active:scale-90 transition-all duration-300 ease-out py-1.5 px-3 rounded-xl group" href="#">
+<span class="material-symbols-outlined mb-1">search</span>
+<span class="font-manrope text-[10px] font-medium tracking-wide">Browse</span>
+</a>
+<!-- Inactive Tab: Profile -->
+<a class="flex flex-col items-center justify-center text-white/40 hover:text-white/80 hover:bg-white/5 active:scale-90 transition-all duration-300 ease-out py-1.5 px-3 rounded-xl group" href="#">
+<span class="material-symbols-outlined mb-1">person</span>
+<span class="font-manrope text-[10px] font-medium tracking-wide">Profile</span>
+</a>
+</nav>
+</body></html>

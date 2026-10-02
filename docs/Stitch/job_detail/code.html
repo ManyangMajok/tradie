@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Job Detail - #TR-1042</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed-variant": "#504700",
+                        "outline": "#998d9d",
+                        "inverse-primary": "#8639b4",
+                        "secondary-fixed": "#fdd6ff",
+                        "surface-container-highest": "#39333b",
+                        "on-surface-variant": "#d0c2d3",
+                        "background": "#171219",
+                        "secondary": "#f2affc",
+                        "on-secondary-fixed": "#340042",
+                        "surface-bright": "#3d373f",
+                        "on-primary-fixed": "#30004b",
+                        "on-primary": "#4f0077",
+                        "surface-container-high": "#2e2830",
+                        "secondary-fixed-dim": "#f2affc",
+                        "on-surface": "#eadfea",
+                        "primary-fixed": "#f5d9ff",
+                        "surface-tint": "#e5b4ff",
+                        "primary": "#e5b4ff",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#e5b4ff",
+                        "on-tertiary-container": "#484000",
+                        "tertiary-container": "#bdac35",
+                        "inverse-on-surface": "#342e37",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#f7e467",
+                        "on-secondary-container": "#e2a2ed",
+                        "inverse-surface": "#eadfea",
+                        "on-primary-container": "#450069",
+                        "surface-container-low": "#1f1a21",
+                        "on-tertiary-fixed": "#201c00",
+                        "surface": "#171219",
+                        "primary-container": "#bd6fec",
+                        "surface-container-lowest": "#110c14",
+                        "on-tertiary": "#373100",
+                        "on-primary-fixed-variant": "#6b1a9a",
+                        "tertiary-fixed-dim": "#dac84e",
+                        "outline-variant": "#4d4351",
+                        "error-container": "#93000a",
+                        "surface-dim": "#171219",
+                        "secondary-container": "#693376",
+                        "on-background": "#eadfea",
+                        "surface-variant": "#39333b",
+                        "on-secondary-fixed-variant": "#663073",
+                        "surface-container": "#231e25",
+                        "on-error-container": "#ffdad6",
+                        "tertiary": "#dac84e",
+                        "on-secondary": "#4d185b"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "inner-padding": "12px",
+                        "container-margin": "20px",
+                        "section-padding": "32px",
+                        "stack-gap": "16px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "body-lg": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "body-sm": ["Manrope"],
+                        "label-caps": ["Manrope"]
+                    },
+                    "fontSize": {
+                        "h3": ["20px", { "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: #29262B; }
+        .glass-card {
+            background-color: rgba(60, 53, 65, 0.7);
+            backdrop-filter: blur(16px);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            border-left: 1px solid rgba(255, 255, 255, 0.1);
+            border-right: 1px solid rgba(255, 255, 255, 0.05);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom); }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-background font-body-lg min-h-screen flex flex-col relative pb-[100px]">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 z-50 shadow-none border-b border-white/10 flex items-center justify-between px-5 h-16 w-full fixed bg-[#3C3541]/80 backdrop-blur-xl">
+<button class="flex items-center justify-center w-10 h-10 rounded-full hover:opacity-80 transition-opacity active:scale-95 duration-200">
+<span class="material-symbols-outlined text-[#AC5FDB]" data-icon="arrow_back">arrow_back</span>
+</button>
+<div class="flex-1 flex justify-center items-center gap-3">
+<h1 class="font-h3 text-h3 text-[#AC5FDB] font-bold tracking-tight">Job #TR-1042</h1>
+<span class="px-2 py-1 rounded-full bg-[#AC5FDB]/20 border border-[#AC5FDB]/30 text-[#AC5FDB] font-label-caps text-label-caps">Assigned</span>
+</div>
+<div class="w-10"></div> <!-- Spacer for centering -->
+</header>
+<!-- Main Content -->
+<main class="flex-1 px-container-margin pt-[88px] pb-section-padding flex flex-col gap-section-padding">
+<!-- Member Contact Card -->
+<section class="glass-card rounded-xl p-inner-padding flex flex-col gap-stack-gap">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-surface-container-high flex items-center justify-center overflow-hidden border border-white/10">
+<span class="material-symbols-outlined text-on-surface-variant text-2xl" data-icon="person">person</span>
+</div>
+<div class="flex-1">
+<h2 class="font-h3 text-h3 text-on-surface">John D.</h2>
+<p class="font-body-sm text-body-sm text-on-surface-variant select-all">+61 412 345 678</p>
+</div>
+</div>
+<div class="flex gap-inner-padding">
+<button class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-surface-container-high border border-white/10 hover:bg-surface-bright transition-colors active:scale-95 duration-200 text-on-surface font-h3 text-body-lg">
+<span class="material-symbols-outlined" data-icon="call">call</span>
+                    Call
+                </button>
+<button class="flex-1 flex items-center justify-center gap-2 py-3 px-4 rounded-lg bg-surface-container-high border border-white/10 hover:bg-surface-bright transition-colors active:scale-95 duration-200 text-on-surface font-h3 text-body-lg">
+<span class="material-symbols-outlined" data-icon="sms">sms</span>
+                    SMS
+                </button>
+</div>
+</section>
+<!-- Address Card -->
+<section class="glass-card rounded-xl p-inner-padding flex flex-col gap-stack-gap">
+<div class="flex items-start gap-4">
+<div class="mt-1">
+<span class="material-symbols-outlined text-error" data-icon="location_on" data-weight="fill" style="font-variation-settings: 'FILL' 1;">location_on</span>
+</div>
+<div class="flex-1">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-1">SERVICE ADDRESS</h3>
+<p class="font-h3 text-h3 text-on-surface">123 Forest St</p>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Surry Hills, NSW 2010</p>
+</div>
+</div>
+<button class="w-full flex items-center justify-center gap-2 py-3 rounded-lg bg-[#3C3541]/50 border border-white/10 hover:bg-[#3C3541] transition-colors active:scale-95 duration-200 text-primary font-h3 text-body-lg mt-2">
+<span class="material-symbols-outlined" data-icon="map">map</span>
+                Open in Maps
+            </button>
+</section>
+<!-- Job Summary -->
+<section class="glass-card rounded-xl p-inner-padding flex flex-col gap-stack-gap">
+<div class="flex flex-wrap gap-2 mb-2">
+<span class="px-3 py-1 rounded-full bg-error/20 border border-error/30 text-error font-label-caps text-label-caps flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]" data-icon="warning">warning</span>
+                    EMERGENCY
+                </span>
+<span class="px-3 py-1 rounded-full bg-secondary-container border border-secondary-container text-on-secondary-container font-label-caps text-label-caps">Plumber</span>
+</div>
+<div>
+<h2 class="font-h2 text-h2 text-on-surface mb-2">Burst Pipe</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant">Main water pipe burst under the kitchen sink. Water is rapidly flooding the ground floor. Have temporarily turned off the mains but need urgent repair.</p>
+</div>
+<!-- Horizontal Photo Scroll -->
+<div class="flex gap-inner-padding overflow-x-auto pb-2 snap-x -mx-inner-padding px-inner-padding no-scrollbar">
+<div class="min-w-[140px] h-[100px] rounded-lg overflow-hidden snap-start shrink-0 bg-surface-container-high">
+<img alt="Burst pipe under sink" class="w-full h-full object-cover" data-alt="close up of a burst water pipe under a kitchen sink with water spraying, dark and wet conditions" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDQU1BY39JeuNEYyW9yca3CuI1zM0_z7RVLkcgo7Vltb8gig1ILK8tHoyQ-UqBapeJIlMkZ6b6g4evzWDAwg67Wdq7doyMj7xv6t7WCNvF8uomKsO_rNBYxooCyG4pmET7v9n1E55YMN06mz5pLCq2ryG_T7dUmhtg_tc8-Wge9FQNj6GvUb-heBkYPwP6MrBCcdnkbf562RZ_TbiyHJ9JH-2M0i28luHBcMA-hBj0CvLVpqjDxTGzNZfoX5zUarSVJ3-3LV-dE7h0p"/>
+</div>
+<div class="min-w-[140px] h-[100px] rounded-lg overflow-hidden snap-start shrink-0 bg-surface-container-high">
+<img alt="Flooded kitchen floor" class="w-full h-full object-cover" data-alt="water pooling on a dark tiled kitchen floor reflecting dim light, urgent emergency feeling" src="https://lh3.googleusercontent.com/aida-public/AB6AXuATsSlqwae0ZyYQMmDBHL5sRuPfMfp-rP-_9paYkMOOg-cUoCCXe4qllzTlRuAyx27uV7anBBvMxy6XtPwb8m2pf9srPObja7D_fPIgGuPA477dVUycouknq-jHaLBJnx4ZzzpW-n3GMQrdwL4cOkICEtM-jSTyeUn6SLcvOS9VtgNcmtEPIIA6Iv1dJX7Dlq6nNY26DOxkZU_LRWFG14aKBDMwQZJxLjhWHjo_869LHG3MP7SPXNDBS-Lqdy7SDLKBNyGNGNc1i08A"/>
+</div>
+<div class="min-w-[140px] h-[100px] rounded-lg overflow-hidden snap-start shrink-0 bg-surface-container-high flex items-center justify-center border border-white/10">
+<span class="material-symbols-outlined text-outline-variant text-3xl" data-icon="add_photo_alternate">add_photo_alternate</span>
+</div>
+</div>
+</section>
+<!-- Status Timeline -->
+<section class="glass-card rounded-xl p-inner-padding flex flex-col gap-4">
+<h3 class="font-label-caps text-label-caps text-on-surface-variant mb-2">STATUS TRACKER</h3>
+<div class="relative pl-6 flex flex-col gap-6">
+<!-- Vertical Line -->
+<div class="absolute left-[11px] top-2 bottom-2 w-0.5 bg-outline-variant/30"></div>
+<!-- Timeline Items -->
+<div class="relative flex items-center gap-4 opacity-50">
+<div class="absolute -left-[30px] w-5 h-5 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[12px] text-outline" data-icon="check">check</span>
+</div>
+<div>
+<p class="font-body-lg text-body-lg font-bold text-on-surface">Submitted</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">08:14 AM</p>
+</div>
+</div>
+<div class="relative flex items-center gap-4 opacity-50">
+<div class="absolute -left-[30px] w-5 h-5 rounded-full bg-surface-container-high border border-outline-variant flex items-center justify-center z-10">
+<span class="material-symbols-outlined text-[12px] text-outline" data-icon="check">check</span>
+</div>
+<div>
+<p class="font-body-lg text-body-lg font-bold text-on-surface">Offered</p>
+<p class="font-body-sm text-body-sm text-on-surface-variant">08:20 AM</p>
+</div>
+</div>
+<!-- Active State -->
+<div class="relative flex items-center gap-4">
+<div class="absolute -left-[34px] w-7 h-7 rounded-full bg-[#AC5FDB] flex items-center justify-center z-10 shadow-[0_0_15px_rgba(172,95,219,0.5)]">
+<span class="material-symbols-outlined text-[16px] text-white font-bold" data-icon="check">check</span>
+</div>
+<div class="bg-[#AC5FDB]/10 p-3 rounded-lg border border-[#AC5FDB]/20 flex-1">
+<p class="font-h3 text-h3 text-[#AC5FDB]">Assigned</p>
+<p class="font-body-sm text-body-sm text-[#AC5FDB]/80">08:25 AM</p>
+</div>
+</div>
+<div class="relative flex items-center gap-4 opacity-30">
+<div class="absolute -left-[28px] w-4 h-4 rounded-full bg-surface border-2 border-outline-variant z-10"></div>
+<div>
+<p class="font-body-lg text-body-lg font-bold text-on-surface">On the way</p>
+</div>
+</div>
+<div class="relative flex items-center gap-4 opacity-30">
+<div class="absolute -left-[28px] w-4 h-4 rounded-full bg-surface border-2 border-outline-variant z-10"></div>
+<div>
+<p class="font-body-lg text-body-lg font-bold text-on-surface">Started</p>
+</div>
+</div>
+<div class="relative flex items-center gap-4 opacity-30">
+<div class="absolute -left-[28px] w-4 h-4 rounded-full bg-surface border-2 border-outline-variant z-10"></div>
+<div>
+<p class="font-body-lg text-body-lg font-bold text-on-surface">Completed</p>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Bottom Action Bar -->
+<div class="fixed bottom-0 left-0 w-full z-50 rounded-t-xl border-t border-white/15 bg-[#3C3541]/90 backdrop-blur-2xl shadow-[0_-4px_20px_rgba(0,0,0,0.5)] p-4 pb-safe flex justify-center items-center">
+<button class="flex flex-row items-center justify-center gap-2 bg-gradient-to-r from-[#AC5FDB] to-[#E3A2EE] text-white rounded-lg w-full py-4 shadow-lg shadow-[#AC5FDB]/20 hover:brightness-110 transition-all active:scale-[0.98] duration-150 font-h3 text-h3 font-bold">
+<span class="material-symbols-outlined" data-icon="directions_car">directions_car</span>
+            I'm on the way
+        </button>
+</div>
+</body></html>

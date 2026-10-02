@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Performance Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-surface-variant": "#d0c2d3",
+                    "surface": "#171219",
+                    "secondary-container": "#693376",
+                    "background": "#171219",
+                    "on-error-container": "#ffdad6",
+                    "on-primary-fixed-variant": "#6b1a9a",
+                    "secondary-fixed-dim": "#f2affc",
+                    "inverse-surface": "#eadfea",
+                    "on-secondary-fixed": "#340042",
+                    "error-container": "#93000a",
+                    "on-surface": "#eadfea",
+                    "inverse-on-surface": "#342e37",
+                    "outline-variant": "#4d4351",
+                    "on-primary-fixed": "#30004b",
+                    "primary-container": "#bd6fec",
+                    "on-tertiary-container": "#484000",
+                    "tertiary-fixed-dim": "#dac84e",
+                    "surface-bright": "#3d373f",
+                    "surface-container-highest": "#39333b",
+                    "on-tertiary": "#373100",
+                    "inverse-primary": "#8639b4",
+                    "surface-tint": "#e5b4ff",
+                    "tertiary-fixed": "#f7e467",
+                    "on-primary": "#4f0077",
+                    "surface-container-high": "#2e2830",
+                    "on-secondary-fixed-variant": "#663073",
+                    "tertiary-container": "#bdac35",
+                    "surface-container-low": "#1f1a21",
+                    "error": "#ffb4ab",
+                    "surface-variant": "#39333b",
+                    "outline": "#998d9d",
+                    "on-error": "#690005",
+                    "surface-dim": "#171219",
+                    "secondary": "#f2affc",
+                    "on-secondary-container": "#e2a2ed",
+                    "on-background": "#eadfea",
+                    "secondary-fixed": "#fdd6ff",
+                    "on-secondary": "#4d185b",
+                    "on-primary-container": "#450069",
+                    "surface-container": "#231e25",
+                    "primary-fixed-dim": "#e5b4ff",
+                    "on-tertiary-fixed": "#201c00",
+                    "tertiary": "#dac84e",
+                    "primary": "#e5b4ff",
+                    "on-tertiary-fixed-variant": "#504700",
+                    "surface-container-lowest": "#110c14",
+                    "primary-fixed": "#f5d9ff"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "spacing": {
+                    "section-padding": "32px",
+                    "inner-padding": "12px",
+                    "stack-gap": "16px",
+                    "container-margin": "20px"
+            },
+            "fontFamily": {
+                    "h2": ["Manrope"],
+                    "body-lg": ["Manrope"],
+                    "label-caps": ["Manrope"],
+                    "h3": ["Manrope"],
+                    "h1": ["Manrope"],
+                    "body-sm": ["Manrope"]
+            },
+            "fontSize": {
+                    "h2": ["24px", {"lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700"}],
+                    "body-lg": ["16px", {"lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400"}],
+                    "label-caps": ["12px", {"lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "700"}],
+                    "h3": ["20px", {"lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600"}],
+                    "h1": ["32px", {"lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700"}],
+                    "body-sm": ["14px", {"lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400"}]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        body {
+            background-color: #29262B; /* Overriding for specific screen requirement while keeping theme tokens where possible */
+        }
+        /* Inner glow utility */
+        .glass-panel {
+            background: rgba(60, 53, 65, 0.7);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.15);
+        }
+        .glass-panel-heavy {
+            background: rgba(60, 53, 65, 0.8);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            box-shadow: inset 1px 1px 0px rgba(255, 255, 255, 0.15);
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="text-on-background min-h-screen flex flex-col pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="fixed top-0 w-full z-50 bg-[#3C3541]/80 backdrop-blur-xl border-b border-white/10 flex justify-between items-center px-5 py-3 md:hidden">
+<div class="flex items-center text-primary transition-colors">
+<span class="material-symbols-outlined font-manrope font-bold text-lg tracking-tight text-white" data-icon="menu">menu</span>
+</div>
+<h1 class="font-manrope font-black text-xl text-white">Insights</h1>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden border border-white/10">
+<img alt="Provider Profile Picture" class="w-full h-full object-cover" data-alt="close up portrait of a smiling male service provider with a neatly trimmed beard in professional attire against a neutral grey background" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBQUgrznzTs_J9E8U1I_2T5fZ-qbE4drNIFZnNon0w-3YBcwV2CI94ipExrqGFXzyJtRn2TcyqKlci0nvlR02y62DZmyf9h8nVaEhPawl1f9VPbb3SdneZesPESUGGwQjyEAX_RUDgNjYRWZv4epQC29mVWG90_79wjmH91pf4gOnKoKEo_4OaavKAgBEcGbtwcmTcokE_fdUQfmGsP1v11MeCr6Qf0_h1zT7QiadGP-2ON4I-47NpfIrFzG2ZpFluyV4b28vwXhUK5"/>
+</div>
+</header>
+<!-- Web Nav (Hidden on Mobile) -->
+<nav class="hidden md:flex flex-col w-64 fixed h-full glass-panel-heavy border-r border-white/10 z-40">
+<div class="p-6">
+<h1 class="font-manrope font-black text-2xl text-white mb-8 tracking-tight">Tradify Pro</h1>
+<ul class="space-y-2">
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="inbox">inbox</span>
+<span class="font-body-lg">Inbox</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span class="font-body-lg">Jobs</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl bg-primary/20 text-primary font-semibold transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="query_stats" data-weight="fill">query_stats</span>
+<span class="font-body-lg">Insights</span>
+</a>
+</li>
+<li>
+<a class="flex items-center gap-3 px-4 py-3 rounded-xl text-gray-400 hover:bg-white/5 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined" data-icon="person">person</span>
+<span class="font-body-lg">Profile</span>
+</a>
+</li>
+</ul>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-1 w-full pt-20 md:pt-8 md:pl-64 px-container-margin md:px-8 max-w-7xl mx-auto space-y-section-padding pb-section-padding">
+<!-- Top Filter -->
+<div class="flex justify-center mb-4">
+<div class="inline-flex glass-panel rounded-full p-1 border border-white/5">
+<button class="px-6 py-2 rounded-full font-body-sm font-semibold text-gray-300 hover:text-white transition-colors">7d</button>
+<button class="px-6 py-2 rounded-full bg-primary text-white font-body-sm font-semibold shadow-sm transition-all">30d</button>
+<button class="px-6 py-2 rounded-full font-body-sm font-semibold text-gray-300 hover:text-white transition-colors">90d</button>
+</div>
+</div>
+<!-- Hero Tile (Rating) -->
+<section class="glass-panel-heavy rounded-3xl p-8 flex flex-col items-center justify-center relative overflow-hidden border border-white/10">
+<!-- Decorative gradient blur behind rating -->
+<div class="absolute w-48 h-48 bg-primary/20 rounded-full blur-3xl -z-10 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2"></div>
+<h2 class="font-h2 text-gray-400 mb-2">Overall Rating</h2>
+<div class="text-[72px] font-manrope font-black text-white leading-none tracking-tighter mb-4 shadow-black/50 drop-shadow-md">
+                4.9
+            </div>
+<div class="flex gap-1 mb-2">
+<span class="material-symbols-outlined text-tertiary text-2xl" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-tertiary text-2xl" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-tertiary text-2xl" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-tertiary text-2xl" data-icon="star" data-weight="fill">star</span>
+<span class="material-symbols-outlined text-tertiary text-2xl" data-icon="star_half" data-weight="fill">star_half</span>
+</div>
+<p class="font-body-sm text-gray-400">(124 reviews)</p>
+</section>
+<!-- Stat Grid (Bento Style) -->
+<section class="grid grid-cols-2 gap-stack-gap">
+<!-- Tile 1: Leads -->
+<div class="glass-panel rounded-2xl p-4 flex flex-col gap-2 relative overflow-hidden border border-white/10">
+<div class="w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center text-primary mb-2">
+<span class="material-symbols-outlined" data-icon="inbox">inbox</span>
+</div>
+<p class="font-body-sm text-gray-400">Leads received</p>
+<p class="font-h1 text-white">42</p>
+</div>
+<!-- Tile 2: Acceptance -->
+<div class="glass-panel rounded-2xl p-4 flex flex-col gap-2 relative overflow-hidden border border-white/10">
+<div class="w-10 h-10 rounded-full bg-tertiary/10 flex items-center justify-center text-tertiary mb-2">
+<span class="material-symbols-outlined" data-icon="check_circle">check_circle</span>
+</div>
+<p class="font-body-sm text-gray-400">Acceptance rate</p>
+<p class="font-h1 text-white">85%</p>
+</div>
+<!-- Tile 3: Avg response -->
+<div class="glass-panel rounded-2xl p-4 flex flex-col gap-2 relative overflow-hidden border border-white/10">
+<div class="w-10 h-10 rounded-full bg-secondary/10 flex items-center justify-center text-secondary mb-2">
+<span class="material-symbols-outlined" data-icon="schedule">schedule</span>
+</div>
+<p class="font-body-sm text-gray-400">Avg response</p>
+<p class="font-h1 text-white">01:15</p>
+</div>
+<!-- Tile 4: Jobs completed -->
+<div class="glass-panel rounded-2xl p-4 flex flex-col gap-2 relative overflow-hidden border border-white/10">
+<div class="w-10 h-10 rounded-full bg-primary-container/20 flex items-center justify-center text-primary mb-2">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+</div>
+<p class="font-body-sm text-gray-400">Jobs completed</p>
+<p class="font-h1 text-white">36</p>
+</div>
+<!-- Tile 5: Revenue (Full Width) -->
+<div class="col-span-2 glass-panel rounded-2xl p-6 flex flex-col sm:flex-row justify-between items-start sm:items-center relative overflow-hidden border border-white/10 border-t border-t-white/20">
+<div class="absolute inset-0 bg-gradient-to-r from-primary/5 to-transparent z-0"></div>
+<div class="relative z-10 flex items-center gap-4">
+<div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-primary">
+<span class="material-symbols-outlined text-2xl" data-icon="attach_money">attach_money</span>
+</div>
+<div>
+<p class="font-body-sm text-gray-400">Total Revenue</p>
+<p class="font-h1 text-white">$4,200</p>
+</div>
+</div>
+<div class="relative z-10 mt-4 sm:mt-0 px-3 py-1 bg-white/10 rounded-full border border-white/5">
+<span class="font-label-caps text-tertiary">+12% vs last 30d</span>
+</div>
+</div>
+</section>
+<!-- Chart Placeholder -->
+<section class="glass-panel rounded-2xl p-6 border border-white/10 flex flex-col gap-6">
+<h3 class="font-h3 text-white">Jobs per week</h3>
+<div class="w-full h-48 relative flex items-end gap-2 pt-8">
+<!-- Mock Line Chart Path via SVG -->
+<svg class="absolute inset-0 w-full h-full" preserveaspectratio="none" viewbox="0 0 100 100">
+<path d="M0,80 Q20,60 40,70 T80,40 T100,20" fill="none" stroke="#AC5FDB" stroke-linecap="round" stroke-width="2"></path>
+<!-- Gradient fill under line -->
+<path d="M0,80 Q20,60 40,70 T80,40 T100,20 L100,100 L0,100 Z" fill="url(#chartGradient)" opacity="0.3"></path>
+<defs>
+<lineargradient id="chartGradient" x1="0%" x2="0%" y1="0%" y2="100%">
+<stop offset="0%" stop-color="#AC5FDB"></stop>
+<stop offset="100%" stop-color="transparent"></stop>
+</lineargradient>
+</defs>
+</svg>
+<!-- Grid Lines -->
+<div class="absolute inset-0 flex flex-col justify-between pointer-events-none">
+<div class="border-b border-white/5 w-full h-0"></div>
+<div class="border-b border-white/5 w-full h-0"></div>
+<div class="border-b border-white/5 w-full h-0"></div>
+<div class="border-b border-white/5 w-full h-0"></div>
+</div>
+</div>
+</section>
+<!-- Bottom Tables -->
+<section class="grid grid-cols-1 md:grid-cols-2 gap-stack-gap">
+<!-- Top Suburbs -->
+<div class="glass-panel rounded-2xl p-6 border border-white/10">
+<h3 class="font-h3 text-white mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-400 text-xl" data-icon="location_on">location_on</span>
+                    Top Suburbs
+                </h3>
+<div class="space-y-3">
+<div class="flex justify-between items-center py-2 border-b border-white/5">
+<span class="font-body-lg text-gray-300">Richmond</span>
+<span class="font-h3 text-white">12</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-white/5">
+<span class="font-body-lg text-gray-300">South Yarra</span>
+<span class="font-h3 text-white">8</span>
+</div>
+<div class="flex justify-between items-center py-2">
+<span class="font-body-lg text-gray-300">Fitzroy</span>
+<span class="font-h3 text-white">6</span>
+</div>
+</div>
+</div>
+<!-- Top Issue Types -->
+<div class="glass-panel rounded-2xl p-6 border border-white/10">
+<h3 class="font-h3 text-white mb-4 flex items-center gap-2">
+<span class="material-symbols-outlined text-gray-400 text-xl" data-icon="build">build</span>
+                    Top Issue Types
+                </h3>
+<div class="space-y-3">
+<div class="flex justify-between items-center py-2 border-b border-white/5">
+<span class="font-body-lg text-gray-300">Leaking Pipe</span>
+<span class="font-h3 text-white">15</span>
+</div>
+<div class="flex justify-between items-center py-2 border-b border-white/5">
+<span class="font-body-lg text-gray-300">Hot Water System</span>
+<span class="font-h3 text-white">10</span>
+</div>
+<div class="flex justify-between items-center py-2">
+<span class="font-body-lg text-gray-300">Blocked Drain</span>
+<span class="font-h3 text-white">7</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Footer Note -->
+<div class="text-center pt-8 pb-12">
+<p class="font-body-sm text-gray-500">You've earned $4,200 through Tradify leads this period.</p>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden bg-[#3C3541]/90 backdrop-blur-2xl fixed bottom-0 w-full z-50 border-t border-white/10 rounded-t-lg fixed bottom-0 left-0 w-full flex justify-around items-center px-4 pb-6 pt-3">
+<a class="flex flex-col items-center justify-center text-gray-400 px-3 py-1 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="inbox">inbox</span>
+<span class="font-manrope text-[10px] font-semibold uppercase tracking-wider">Inbox</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 px-3 py-1 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="work">work</span>
+<span class="font-manrope text-[10px] font-semibold uppercase tracking-wider">Jobs</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-[#AC5FDB]/20 text-[#E3A2EE] rounded-xl px-3 py-1 hover:text-white transition-all scale-90 duration-150" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="query_stats" data-weight="fill">query_stats</span>
+<span class="font-manrope text-[10px] font-semibold uppercase tracking-wider">Insights</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-400 px-3 py-1 hover:text-white transition-all" href="#">
+<span class="material-symbols-outlined mb-1" data-icon="person">person</span>
+<span class="font-manrope text-[10px] font-semibold uppercase tracking-wider">Profile</span>
+</a>
+</nav>
+</body></html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Completion Form Wizard - Photos</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-family: 'Material Symbols Outlined';
+            font-weight: normal;
+            font-style: normal;
+            font-size: 24px;
+            line-height: 1;
+            letter-spacing: normal;
+            text-transform: none;
+            display: inline-block;
+            white-space: nowrap;
+            word-wrap: normal;
+            direction: ltr;
+            -webkit-font-feature-settings: 'liga';
+            -webkit-font-smoothing: antialiased;
+        }
+        .pb-safe { padding-bottom: env(safe-area-inset-bottom, 16px); }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "on-primary": "#4f0077",
+                        "surface-container-high": "#2e2830",
+                        "secondary-fixed-dim": "#f2affc",
+                        "on-surface": "#eadfea",
+                        "primary-fixed": "#f5d9ff",
+                        "surface-tint": "#e5b4ff",
+                        "primary": "#e5b4ff",
+                        "error": "#ffb4ab",
+                        "primary-fixed-dim": "#e5b4ff",
+                        "on-tertiary-container": "#484000",
+                        "tertiary-container": "#bdac35",
+                        "inverse-on-surface": "#342e37",
+                        "on-error": "#690005",
+                        "tertiary-fixed": "#f7e467",
+                        "on-tertiary-fixed-variant": "#504700",
+                        "outline": "#998d9d",
+                        "inverse-primary": "#8639b4",
+                        "secondary-fixed": "#fdd6ff",
+                        "surface-container-highest": "#39333b",
+                        "on-surface-variant": "#d0c2d3",
+                        "background": "#171219",
+                        "secondary": "#f2affc",
+                        "on-secondary-fixed": "#340042",
+                        "surface-bright": "#3d373f",
+                        "on-primary-fixed": "#30004b",
+                        "tertiary-fixed-dim": "#dac84e",
+                        "outline-variant": "#4d4351",
+                        "error-container": "#93000a",
+                        "surface-dim": "#171219",
+                        "secondary-container": "#693376",
+                        "on-background": "#eadfea",
+                        "surface-variant": "#39333b",
+                        "on-secondary-fixed-variant": "#663073",
+                        "surface-container": "#231e25",
+                        "on-error-container": "#ffdad6",
+                        "tertiary": "#dac84e",
+                        "on-secondary": "#4d185b",
+                        "on-secondary-container": "#e2a2ed",
+                        "inverse-surface": "#eadfea",
+                        "on-primary-container": "#450069",
+                        "surface-container-low": "#1f1a21",
+                        "on-tertiary-fixed": "#201c00",
+                        "surface": "#171219",
+                        "primary-container": "#bd6fec",
+                        "surface-container-lowest": "#110c14",
+                        "on-tertiary": "#373100",
+                        "on-primary-fixed-variant": "#6b1a9a"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "container-margin": "20px",
+                        "inner-padding": "12px",
+                        "stack-gap": "16px",
+                        "section-padding": "32px"
+                    },
+                    fontFamily: {
+                        "body-sm": ["Manrope"],
+                        "label-caps": ["Manrope"],
+                        "h3": ["Manrope"],
+                        "h1": ["Manrope"],
+                        "h2": ["Manrope"],
+                        "body-lg": ["Manrope"]
+                    },
+                    fontSize: {
+                        "body-sm": ["14px", { "lineHeight": "1.5", "letterSpacing": "0.01em", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.08em", "fontWeight": "700" }],
+                        "h3": ["20px", { "lineHeight": "1.4", "letterSpacing": "0", "fontWeight": "600" }],
+                        "h1": ["32px", { "lineHeight": "1.2", "letterSpacing": "-0.02em", "fontWeight": "700" }],
+                        "h2": ["24px", { "lineHeight": "1.3", "letterSpacing": "-0.01em", "fontWeight": "700" }],
+                        "body-lg": ["16px", { "lineHeight": "1.6", "letterSpacing": "0", "fontWeight": "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background min-h-screen antialiased selection:bg-primary-container selection:text-on-primary-container font-body-lg">
+<!-- TopAppBar Component -->
+<header class="docked full-width top-0 border-b bg-[#3C3541]/80 backdrop-blur-lg border-white/10 shadow-none flex justify-between items-center w-full px-5 py-4 fixed z-50">
+<button class="hover:bg-white/5 transition-colors p-1.5 rounded-full flex items-center justify-center text-[#AC5FDB] opacity-70 hover:scale-95">
+<span class="material-symbols-outlined">close</span>
+</button>
+<h1 class="font-manrope text-sm font-semibold tracking-tight text-white">Step 1 of 5</h1>
+<div class="w-8"></div>
+</header>
+<!-- Main Canvas Content -->
+<main class="pt-[88px] pb-[120px] px-container-margin flex flex-col gap-section-padding">
+<!-- Section Header -->
+<section class="flex flex-col gap-2">
+<h2 class="font-h1 text-h1 text-primary-fixed">Repair Photos</h2>
+<p class="font-body-lg text-body-lg text-on-surface-variant max-w-[90%]">
+                Upload clear images of the completed repair work to finalize this step. Ensure the work area is well-lit.
+            </p>
+</section>
+<!-- Bento Grid for Photos -->
+<section class="grid grid-cols-2 gap-4">
+<!-- Add Photo Action Card -->
+<button class="aspect-square rounded-2xl border border-dashed border-outline-variant bg-surface-container-low/50 backdrop-blur-md flex flex-col items-center justify-center gap-3 hover:border-primary hover:bg-surface-container-high transition-all group shadow-sm">
+<div class="w-12 h-12 rounded-full bg-surface-variant flex items-center justify-center group-hover:bg-primary-container transition-colors">
+<span class="material-symbols-outlined text-on-surface-variant group-hover:text-on-primary-container text-2xl">add</span>
+</div>
+<span class="font-label-caps text-label-caps text-on-surface-variant group-hover:text-primary-fixed transition-colors">Add Photo</span>
+</button>
+<!-- Mock Thumbnail 1 -->
+<div class="aspect-square rounded-2xl overflow-hidden relative group bg-surface-container border border-white/5 shadow-lg relative">
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute top-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="w-8 h-8 rounded-full bg-error-container/80 backdrop-blur-md flex items-center justify-center text-on-error-container hover:bg-error transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+<img alt="Repaired Pipe" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="close up of a newly repaired copper water pipe with clean soldered joints in a dimly lit industrial basement with dramatic side lighting" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDrum8mypNlFHVmtMFB_bINEkR_sZfa2FpJhUtMhrCykveGtZLri6Tw6yFqnqaZsc9Zar7O4KW_bCTIQT_YVsu5nvuJ9DcRYmpMQLvAvNTgZMCCN0kLnD59bhp7rLlKnC-5X7uw4KuswQEVoSLt2Nty0_T-mMMQGtZPw3S4J2G1sDbUkFQ6O8PxSk1GkdeWo2ycqkYtmhQF02q1Gb1ACZjc58r-Kz4h0Z9kWjcovEnWzMI6xaP1aJflzq29dSlaPZ2VAO_6dC2LfRcy"/>
+</div>
+<!-- Mock Thumbnail 2 -->
+<div class="aspect-square rounded-2xl overflow-hidden relative group bg-surface-container border border-white/5 shadow-lg relative col-span-2 sm:col-span-1">
+<div class="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent z-10 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+<div class="absolute top-2 right-2 z-20 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+<button class="w-8 h-8 rounded-full bg-error-container/80 backdrop-blur-md flex items-center justify-center text-on-error-container hover:bg-error transition-colors shadow-sm">
+<span class="material-symbols-outlined text-[18px]">delete</span>
+</button>
+</div>
+<img alt="Electrical Wiring" class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105" data-alt="close up of organized electrical wiring in a modern breaker box with clean secure connections and precise cable management" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDhox3IaFusgIgbY1PEyPetFi3N1TM2O_1iyGeRLm_y9kchPVo0ejmIadqUal6vi2D6Mv0fsCaLaiGC9ODZ_GBm3DWVpK-SsjmoPozuDocGVbFeHdJFhl8BRMcVwWYSfym9XtCicUyrjPQOAXQsIvqOEA2WUr4Pb8mfqzTZ9FLaMkcudsyqiqUFxAMyBlUgMy7PGUPv__CTkZllEGMzZih2ru8gyJHdfGMdQxS9ZvEY18N8of9W9MtZTOqyFp8uJOTvEyc8hSXjuwR3"/>
+</div>
+</section>
+</main>
+<!-- BottomNavBar Component -->
+<nav class="docked full-width bottom-0 rounded-t-2xl border-t bg-[#3C3541]/90 backdrop-blur-2xl border-white/10 shadow-[0_-4px_20px_rgba(0,0,0,0.3)] fixed left-0 w-full z-50 flex justify-around items-center px-6 py-4 pb-safe">
+<!-- Back Action -->
+<button class="text-gray-400 opacity-60 flex flex-col items-center gap-1 hover:text-white transition-all cursor-pointer">
+<span class="material-symbols-outlined">arrow_back</span>
+<span class="font-manrope text-[10px] font-bold uppercase tracking-widest">Back</span>
+</button>
+<!-- Next Action (Active Intent for Wizard) -->
+<button class="bg-gradient-to-r from-[#AC5FDB] to-[#E3A2EE] text-white rounded-xl px-6 py-3 shadow-[0_0_15px_rgba(172,95,219,0.4)] flex items-center justify-center gap-2 hover:scale-95 transition-transform duration-150 cursor-pointer w-32">
+<span class="font-manrope text-xs font-bold uppercase tracking-widest">Next</span>
+<span class="material-symbols-outlined text-lg">arrow_forward</span>
+</button>
+<!-- Submit Action -->
+<button class="text-gray-400 opacity-60 flex flex-col items-center gap-1 hover:text-white transition-all cursor-pointer">
+<span class="material-symbols-outlined">done_all</span>
+<span class="font-manrope text-[10px] font-bold uppercase tracking-widest">Submit</span>
+</button>
+</nav>
+</body></html>
