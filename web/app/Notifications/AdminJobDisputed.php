@@ -37,6 +37,6 @@ class AdminJobDisputed extends Notification
             ->line("- Discount honoured: {$this->review->discount_honoured}")
             ->line("- Stars: {$this->review->stars}/5")
             ->line('"'.($this->review->review_text ?? '(no comment)').'"')
-            ->salutation('— Tradify System');
+            ->salutation('— TradeFinder System');
     }
 }

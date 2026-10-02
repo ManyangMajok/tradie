@@ -27,6 +27,6 @@ class MemberJobAutoConfirmed extends Notification
             ->greeting("Hi {$notifiable->first_name},")
             ->line("Your recent job with {$company->business_name} was marked complete 7 days ago. Since we didn't hear back, we've assumed everything went fine.")
             ->line("If there was an issue, reply to this email and we'll take a look.")
-            ->salutation('— Tradify');
+            ->salutation('— TradeFinder');
     }
 }

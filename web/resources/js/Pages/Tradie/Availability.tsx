@@ -60,7 +60,7 @@ export default function Availability({ availability: initial }: Props) {
                                                 type="checkbox"
                                                 checked={row.is_open}
                                                 onChange={(e) => setRow(i, { is_open: e.target.checked })}
-                                                className="rounded border-gray-300 text-blue-600"
+                                                className="rounded border-gray-300 text-brand-500"
                                             />
                                         </td>
                                         <td className="px-4 py-2.5">
@@ -86,7 +86,7 @@ export default function Availability({ availability: initial }: Props) {
                                                 type="checkbox"
                                                 checked={row.accepts_emergency}
                                                 onChange={(e) => setRow(i, { accepts_emergency: e.target.checked })}
-                                                className="rounded border-gray-300 text-blue-600"
+                                                className="rounded border-gray-300 text-brand-500"
                                             />
                                         </td>
                                     </tr>

@@ -1,5 +1,6 @@
 import React from 'react';
 import { usePage } from '@inertiajs/react';
+import { Logo } from '../Components/ui/Logo';
 
 interface AuthLayoutProps {
     children: React.ReactNode;
@@ -13,8 +14,8 @@ export default function AuthLayout({ children, title, subtitle }: AuthLayoutProp
     return (
         <div className="flex min-h-screen flex-col items-center justify-center bg-gray-50 px-4 py-12">
             <div className="mb-8 text-center">
-                <a href="/" className="text-2xl font-bold text-blue-600">
-                    Tradify
+                <a href="/" className="inline-flex">
+                    <Logo size="lg" />
                 </a>
                 {title && <h1 className="mt-4 text-2xl font-semibold text-gray-900">{title}</h1>}
                 {subtitle && <p className="mt-1 text-sm text-gray-500">{subtitle}</p>}

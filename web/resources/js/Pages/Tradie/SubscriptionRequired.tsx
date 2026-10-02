@@ -15,12 +15,12 @@ export default function SubscriptionRequired() {
                 </p>
                 <Link
                     href="/tradie/activate-subscription"
-                    className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+                    className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-600"
                 >
                     Choose a plan
                 </Link>
                 <p className="mt-4 text-center text-sm text-gray-500">
-                    <Link href="/logout" method="post" as="button" className="text-blue-600 hover:underline">
+                    <Link href="/logout" method="post" as="button" className="text-brand-500 hover:underline">
                         Sign out
                     </Link>
                 </p>

@@ -76,7 +76,7 @@ export default function TradieJobComplete({ job }: Props) {
                                 Summary of work <span className="text-red-500">*</span>
                             </label>
                             <textarea
-                                className="mt-1 w-full rounded-lg border border-gray-200 p-3 text-sm focus:border-blue-500 focus:outline-none"
+                                className="mt-1 w-full rounded-lg border border-gray-200 p-3 text-sm focus:border-brand-500 focus:outline-none"
                                 rows={4}
                                 placeholder="Describe what was done…"
                                 value={form.summary_of_work}
@@ -98,7 +98,7 @@ export default function TradieJobComplete({ job }: Props) {
                                     type="number"
                                     min="0"
                                     step="0.01"
-                                    className="w-full rounded-lg border border-gray-200 p-2.5 text-sm focus:border-blue-500 focus:outline-none"
+                                    className="w-full rounded-lg border border-gray-200 p-2.5 text-sm focus:border-brand-500 focus:outline-none"
                                     placeholder="0.00"
                                     value={form.invoice_total_dollars}
                                     onChange={(e) => update('invoice_total_dollars', e.target.value)}
@@ -113,7 +113,7 @@ export default function TradieJobComplete({ job }: Props) {
                         <label className="flex cursor-pointer items-start gap-3">
                             <input
                                 type="checkbox"
-                                className="mt-0.5 accent-blue-600"
+                                className="mt-0.5 accent-brand-500"
                                 checked={form.no_callout_fee_confirmed}
                                 onChange={(e) => update('no_callout_fee_confirmed', e.target.checked)}
                             />
@@ -127,7 +127,7 @@ export default function TradieJobComplete({ job }: Props) {
                         <label className="flex cursor-pointer items-start gap-3">
                             <input
                                 type="checkbox"
-                                className="mt-0.5 accent-blue-600"
+                                className="mt-0.5 accent-brand-500"
                                 checked={form.discount_applied}
                                 onChange={(e) => update('discount_applied', e.target.checked)}
                             />
@@ -149,7 +149,7 @@ export default function TradieJobComplete({ job }: Props) {
                                         type="number"
                                         min="0"
                                         step="0.01"
-                                        className="w-full rounded-lg border border-gray-200 p-2.5 text-sm focus:border-blue-500 focus:outline-none"
+                                        className="w-full rounded-lg border border-gray-200 p-2.5 text-sm focus:border-brand-500 focus:outline-none"
                                         placeholder="0.00"
                                         value={form.discount_amount_dollars}
                                         onChange={(e) => update('discount_amount_dollars', e.target.value)}
@@ -165,7 +165,7 @@ export default function TradieJobComplete({ job }: Props) {
                         <div>
                             <label className="block text-sm font-medium text-gray-700">Completion notes (optional)</label>
                             <textarea
-                                className="mt-1 w-full rounded-lg border border-gray-200 p-3 text-sm focus:border-blue-500 focus:outline-none"
+                                className="mt-1 w-full rounded-lg border border-gray-200 p-3 text-sm focus:border-brand-500 focus:outline-none"
                                 rows={2}
                                 placeholder="Any follow-up notes for the member…"
                                 value={form.completion_notes}

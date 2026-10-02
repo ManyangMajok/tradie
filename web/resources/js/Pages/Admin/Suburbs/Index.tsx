@@ -51,16 +51,16 @@ export default function SuburbsIndex({ suburbs, filters }: Props) {
                             value={search}
                             onChange={e => setSearch(e.target.value)}
                             placeholder="Search name or postcode…"
-                            className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-64"
+                            className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 w-64"
                         />
-                        <button type="submit" className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
+                        <button type="submit" className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600">
                             Search
                         </button>
                     </form>
                     <select
                         value={filters.active ?? ''}
                         onChange={e => setActive(e.target.value)}
-                        className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                     >
                         <option value="">All</option>
                         <option value="1">Active</option>
@@ -108,7 +108,7 @@ export default function SuburbsIndex({ suburbs, filters }: Props) {
                                         key={i}
                                         onClick={() => router.get(link.url!)}
                                         dangerouslySetInnerHTML={{ __html: link.label }}
-                                        className={`rounded px-3 py-1 ${link.active ? 'bg-indigo-600 text-white' : 'border border-gray-300 hover:bg-gray-50'}`}
+                                        className={`rounded px-3 py-1 ${link.active ? 'bg-brand-500 text-white' : 'border border-gray-300 hover:bg-gray-50'}`}
                                     />
                                 ) : (
                                     <span key={i} dangerouslySetInnerHTML={{ __html: link.label }} className="rounded px-3 py-1 text-gray-300" />

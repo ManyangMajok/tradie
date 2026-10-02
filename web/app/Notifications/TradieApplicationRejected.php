@@ -20,7 +20,7 @@ class TradieApplicationRejected extends Notification
     public function toMail(object $notifiable): MailMessage
     {
         $message = (new MailMessage)
-            ->subject('Your Tradify application was not approved')
+            ->subject('Your TradeFinder application was not approved')
             ->greeting("Hi {$notifiable->first_name},")
             ->line('After reviewing your application, we are unable to approve it at this time.');
 
@@ -30,6 +30,6 @@ class TradieApplicationRejected extends Notification
 
         return $message
             ->line('If you believe this is an error, please reply to this email.')
-            ->salutation('The Tradify Team');
+            ->salutation('The TradeFinder Team');
     }
 }

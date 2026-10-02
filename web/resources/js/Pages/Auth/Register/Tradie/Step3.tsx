@@ -62,7 +62,7 @@ export default function TradieStep3({ draft = {} }: Props) {
                                 <select
                                     value={data.licence_state}
                                     onChange={(e) => setData('licence_state', e.target.value)}
-                                    className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                    className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                                 >
                                     {states.map((s) => <option key={s} value={s}>{s}</option>)}
                                 </select>

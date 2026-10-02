@@ -39,12 +39,12 @@ class AuthController extends Controller
         $app = $request->input('app');
         if ($app === 'tradie' && $user->role !== UserRole::Tradie) {
             return response()->json([
-                'message' => 'This account is for members. Use the Tradify Members app (or the local demo website) to access your account.',
+                'message' => 'This account is for members. Use the TradeFinder Members app (or the local demo website) to access your account.',
             ], 403);
         }
         if ($app === 'member' && $user->role !== UserRole::Member) {
             return response()->json([
-                'message' => 'This account is for tradies. Use the Tradify Tradies app to access your account.',
+                'message' => 'This account is for tradies. Use the TradeFinder Tradies app to access your account.',
             ], 403);
         }
 

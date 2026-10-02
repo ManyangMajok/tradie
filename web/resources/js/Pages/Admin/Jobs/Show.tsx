@@ -51,8 +51,8 @@ interface Props {
 const STATUS_COLOURS: Record<string, string> = {
     pending_dispatch: 'bg-gray-100 text-gray-700',
     offered: 'bg-yellow-100 text-yellow-700',
-    assigned: 'bg-blue-100 text-blue-700',
-    tradie_on_the_way: 'bg-indigo-100 text-indigo-700',
+    assigned: 'bg-brand-100 text-brand-700',
+    tradie_on_the_way: 'bg-brand-100 text-brand-700',
     in_progress: 'bg-purple-100 text-purple-700',
     completed: 'bg-teal-100 text-teal-700',
     confirmed: 'bg-green-100 text-green-700',
@@ -74,7 +74,7 @@ export default function JobShow({ job, tradieCompanies }: Props) {
         <div className="space-y-8 max-w-4xl">
             <div className="flex items-start justify-between">
                 <div>
-                    <Link href="/admin/jobs" className="text-sm text-indigo-600 hover:underline">← All jobs</Link>
+                    <Link href="/admin/jobs" className="text-sm text-brand-600 hover:underline">← All jobs</Link>
                     <h1 className="mt-1 text-2xl font-bold text-gray-900">{job.public_id}</h1>
                 </div>
                 <span className={`inline-flex rounded-full px-3 py-1 text-sm font-medium ${STATUS_COLOURS[job.status] ?? 'bg-gray-100 text-gray-700'}`}>
@@ -143,7 +143,7 @@ export default function JobShow({ job, tradieCompanies }: Props) {
                 <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm space-y-4">
                     <h2 className="font-semibold text-gray-900">Admin actions</h2>
                     <div className="flex flex-wrap gap-3">
-                        <button onClick={() => setShowAssign(!showAssign)} className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700">
+                        <button onClick={() => setShowAssign(!showAssign)} className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600">
                             Manually assign
                         </button>
                         <button
@@ -166,7 +166,7 @@ export default function JobShow({ job, tradieCompanies }: Props) {
                                     value={assignForm.data.tradie_company_id}
                                     onChange={(e) => assignForm.setData('tradie_company_id', e.target.value)}
                                     required
-                                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                                 >
                                     <option value="">Select tradie…</option>
                                     {tradieCompanies.map((t) => (
@@ -182,10 +182,10 @@ export default function JobShow({ job, tradieCompanies }: Props) {
                                     value={assignForm.data.note}
                                     onChange={(e) => assignForm.setData('note', e.target.value)}
                                     placeholder="e.g. Per phone call"
-                                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                                 />
                             </div>
-                            <button type="submit" disabled={assignForm.processing} className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50">
+                            <button type="submit" disabled={assignForm.processing} className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-50">
                                 Assign
                             </button>
                         </form>
@@ -199,7 +199,7 @@ export default function JobShow({ job, tradieCompanies }: Props) {
                                     type="text"
                                     value={cancelForm.data.reason}
                                     onChange={(e) => cancelForm.setData('reason', e.target.value)}
-                                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                                 />
                             </div>
                             <button type="submit" disabled={cancelForm.processing} className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700 disabled:opacity-50">

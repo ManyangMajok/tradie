@@ -82,7 +82,7 @@ export default function TradieJobShow({ job }: Props) {
                         {job.member.first_name} {job.member.last_name}
                     </div>
                     {job.member.phone && (
-                        <a href={`tel:${job.member.phone}`} className="flex items-center gap-2 text-sm text-blue-600 hover:underline">
+                        <a href={`tel:${job.member.phone}`} className="flex items-center gap-2 text-sm text-brand-500 hover:underline">
                             <Phone className="h-4 w-4" />
                             {job.member.phone}
                         </a>

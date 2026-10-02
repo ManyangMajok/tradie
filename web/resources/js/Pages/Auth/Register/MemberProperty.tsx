@@ -62,7 +62,7 @@ export default function MemberProperty({ suburbs }: Props) {
                             <select
                                 value={data.suburb_id}
                                 onChange={(e) => setData('suburb_id', e.target.value)}
-                                className={`block w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500 ${errors.suburb_id ? 'border-red-500' : 'border-gray-300'}`}
+                                className={`block w-full rounded-lg border px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500 ${errors.suburb_id ? 'border-red-500' : 'border-gray-300'}`}
                             >
                                 <option value="">Select suburb…</option>
                                 {suburbs.map((s) => (
@@ -77,7 +77,7 @@ export default function MemberProperty({ suburbs }: Props) {
                             <select
                                 value={data.property_type}
                                 onChange={(e) => setData('property_type', e.target.value)}
-                                className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                             >
                                 {propertyTypes.map((t) => (
                                     <option key={t.value} value={t.value}>{t.label}</option>

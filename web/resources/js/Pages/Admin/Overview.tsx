@@ -37,8 +37,8 @@ interface Props {
 }
 
 const STATUS_COLOURS: Record<string, string> = {
-    assigned: 'bg-blue-100 text-blue-700',
-    tradie_on_the_way: 'bg-indigo-100 text-indigo-700',
+    assigned: 'bg-brand-100 text-brand-700',
+    tradie_on_the_way: 'bg-brand-100 text-brand-700',
     in_progress: 'bg-purple-100 text-purple-700',
     rescheduled: 'bg-yellow-100 text-yellow-700',
 };
@@ -52,7 +52,7 @@ export default function Overview({ counts, attention, liveJobs }: Props) {
                 <Card>
                     <CardBody>
                         <div className="flex items-center gap-4">
-                            <div className="rounded-lg p-3 bg-blue-50 text-blue-600"><Users className="h-5 w-5" /></div>
+                            <div className="rounded-lg p-3 bg-brand-50 text-brand-500"><Users className="h-5 w-5" /></div>
                             <div>
                                 <p className="text-sm text-gray-500">Active members</p>
                                 <p className="text-2xl font-bold text-gray-900">{counts.active_members}</p>
@@ -128,7 +128,7 @@ export default function Overview({ counts, attention, liveJobs }: Props) {
                 )}
                 {attention.renewals_in_7_days > 0 && (
                     <Card>
-                        <CardBody className="flex items-center gap-3 text-blue-700 bg-blue-50">
+                        <CardBody className="flex items-center gap-3 text-brand-700 bg-brand-50">
                             <Clock className="h-5 w-5 shrink-0" />
                             <span className="text-sm font-medium">{attention.renewals_in_7_days} renewal{attention.renewals_in_7_days !== 1 ? 's' : ''} in 7 days</span>
                         </CardBody>
@@ -157,7 +157,7 @@ export default function Overview({ counts, attention, liveJobs }: Props) {
                                 {liveJobs.map((job) => (
                                     <tr key={job.id} className="hover:bg-gray-50">
                                         <td className="px-4 py-3">
-                                            <Link href={`/admin/jobs/${job.public_id}`} className="font-medium text-indigo-600 hover:underline">
+                                            <Link href={`/admin/jobs/${job.public_id}`} className="font-medium text-brand-600 hover:underline">
                                                 {job.public_id}
                                             </Link>
                                         </td>

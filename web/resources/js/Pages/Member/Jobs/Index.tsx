@@ -30,8 +30,8 @@ interface PaginatedJobs {
 interface Props { jobs: PaginatedJobs; }
 
 const STATUS_LABELS: Record<string, { label: string; colour: string }> = {
-    pending_dispatch: { label: 'Finding a tradie…', colour: 'text-blue-500' },
-    offered:          { label: 'Finding a tradie…', colour: 'text-blue-500' },
+    pending_dispatch: { label: 'Finding a tradie…', colour: 'text-brand-500' },
+    offered:          { label: 'Finding a tradie…', colour: 'text-brand-500' },
     assigned:         { label: 'Tradie assigned',   colour: 'text-green-600' },
     tradie_on_the_way:{ label: 'On the way',         colour: 'text-green-600' },
     in_progress:      { label: 'In progress',        colour: 'text-green-600' },
@@ -51,7 +51,7 @@ export default function JobsIndex({ jobs }: Props) {
                 </div>
                 <Link
                     href="/jobs/new"
-                    className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium text-white hover:bg-blue-700"
+                    className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600"
                 >
                     Request a tradie
                 </Link>
@@ -61,7 +61,7 @@ export default function JobsIndex({ jobs }: Props) {
                 <div className="mt-16 flex flex-col items-center gap-3 text-gray-400">
                     <Inbox className="h-12 w-12" />
                     <p className="text-sm">No jobs yet</p>
-                    <Link href="/jobs/new" className="text-sm text-blue-600 hover:underline">
+                    <Link href="/jobs/new" className="text-sm text-brand-500 hover:underline">
                         Request your first tradie
                     </Link>
                 </div>

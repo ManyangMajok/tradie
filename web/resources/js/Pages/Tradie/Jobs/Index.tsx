@@ -29,8 +29,8 @@ interface Props { jobs: PaginatedJobs; }
 const ACTIVE_STATUSES = new Set(['assigned', 'tradie_on_the_way', 'in_progress', 'awaiting_client_response', 'rescheduled']);
 
 const STATUS_LABELS: Record<string, { label: string; colour: string }> = {
-    assigned:                  { label: 'Assigned',       colour: 'text-blue-600' },
-    tradie_on_the_way:         { label: 'On the way',     colour: 'text-blue-600' },
+    assigned:                  { label: 'Assigned',       colour: 'text-brand-500' },
+    tradie_on_the_way:         { label: 'On the way',     colour: 'text-brand-500' },
     in_progress:               { label: 'In progress',    colour: 'text-green-600' },
     awaiting_client_response:  { label: 'Awaiting client', colour: 'text-amber-500' },
     rescheduled:               { label: 'Rescheduled',    colour: 'text-amber-500' },

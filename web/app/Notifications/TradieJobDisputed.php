@@ -38,6 +38,6 @@ class TradieJobDisputed extends Notification
             ->line('"'.($this->review->review_text ?? '(no comment)').'"')
             ->line('Our team will review this and may contact you. In the meantime, new leads to your business are paused pending review.')
             ->line("If you'd like to respond first, reply to this email.")
-            ->salutation('— Tradify');
+            ->salutation('— TradeFinder');
     }
 }

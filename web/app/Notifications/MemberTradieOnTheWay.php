@@ -30,6 +30,6 @@ class MemberTradieOnTheWay extends Notification
             ->greeting("Hi {$notifiable->first_name},")
             ->line("{$company->business_name} is on their way to {$property->address_line_1}, {$property->suburb->name}.")
             ->action('View job', url("/jobs/{$this->job->public_id}"))
-            ->salutation('— Tradify');
+            ->salutation('— TradeFinder');
     }
 }

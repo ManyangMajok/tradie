@@ -71,12 +71,12 @@ export default function Applications({ applications }: Props) {
                                         </div>
                                         <div className="mt-2 flex gap-3 text-xs">
                                             {app.licence_document_path && (
-                                                <a href={`/admin/documents/${encodeURIComponent(app.licence_document_path)}`} target="_blank" className="flex items-center gap-1 text-blue-600 hover:underline" rel="noreferrer">
+                                                <a href={`/admin/documents/${encodeURIComponent(app.licence_document_path)}`} target="_blank" className="flex items-center gap-1 text-brand-500 hover:underline" rel="noreferrer">
                                                     <FileText className="h-3.5 w-3.5" /> Licence doc
                                                 </a>
                                             )}
                                             {app.insurance_document_path && (
-                                                <a href={`/admin/documents/${encodeURIComponent(app.insurance_document_path)}`} target="_blank" className="flex items-center gap-1 text-blue-600 hover:underline" rel="noreferrer">
+                                                <a href={`/admin/documents/${encodeURIComponent(app.insurance_document_path)}`} target="_blank" className="flex items-center gap-1 text-brand-500 hover:underline" rel="noreferrer">
                                                     <FileText className="h-3.5 w-3.5" /> Insurance doc
                                                 </a>
                                             )}

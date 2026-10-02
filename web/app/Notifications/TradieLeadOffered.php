@@ -35,6 +35,6 @@ class TradieLeadOffered extends Notification
             ->line('Issue: '.($job->issueType?->name ?? $job->custom_issue ?? 'Not specified'))
             ->line('Description: '.$job->description)
             ->action('View & Accept Lead', $leadUrl)
-            ->salutation('— Tradify');
+            ->salutation('— TradeFinder');
     }
 }

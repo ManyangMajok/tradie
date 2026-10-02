@@ -45,6 +45,6 @@ class MemberJobDelayed extends Notification
             ->line("Your job reference: **{$this->job->public_id}**")
             ->action('View your request', url("/jobs/{$this->job->public_id}"))
             ->line('Sorry for the wait — we appreciate your patience.')
-            ->salutation('— Tradify');
+            ->salutation('— TradeFinder');
     }
 }

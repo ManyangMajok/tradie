@@ -31,10 +31,10 @@ export default function TradieChoices({ tradies, selected, onChange, location, e
                 <ol className="space-y-3">
                     {tradies.map((tradie, index) => (
                         <li key={tradie.id}>
-                            <label className={`flex cursor-pointer items-start gap-3 rounded-lg border p-4 focus-within:ring-2 focus-within:ring-blue-600 ${selected === tradie.id ? 'border-blue-600 bg-blue-50' : 'border-gray-200'}`}>
+                            <label className={`flex cursor-pointer items-start gap-3 rounded-lg border p-4 focus-within:ring-2 focus-within:ring-brand-500 ${selected === tradie.id ? 'border-brand-500 bg-brand-50' : 'border-gray-200'}`}>
                                 <input type="radio" name="selected_tradie_company_id" value={tradie.id}
                                     checked={selected === tradie.id} onChange={() => onChange(tradie.id)}
-                                    aria-invalid={Boolean(error)} className="mt-1 accent-blue-600" />
+                                    aria-invalid={Boolean(error)} className="mt-1 accent-brand-500" />
                                 <span className="min-w-0 space-y-1">
                                     <span className="block font-semibold text-gray-900">{index + 1}. {tradie.business_name}</span>
                                     <span className="block text-sm text-gray-700">

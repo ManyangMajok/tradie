@@ -44,7 +44,7 @@ export default function Metrics({ metrics }: Props) {
                             <dt className="w-48 text-sm text-gray-500">{status.replace(/_/g, ' ')}</dt>
                             <div className="flex-1 bg-gray-100 rounded-full h-4 overflow-hidden">
                                 <div
-                                    className="h-full bg-indigo-500 rounded-full"
+                                    className="h-full bg-brand-500 rounded-full"
                                     style={{ width: `${metrics.total_jobs > 0 ? (count / metrics.total_jobs) * 100 : 0}%` }}
                                 />
                             </div>

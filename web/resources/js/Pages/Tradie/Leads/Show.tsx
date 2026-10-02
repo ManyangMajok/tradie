@@ -181,7 +181,7 @@ export default function LeadShow({ offer }: Props) {
                                         value={r.value}
                                         checked={declineReason === r.value}
                                         onChange={() => setDeclineReason(r.value)}
-                                        className="accent-blue-600"
+                                        className="accent-brand-500"
                                     />
                                     <span className="text-sm text-gray-700">{r.label}</span>
                                 </label>

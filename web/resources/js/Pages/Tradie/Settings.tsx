@@ -34,7 +34,7 @@ function Field({ label, error, children }: { label: string; error?: string; chil
     );
 }
 
-const inputCls = 'w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500';
+const inputCls = 'w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500';
 
 export default function Settings({ profile, company }: Props) {
     const profileForm = useForm({
@@ -108,7 +108,7 @@ export default function Settings({ profile, company }: Props) {
                     <button
                         type="submit"
                         disabled={profileForm.processing}
-                        className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+                        className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-50"
                     >
                         Save
                     </button>
@@ -146,7 +146,7 @@ export default function Settings({ profile, company }: Props) {
                     <button
                         type="submit"
                         disabled={companyForm.processing}
-                        className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+                        className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-50"
                     >
                         Save
                     </button>
@@ -187,7 +187,7 @@ export default function Settings({ profile, company }: Props) {
                     <button
                         type="submit"
                         disabled={passwordForm.processing}
-                        className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+                        className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-50"
                     >
                         Change password
                     </button>

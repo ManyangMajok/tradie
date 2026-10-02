@@ -14,7 +14,7 @@ function showProgress() {
         npBar.setAttribute('role', 'progressbar');
         npBar.setAttribute('aria-label', 'Page loading');
         npBar.style.cssText =
-            'position:fixed;top:0;left:0;height:3px;background:#6366f1;z-index:9999;transition:width 200ms ease;width:0';
+            'position:fixed;top:0;left:0;height:3px;background:#F97316;z-index:9999;transition:width 200ms ease;width:0';
         document.body.appendChild(npBar);
     }
     npBar.style.width = '0';

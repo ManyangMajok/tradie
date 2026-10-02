@@ -31,6 +31,6 @@ class MemberJobCompletedPromptReview extends Notification
             ->line("{$company->business_name} has marked your job complete.")
             ->line('Quick 1-min check: was the call-out fee waived and your discount applied?')
             ->action('Leave your review', $reviewUrl)
-            ->salutation('— Tradify');
+            ->salutation('— TradeFinder');
     }
 }

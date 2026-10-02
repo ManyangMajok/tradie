@@ -30,7 +30,7 @@ export default function TradieStep4() {
                             onChange={(v) => setData('agreed_terms', v)}
                             error={errors.agreed_terms}
                         >
-                            I agree to the <a href="/terms" className="text-blue-600 hover:underline" target="_blank">Terms and Conditions</a> and <a href="/privacy" className="text-blue-600 hover:underline" target="_blank">Privacy Policy</a>.
+                            I agree to the <a href="/terms" className="text-brand-500 hover:underline" target="_blank">Terms and Conditions</a> and <a href="/privacy" className="text-brand-500 hover:underline" target="_blank">Privacy Policy</a>.
                         </AgreementCheckbox>
 
                         <AgreementCheckbox
@@ -38,7 +38,7 @@ export default function TradieStep4() {
                             onChange={(v) => setData('agreed_conduct', v)}
                             error={errors.agreed_conduct}
                         >
-                            I agree to Tradify's <span className="font-medium">Code of Conduct</span> — I will respond promptly to leads, treat members professionally, and charge fairly.
+                            I agree to TradeFinder's <span className="font-medium">Code of Conduct</span> — I will respond promptly to leads, treat members professionally, and charge fairly.
                         </AgreementCheckbox>
 
                         <AgreementCheckbox
@@ -72,7 +72,7 @@ function AgreementCheckbox({ checked, onChange, error, children }: {
                     type="checkbox"
                     checked={checked}
                     onChange={(e) => onChange(e.target.checked)}
-                    className="mt-0.5 h-4 w-4 rounded border-gray-300 text-blue-600"
+                    className="mt-0.5 h-4 w-4 rounded border-gray-300 text-brand-500"
                 />
                 <span className="text-sm text-gray-700">{children}</span>
             </label>

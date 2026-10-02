@@ -166,7 +166,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
             {/* Progress bar */}
             <div className="mb-6 h-1.5 w-full rounded-full bg-gray-100">
                 <div
-                    className="h-1.5 rounded-full bg-blue-600 transition-all"
+                    className="h-1.5 rounded-full bg-brand-500 transition-all"
                     style={{ width: `${(currentProgress / totalSteps) * 100}%` }}
                 />
             </div>
@@ -185,7 +185,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                                         onClick={() => set('property_id', p.id)}
                                         className={`w-full rounded-lg border p-3 text-left transition-colors ${
                                             state.property_id === p.id
-                                                ? 'border-blue-600 bg-blue-50'
+                                                ? 'border-brand-500 bg-brand-50'
                                                 : 'border-gray-200 hover:border-gray-300'
                                         }`}
                                     >
@@ -216,7 +216,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                                         }}
                                         className={`rounded-lg border p-3 text-left font-medium transition-colors ${
                                             state.tradie_category_id === c.id
-                                                ? 'border-blue-600 bg-blue-50 text-blue-700'
+                                                ? 'border-brand-500 bg-brand-50 text-brand-700'
                                                 : 'border-gray-200 text-gray-700 hover:border-gray-300'
                                         }`}
                                     >
@@ -247,7 +247,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                                         }}
                                         className={`w-full rounded-lg border p-3 text-left transition-colors ${
                                             state.issue_type_id === i.id
-                                                ? 'border-blue-600 bg-blue-50'
+                                                ? 'border-brand-500 bg-brand-50'
                                                 : 'border-gray-200 hover:border-gray-300'
                                         }`}
                                     >
@@ -268,7 +268,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                                             set('issue_type_id', null);
                                         }}
                                         placeholder="e.g. Blocked stormwater drain"
-                                        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+                                        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
                                     />
                                 </div>
                             </div>
@@ -290,7 +290,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                                         onClick={() => set('urgency', o.value)}
                                         className={`w-full rounded-lg border p-3 text-left transition-colors ${
                                             state.urgency === o.value
-                                                ? 'border-blue-600 bg-blue-50'
+                                                ? 'border-brand-500 bg-brand-50'
                                                 : 'border-gray-200 hover:border-gray-300'
                                         }`}
                                     >
@@ -315,7 +315,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                                 onChange={(e) => set('description', e.target.value)}
                                 rows={5}
                                 placeholder="Tell us what's happening — the more detail the better. When did it start? What have you already tried?"
-                                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+                                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
                             />
                             {errors.description && (
                                 <p className="mt-1 text-sm text-red-600">{errors.description}</p>
@@ -331,7 +331,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                                     value={state.best_contact_time}
                                     onChange={(e) => set('best_contact_time', e.target.value)}
                                     placeholder="e.g. Mornings, after 5pm, anytime"
-                                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-blue-500 focus:outline-none"
+                                    className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:border-brand-500 focus:outline-none"
                                 />
                             </div>
                         </div>
@@ -351,7 +351,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                             {Object.entries(errors).filter(([key]) => key !== 'selected_tradie_company_id').map(([key, message]) => message && <p key={key}>{message}</p>)}
                         </div>
                     )}
-                    {properties.length === 0 && <Link href="/register/member/property" className="text-sm text-blue-600 underline">Add a property to find local tradies</Link>}
+                    {properties.length === 0 && <Link href="/register/member/property" className="text-sm text-brand-500 underline">Add a property to find local tradies</Link>}
                 </CardBody>
             </Card>
 

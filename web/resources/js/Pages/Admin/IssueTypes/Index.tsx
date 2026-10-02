@@ -41,7 +41,7 @@ export default function IssueTypesIndex({ issueTypes, categories, filters }: Pro
                     <select
                         value={filters.category_id ?? ''}
                         onChange={e => setCategory(e.target.value)}
-                        className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                     >
                         <option value="">All categories</option>
                         {categories.map(c => (

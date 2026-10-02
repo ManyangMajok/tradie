@@ -44,7 +44,7 @@ export default function SavedTradies({ savedTradies }: Props) {
                                 {s.company.categories.length > 0 && (
                                     <div className="mt-1 flex flex-wrap gap-1">
                                         {s.company.categories.map(cat => (
-                                            <span key={cat} className="inline-flex items-center rounded-full bg-blue-50 px-2 py-0.5 text-xs font-medium text-blue-700">
+                                            <span key={cat} className="inline-flex items-center rounded-full bg-brand-50 px-2 py-0.5 text-xs font-medium text-brand-700">
                                                 {cat}
                                             </span>
                                         ))}

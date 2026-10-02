@@ -36,6 +36,6 @@ class TradieDisputeResolvedWarning extends Notification
             ->line("The dispute raised on job {$this->job->public_id} has been reviewed by our team.")
             ->line($actionText)
             ->line('If you have questions, reply to this email.')
-            ->salutation('— Tradify');
+            ->salutation('— TradeFinder');
     }
 }

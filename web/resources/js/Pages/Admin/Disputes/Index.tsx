@@ -69,7 +69,7 @@ function ResolvePanel({ job }: { job: Dispute }) {
                         value={form.data.resolution}
                         onChange={(e) => form.setData('resolution', e.target.value)}
                         required
-                        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                     >
                         <option value="">Select…</option>
                         <option value="tradie_at_fault">Tradie at fault</option>
@@ -84,7 +84,7 @@ function ResolvePanel({ job }: { job: Dispute }) {
                     <select
                         value={form.data.action_on_tradie}
                         onChange={(e) => form.setData('action_on_tradie', e.target.value)}
-                        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                     >
                         <option value="none">None</option>
                         <option value="warn">Warn</option>
@@ -101,7 +101,7 @@ function ResolvePanel({ job }: { job: Dispute }) {
                         value={form.data.issue_member_credit_cents}
                         onChange={(e) => form.setData('issue_member_credit_cents', e.target.value)}
                         placeholder="0.00"
-                        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                     />
                 </div>
                 <div>
@@ -111,14 +111,14 @@ function ResolvePanel({ job }: { job: Dispute }) {
                         value={form.data.note}
                         onChange={(e) => form.setData('note', e.target.value)}
                         maxLength={1000}
-                        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                        className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                     />
                 </div>
             </div>
             <button
                 type="submit"
                 disabled={form.processing || !form.data.resolution}
-                className="rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-700 disabled:opacity-50"
+                className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-50"
             >
                 Resolve dispute
             </button>
@@ -145,7 +145,7 @@ export default function DisputesIndex({ disputes }: Props) {
                             <div className="p-5">
                                 <div className="flex items-start justify-between gap-4">
                                     <div>
-                                        <Link href={`/admin/jobs/${job.public_id}`} className="font-semibold text-indigo-600 hover:underline">
+                                        <Link href={`/admin/jobs/${job.public_id}`} className="font-semibold text-brand-600 hover:underline">
                                             {job.public_id}
                                         </Link>
                                         <span className="ml-2 text-sm text-gray-500">{job.category?.name ?? '—'} · {job.property?.suburb?.name ?? '—'}</span>
@@ -165,7 +165,7 @@ export default function DisputesIndex({ disputes }: Props) {
                                         <p className="text-xs text-gray-400">{new Date(job.updated_at).toLocaleDateString('en-KE', { timeZone: 'Africa/Nairobi' })}</p>
                                         <button
                                             onClick={() => setExpanded(expanded === job.id ? null : job.id)}
-                                            className="mt-2 rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-indigo-700"
+                                            className="mt-2 rounded-lg bg-brand-500 px-3 py-1.5 text-xs font-medium text-white hover:bg-brand-600"
                                         >
                                             {expanded === job.id ? 'Close' : 'Resolve'}
                                         </button>
@@ -186,7 +186,7 @@ export default function DisputesIndex({ disputes }: Props) {
                             <Link
                                 key={i}
                                 href={link.url}
-                                className={`px-3 py-1.5 rounded text-sm border ${link.active ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'}`}
+                                className={`px-3 py-1.5 rounded text-sm border ${link.active ? 'bg-brand-500 text-white border-brand-500' : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'}`}
                                 dangerouslySetInnerHTML={{ __html: link.label }}
                             />
                         ) : (

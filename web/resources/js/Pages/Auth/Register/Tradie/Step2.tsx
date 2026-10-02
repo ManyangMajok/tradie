@@ -68,7 +68,7 @@ export default function TradieStep2({ categories, suburbs, draft }: Props) {
                                         type="button"
                                         onClick={() => toggleCategory(cat.id)}
                                         className={`flex items-center gap-2 rounded-lg border-2 px-3 py-2 text-left text-sm transition-colors ${
-                                            selected ? 'border-blue-600 bg-blue-50 text-blue-700' : 'border-gray-200 text-gray-700 hover:border-gray-300'
+                                            selected ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-gray-200 text-gray-700 hover:border-gray-300'
                                         }`}
                                     >
                                         {selected && <CheckCircle2 className="h-3.5 w-3.5 shrink-0" />}
@@ -94,7 +94,7 @@ export default function TradieStep2({ categories, suburbs, draft }: Props) {
                             placeholder="Search area or postal code…"
                             value={suburbSearch}
                             onChange={(e) => setSuburbSearch(e.target.value)}
-                            className="mb-3 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"
+                            className="mb-3 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                         />
                         <div className="max-h-56 overflow-y-auto space-y-1">
                             {filteredSuburbs.map((s) => {
@@ -105,7 +105,7 @@ export default function TradieStep2({ categories, suburbs, draft }: Props) {
                                             type="checkbox"
                                             checked={selected}
                                             onChange={() => toggleSuburb(s.id)}
-                                            className="rounded border-gray-300 text-blue-600"
+                                            className="rounded border-gray-300 text-brand-500"
                                         />
                                         <span className="text-sm text-gray-700">{s.name} {s.postcode}</span>
                                     </label>

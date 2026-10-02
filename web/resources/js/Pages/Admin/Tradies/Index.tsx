@@ -53,7 +53,7 @@ export default function TradiesIndex({ tradies, filters }: Props) {
                 <select
                     value={filters.status ?? ''}
                     onChange={(e) => applyFilter('status', e.target.value)}
-                    className="rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                 >
                     <option value="">All statuses</option>
                     <option value="pending_review">Pending review</option>
@@ -64,7 +64,7 @@ export default function TradiesIndex({ tradies, filters }: Props) {
                 <select
                     value={filters.sort ?? ''}
                     onChange={(e) => applyFilter('sort', e.target.value)}
-                    className="rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                 >
                     <option value="">Sort: newest</option>
                     <option value="rating">Sort: rating</option>
@@ -88,7 +88,7 @@ export default function TradiesIndex({ tradies, filters }: Props) {
                         {tradies.data.map((tradie) => (
                             <tr key={tradie.id} className="hover:bg-gray-50">
                                 <td className="px-4 py-3">
-                                    <Link href={`/admin/tradies/${tradie.id}`} className="font-medium text-indigo-600 hover:underline">
+                                    <Link href={`/admin/tradies/${tradie.id}`} className="font-medium text-brand-600 hover:underline">
                                         {tradie.business_name}
                                     </Link>
                                 </td>
@@ -130,7 +130,7 @@ export default function TradiesIndex({ tradies, filters }: Props) {
                             <Link
                                 key={i}
                                 href={link.url}
-                                className={`px-3 py-1.5 rounded text-sm border ${link.active ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'}`}
+                                className={`px-3 py-1.5 rounded text-sm border ${link.active ? 'bg-brand-500 text-white border-brand-500' : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'}`}
                                 dangerouslySetInnerHTML={{ __html: link.label }}
                             />
                         ) : (

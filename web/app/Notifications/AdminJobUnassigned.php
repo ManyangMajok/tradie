@@ -50,6 +50,6 @@ class AdminJobUnassigned extends Notification
             ->line('**Submitted:** '.$job->submitted_at?->format('d/m/Y H:i'))
             ->line("**Tradies offered (none accepted):**\n{$offerLines}")
             ->action('Assign manually', $adminUrl)
-            ->salutation('— Tradify System');
+            ->salutation('— TradeFinder System');
     }
 }

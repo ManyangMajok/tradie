@@ -21,8 +21,8 @@ export default function Dashboard() {
                 <Card>
                     <CardBody>
                         <div className="flex items-start gap-4">
-                            <div className="rounded-lg bg-blue-50 p-3">
-                                <PlusCircle className="h-6 w-6 text-blue-600" />
+                            <div className="rounded-lg bg-brand-50 p-3">
+                                <PlusCircle className="h-6 w-6 text-brand-500" />
                             </div>
                             <div className="flex-1">
                                 <h2 className="font-semibold text-gray-900">Book a tradie</h2>
@@ -31,7 +31,7 @@ export default function Dashboard() {
                                 </p>
                                 <Link
                                     href="/jobs/new"
-                                    className="mt-4 inline-flex items-center justify-center gap-2 rounded-lg bg-blue-600 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-blue-700"
+                                    className="mt-4 inline-flex items-center justify-center gap-2 rounded-lg bg-brand-500 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-brand-600"
                                 >
                                     Get a tradie
                                 </Link>

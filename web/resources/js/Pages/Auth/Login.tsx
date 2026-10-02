@@ -19,7 +19,7 @@ export default function Login() {
     }
 
     return (
-        <AuthLayout title="Welcome back" subtitle="Sign in to your Tradify account">
+        <AuthLayout title="Welcome back" subtitle="Sign in to your TradeFinder account">
             <Card>
                 <CardBody>
                     <form onSubmit={submit} className="space-y-4">
@@ -55,7 +55,7 @@ export default function Login() {
                             </label>
                             <Link
                                 href="/password/forgot"
-                                className="text-sm text-blue-600 hover:underline"
+                                className="text-sm text-brand-500 hover:underline"
                             >
                                 Forgot password?
                             </Link>
@@ -70,8 +70,8 @@ export default function Login() {
 
             <p className="mt-6 text-center text-sm text-gray-500">
                 Not a member yet?{' '}
-                <Link href="/register/member" className="text-blue-600 hover:underline">
-                    Join Tradify
+                <Link href="/register/member" className="text-brand-500 hover:underline">
+                    Join TradeFinder
                 </Link>
             </p>
         </AuthLayout>

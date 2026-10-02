@@ -40,7 +40,7 @@ export default function Categories({ my_categories, all_categories }: Props) {
                                     type="button"
                                     onClick={() => active && myEntry ? remove(myEntry.id) : add(cat.id)}
                                     className={`flex items-center justify-between gap-2 rounded-lg border-2 px-3 py-2 text-left text-sm transition-colors ${
-                                        active ? 'border-blue-600 bg-blue-50 text-blue-700' : 'border-gray-200 text-gray-700 hover:border-gray-300'
+                                        active ? 'border-brand-500 bg-brand-50 text-brand-700' : 'border-gray-200 text-gray-700 hover:border-gray-300'
                                     }`}
                                 >
                                     <span>{cat.name}</span>

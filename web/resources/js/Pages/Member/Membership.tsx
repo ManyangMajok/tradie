@@ -16,7 +16,7 @@ const statusConfig: Record<SubscriptionStatus, { label: string; colour: string; 
     past_due: { label: 'Payment overdue', colour: 'text-yellow-700 bg-yellow-50', icon: <AlertCircle className="h-4 w-4" /> },
     canceled: { label: 'Cancelled', colour: 'text-gray-600 bg-gray-100', icon: <XCircle className="h-4 w-4" /> },
     incomplete: { label: 'Incomplete', colour: 'text-orange-700 bg-orange-50', icon: <AlertCircle className="h-4 w-4" /> },
-    paused: { label: 'Paused', colour: 'text-blue-700 bg-blue-50', icon: <AlertCircle className="h-4 w-4" /> },
+    paused: { label: 'Paused', colour: 'text-brand-700 bg-brand-50', icon: <AlertCircle className="h-4 w-4" /> },
 };
 
 function formatDate(iso: string | null): string {

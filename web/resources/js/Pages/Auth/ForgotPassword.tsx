@@ -40,7 +40,7 @@ export default function ForgotPassword() {
             </Card>
 
             <p className="mt-6 text-center text-sm text-gray-500">
-                <Link href="/login" className="text-blue-600 hover:underline">
+                <Link href="/login" className="text-brand-500 hover:underline">
                     Back to sign in
                 </Link>
             </p>

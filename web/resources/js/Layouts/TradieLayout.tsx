@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, usePage } from '@inertiajs/react';
 import { LayoutDashboard, Briefcase, BarChart2, MapPin, Calendar, Settings, LogOut, Menu, X, CreditCard } from 'lucide-react';
 import { useAuth } from '../Hooks/useAuth';
+import { Logo } from '../Components/ui/Logo';
 
 const nav = [
     { href: '/tradie', label: 'Leads', icon: LayoutDashboard },
@@ -23,7 +24,7 @@ export default function TradieLayout({ children }: { children: React.ReactNode }
         <div className="flex min-h-screen bg-gray-50">
             <a
                 href="#main-content"
-                className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:font-medium focus:text-indigo-600 focus:shadow focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                className="sr-only focus:not-sr-only focus:fixed focus:top-2 focus:left-2 focus:z-50 focus:rounded focus:bg-white focus:px-3 focus:py-2 focus:text-sm focus:font-medium focus:text-brand-600 focus:shadow focus:outline-none focus:ring-2 focus:ring-brand-500"
             >
                 Skip to main content
             </a>
@@ -36,8 +37,8 @@ export default function TradieLayout({ children }: { children: React.ReactNode }
                 }`}
             >
                 <div className="flex h-16 items-center border-b border-gray-100 px-6">
-                    <Link href="/" className="text-xl font-bold text-blue-600">
-                        Tradify
+                    <Link href="/">
+                        <Logo size="sm" />
                     </Link>
                 </div>
                 <nav aria-label="Tradie menu" className="mt-4 px-3">
@@ -50,9 +51,9 @@ export default function TradieLayout({ children }: { children: React.ReactNode }
                                 aria-current={active ? 'page' : undefined}
                                 className={`flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium transition-colors ${
                                     active
-                                        ? 'bg-indigo-50 text-indigo-700'
+                                        ? 'bg-brand-50 text-brand-700'
                                         : 'text-gray-700 hover:bg-gray-100'
-                                } focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500`}
+                                } focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brand-500`}
                             >
                                 <Icon className="h-4 w-4 shrink-0" aria-hidden="true" />
                                 {label}
@@ -68,7 +69,7 @@ export default function TradieLayout({ children }: { children: React.ReactNode }
                         href="/logout"
                         method="post"
                         as="button"
-                        className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500"
+                        className="flex w-full items-center gap-2 rounded-lg px-3 py-2 text-sm text-gray-700 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-brand-500"
                     >
                         <LogOut className="h-4 w-4" aria-hidden="true" />
                         Sign out
@@ -87,7 +88,7 @@ export default function TradieLayout({ children }: { children: React.ReactNode }
             <div className="flex flex-1 flex-col min-w-0">
                 <header className="flex h-16 items-center justify-between border-b border-gray-100 bg-white px-4 lg:px-6">
                     <button
-                        className="rounded-md p-1 text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-indigo-500 lg:hidden"
+                        className="rounded-md p-1 text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-brand-500 lg:hidden"
                         onClick={() => setMobileOpen((v) => !v)}
                         aria-expanded={mobileOpen}
                         aria-controls="main-sidebar"

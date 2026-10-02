@@ -93,7 +93,7 @@ function ReviewForm({ job }: { job: Job }) {
                                         value={val}
                                         checked={form.work_completed_status === val}
                                         onChange={() => update('work_completed_status', val)}
-                                        className="accent-blue-600"
+                                        className="accent-brand-500"
                                     />
                                     <span className="text-sm">{label}</span>
                                 </label>
@@ -105,7 +105,7 @@ function ReviewForm({ job }: { job: Job }) {
                     <label className="flex cursor-pointer items-center gap-3">
                         <input
                             type="checkbox"
-                            className="accent-blue-600"
+                            className="accent-brand-500"
                             checked={form.no_callout_fee_honoured}
                             onChange={(e) => update('no_callout_fee_honoured', e.target.checked)}
                         />
@@ -124,7 +124,7 @@ function ReviewForm({ job }: { job: Job }) {
                                         value={val}
                                         checked={form.discount_honoured === val}
                                         onChange={() => update('discount_honoured', val)}
-                                        className="accent-blue-600"
+                                        className="accent-brand-500"
                                     />
                                     <span className="text-sm">{label}</span>
                                 </label>
@@ -158,7 +158,7 @@ function ReviewForm({ job }: { job: Job }) {
                     <div>
                         <label className="block text-sm font-medium text-gray-700">Comments (optional)</label>
                         <textarea
-                            className="mt-1 w-full rounded-lg border border-gray-200 p-3 text-sm focus:border-blue-500 focus:outline-none"
+                            className="mt-1 w-full rounded-lg border border-gray-200 p-3 text-sm focus:border-brand-500 focus:outline-none"
                             rows={3}
                             placeholder="Anything else to add?"
                             maxLength={1000}
@@ -177,8 +177,8 @@ function ReviewForm({ job }: { job: Job }) {
 }
 
 const STATUS_CONFIG: Record<string, { label: string; icon: React.ElementType; colour: string }> = {
-    pending_dispatch: { label: 'Finding a tradie…', icon: Loader2, colour: 'text-blue-500' },
-    offered:          { label: 'Finding a tradie…', icon: Loader2, colour: 'text-blue-500' },
+    pending_dispatch: { label: 'Finding a tradie…', icon: Loader2, colour: 'text-brand-500' },
+    offered:          { label: 'Finding a tradie…', icon: Loader2, colour: 'text-brand-500' },
     assigned:         { label: 'Tradie assigned',   icon: CheckCircle2, colour: 'text-green-600' },
     tradie_on_the_way:{ label: 'On the way',         icon: CheckCircle2, colour: 'text-green-600' },
     in_progress:      { label: 'In progress',        icon: CheckCircle2, colour: 'text-green-600' },
@@ -280,7 +280,7 @@ export default function JobShow({ job, available_tradies }: Props) {
                         <h2 className="mb-2 text-sm font-semibold text-gray-700">Your tradie</h2>
                         <p className="text-lg font-semibold text-gray-900">{job.assigned_company.business_name}</p>
                         {job.assigned_company.phone && (
-                            <a href={`tel:${job.assigned_company.phone}`} className="mt-1 text-sm text-blue-600 hover:underline">
+                            <a href={`tel:${job.assigned_company.phone}`} className="mt-1 text-sm text-brand-500 hover:underline">
                                 {job.assigned_company.phone}
                             </a>
                         )}

@@ -37,8 +37,8 @@ interface Props {
 const STATUS_COLOURS: Record<string, string> = {
     pending_dispatch: 'bg-gray-100 text-gray-700',
     offered: 'bg-yellow-100 text-yellow-700',
-    assigned: 'bg-blue-100 text-blue-700',
-    tradie_on_the_way: 'bg-indigo-100 text-indigo-700',
+    assigned: 'bg-brand-100 text-brand-700',
+    tradie_on_the_way: 'bg-brand-100 text-brand-700',
     in_progress: 'bg-purple-100 text-purple-700',
     completed: 'bg-teal-100 text-teal-700',
     confirmed: 'bg-green-100 text-green-700',
@@ -71,14 +71,14 @@ export default function JobsIndex({ jobs, filters }: Props) {
                     type="text"
                     placeholder="Search job ID or description…"
                     defaultValue={filters.q}
-                    className="rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 w-64"
+                    className="rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500 w-64"
                     onBlur={(e) => applyFilter('q', e.target.value)}
                     onKeyDown={(e) => e.key === 'Enter' && applyFilter('q', (e.target as HTMLInputElement).value)}
                 />
                 <select
                     value={filters.status ?? ''}
                     onChange={(e) => applyFilter('status', e.target.value)}
-                    className="rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                 >
                     <option value="">All statuses</option>
                     {JOB_STATUSES.map((s) => (
@@ -88,7 +88,7 @@ export default function JobsIndex({ jobs, filters }: Props) {
                 <select
                     value={filters.urgency ?? ''}
                     onChange={(e) => applyFilter('urgency', e.target.value)}
-                    className="rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                    className="rounded-lg border border-gray-300 px-3 py-2 text-sm shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                 >
                     <option value="">All urgencies</option>
                     <option value="same_day">Same day</option>
@@ -116,7 +116,7 @@ export default function JobsIndex({ jobs, filters }: Props) {
                         {jobs.data.map((job) => (
                             <tr key={job.id} className="hover:bg-gray-50">
                                 <td className="px-4 py-3">
-                                    <Link href={`/admin/jobs/${job.public_id}`} className="font-medium text-indigo-600 hover:underline">
+                                    <Link href={`/admin/jobs/${job.public_id}`} className="font-medium text-brand-600 hover:underline">
                                         {job.public_id}
                                     </Link>
                                     {job.requires_admin_review && (
@@ -150,7 +150,7 @@ export default function JobsIndex({ jobs, filters }: Props) {
                             <Link
                                 key={i}
                                 href={link.url}
-                                className={`px-3 py-1.5 rounded text-sm border ${link.active ? 'bg-indigo-600 text-white border-indigo-600' : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'}`}
+                                className={`px-3 py-1.5 rounded text-sm border ${link.active ? 'bg-brand-500 text-white border-brand-500' : 'bg-white text-gray-600 border-gray-300 hover:bg-gray-50'}`}
                                 dangerouslySetInnerHTML={{ __html: link.label }}
                             />
                         ) : (

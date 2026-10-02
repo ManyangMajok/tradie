@@ -23,12 +23,12 @@ class TradieApplicationApproved extends Notification
         $loginUrl = url('/login');
 
         return (new MailMessage)
-            ->subject('Your Tradify application has been approved!')
-            ->greeting("Welcome to Tradify, {$notifiable->first_name}!")
+            ->subject('Your TradeFinder application has been approved!')
+            ->greeting("Welcome to TradeFinder, {$notifiable->first_name}!")
             ->line('Your application for **'.$this->company->business_name.'** has been approved.')
             ->line('Log in to activate your subscription and start receiving leads.')
             ->action('Log in and activate', $loginUrl)
             ->line('Questions? Reply to this email.')
-            ->salutation('The Tradify Team');
+            ->salutation('The TradeFinder Team');
     }
 }

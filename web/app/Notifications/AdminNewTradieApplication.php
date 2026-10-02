@@ -31,6 +31,6 @@ class AdminNewTradieApplication extends Notification
             ->line('**Email:** '.$owner->email)
             ->line('**Phone:** '.$owner->phone)
             ->action('Review application', $adminUrl)
-            ->salutation('Tradify Admin');
+            ->salutation('TradeFinder Admin');
     }
 }

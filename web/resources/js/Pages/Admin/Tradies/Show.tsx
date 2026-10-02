@@ -44,7 +44,7 @@ const STATUS_COLOURS: Record<string, string> = {
 };
 
 const JOB_STATUS_COLOURS: Record<string, string> = {
-    assigned: 'bg-blue-100 text-blue-700',
+    assigned: 'bg-brand-100 text-brand-700',
     confirmed: 'bg-green-100 text-green-700',
     disputed: 'bg-red-100 text-red-700',
     cancelled: 'bg-gray-200 text-gray-500',
@@ -59,7 +59,7 @@ export default function TradieShow({ tradie }: Props) {
     return (
         <div className="space-y-8 max-w-4xl">
             <div>
-                <Link href="/admin/tradies" className="text-sm text-indigo-600 hover:underline">← All tradies</Link>
+                <Link href="/admin/tradies" className="text-sm text-brand-600 hover:underline">← All tradies</Link>
                 <div className="mt-1 flex items-center gap-3">
                     <h1 className="text-2xl font-bold text-gray-900">{tradie.business_name}</h1>
                     <span className={`inline-flex rounded-full px-3 py-1 text-sm font-medium ${STATUS_COLOURS[tradie.status] ?? 'bg-gray-100 text-gray-700'}`}>
@@ -151,7 +151,7 @@ export default function TradieShow({ tradie }: Props) {
                                 onChange={(e) => suspendForm.setData('reason', e.target.value)}
                                 required
                                 maxLength={500}
-                                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-indigo-500"
+                                className="w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-brand-500"
                             />
                             {suspendForm.errors.reason && <p className="mt-1 text-xs text-red-600">{suspendForm.errors.reason}</p>}
                         </div>
@@ -181,7 +181,7 @@ export default function TradieShow({ tradie }: Props) {
                             {tradie.assigned_jobs.map((job) => (
                                 <tr key={job.id}>
                                     <td className="py-2 pr-4">
-                                        <Link href={`/admin/jobs/${job.public_id}`} className="text-indigo-600 hover:underline">{job.public_id}</Link>
+                                        <Link href={`/admin/jobs/${job.public_id}`} className="text-brand-600 hover:underline">{job.public_id}</Link>
                                     </td>
                                     <td className="py-2 pr-4">
                                         <span className={`inline-flex rounded-full px-2 py-0.5 text-xs font-medium ${JOB_STATUS_COLOURS[job.status] ?? 'bg-gray-100 text-gray-700'}`}>
