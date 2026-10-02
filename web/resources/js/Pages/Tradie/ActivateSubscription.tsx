@@ -20,7 +20,7 @@ interface Props {
 }
 
 function formatPrice(cents: number): string {
-    return `$${(cents / 100).toFixed(0)}/yr`;
+    return `KSh ${(cents / 100).toFixed(0)}/yr`;
 }
 
 export default function ActivateSubscription({ plans, errors = {} }: Props) {
@@ -38,6 +38,7 @@ export default function ActivateSubscription({ plans, errors = {} }: Props) {
 
     return (
         <AuthLayout title="Activate your subscription" subtitle="Choose a plan to start receiving leads">
+            <p className="mb-4 text-sm text-gray-600">Kenyan demo: KSh prices are illustrative placeholders. Payments are simulated.</p>
             <form onSubmit={submit}>
                 <div className="space-y-3">
                     {plans.map((plan) => (

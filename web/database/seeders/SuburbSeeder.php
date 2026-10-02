@@ -2,38 +2,25 @@
 
 namespace Database\Seeders;
 
+use App\Models\Suburb;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\DB;
 
 class SuburbSeeder extends Seeder
 {
     public function run(): void
     {
-        $csv = database_path('seeders/data/wa_suburbs.csv');
-        $rows = array_map('str_getcsv', file($csv));
-        $headers = array_shift($rows);
-
-        $now = now();
-        $records = [];
-
-        foreach ($rows as $row) {
-            $data = array_combine($headers, $row);
-            $records[] = [
-                'name' => trim($data['name']),
-                'postcode' => trim($data['postcode']),
-                'state' => trim($data['state']),
-                'latitude' => $data['latitude'] !== '' ? (float) $data['latitude'] : null,
-                'longitude' => $data['longitude'] !== '' ? (float) $data['longitude'] : null,
-                'is_active' => true,
-                'created_at' => $now,
-                'updated_at' => $now,
-            ];
+        // Representative demonstration service areas, not a national postal directory.
+        foreach ([
+            ['Westlands', '00100', 'Nairobi'], ['Kilimani', '00100', 'Nairobi'],
+            ['Karen', '00502', 'Nairobi'], ['Langata', '00509', 'Nairobi'],
+            ['Kasarani', '00608', 'Nairobi'], ['Embakasi', '00501', 'Nairobi'],
+            ['Nyali', '80100', 'Mombasa'], ['Bamburi', '80100', 'Mombasa'],
+            ['Milimani', '40100', 'Kisumu'], ['Nakuru Town', '20100', 'Nakuru'],
+            ['Ruiru', '00232', 'Kiambu'], ['Kitengela', '00241', 'Kajiado'],
+        ] as [$name, $postcode, $county]) {
+            Suburb::updateOrCreate(['name' => $name, 'postcode' => $postcode, 'state' => $county], ['is_active' => true]);
         }
-
-        DB::table('suburbs')->upsert(
-            $records,
-            ['name', 'postcode', 'state'],
-            ['latitude', 'longitude', 'is_active', 'updated_at']
-        );
+        // Retain referenced old rows so existing requests are preserved.
+        Suburb::where('state', 'WA')->update(['is_active' => false]);
     }
 }

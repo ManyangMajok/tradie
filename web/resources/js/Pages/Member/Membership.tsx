@@ -21,11 +21,11 @@ const statusConfig: Record<SubscriptionStatus, { label: string; colour: string; 
 
 function formatDate(iso: string | null): string {
     if (!iso) return '—';
-    return new Date(iso).toLocaleDateString('en-AU', { day: 'numeric', month: 'long', year: 'numeric' });
+    return new Date(iso).toLocaleDateString('en-KE', { day: 'numeric', month: 'long', year: 'numeric' });
 }
 
 function formatPrice(cents: number): string {
-    return `$${(cents / 100).toFixed(0)}/yr`;
+    return `KSh ${(cents / 100).toFixed(0)}/yr`;
 }
 
 export default function Membership({ subscription, plans }: Props) {

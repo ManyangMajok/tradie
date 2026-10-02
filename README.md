@@ -1,6 +1,6 @@
 # Tradify demonstration
 
-The same Tradify web application, configured for a simple local demonstration: **Laravel 13 + React 19 + Inertia 3 + TypeScript 6 + Tailwind 4 + MySQL 8.4**.
+The Tradify web application with Kenyan demo data, configured for a simple local demonstration: **Laravel 13 + React 19 + Inertia 3 + TypeScript 6 + Tailwind 4 + MySQL 8.4**.
 
 Payments are simulated. Emails are written to `web/storage/logs/laravel.log`; uploaded files stay on local disk. No Redis, Stripe, Twilio, Resend, Sentry, Reverb, or cloud storage account is required.
 
@@ -58,11 +58,11 @@ All four accounts use the local demonstration password **`password`**.
 | Standard tradie | `tradie@tradify.dev` |
 | Premium tradie | `tradie2@tradify.dev` |
 
-The member has a demo home in Baldivis. Both tradies cover Baldivis, Wellard, and Rockingham, plumbing and electrical jobs, with availability every day. Use separate browser profiles/private windows for different roles.
+The member has a demo home in Westlands, Nairobi. Eight fictional fundi businesses cover twelve Kenyan demo locations. Westlands has four available providers with different ratings, including one without reviews. All demo providers have daily availability. Additional tradie logins are tradie3@tradify.dev through tradie8@tradify.dev; regional member logins are member4@tradify.dev through member7@tradify.dev. Use separate browser profiles/private windows for different roles.
 
 ## Walk through the demo
 
-1. Log in as the member and request a plumber for the demo home. Use a flexible urgency to give yourself time to switch accounts. Click **Find local tradies**, compare all available tradies serving the property suburb (highest rating first), choose one, then click **Send to chosen tradie**. Both seeded tradies have the same rating; ties use business name.
+1. Log in as the member and request a plumber for the demo home. Use a flexible urgency to give yourself time to switch accounts. Click **Find local tradies**, compare all available tradies serving the property suburb (highest rating first), choose one, then click **Send to chosen tradie**. Ratings are backed by seeded reviews; unrated providers appear last.
 2. Log in as the tradie you selected and open the lead, then accept it. Only the selected tradie receives this request. If they decline or the offer expires, refresh the member job page and choose another tradie. Refresh pages to see changes made in another browser; this copy does not use WebSockets.
 3. Progress the job, submit the completion report, then switch back to the member to review it.
 4. Log in as admin to inspect jobs, tradies, applications, disputes, and performance.
@@ -115,3 +115,10 @@ Tests force `DB_DATABASE=tradie_demo_testing` and recreate its tables. Never poi
 `web/` is the runnable demo. `apps/`, `packages/`, and design references are preserved from the original project but are not required for the web demonstration. Root production deployment guides and `deploy/` are historical reference material; use this README for the demo. Do not run the original VPS deployment scripts for this copy.
 
 See [docs/DEMO.md](docs/DEMO.md) for the implementation differences. This is a demonstration build with publicly documented test accounts, not a production deployment.
+
+
+## Kenyan demo data
+
+Run `php artisan db:seed` to install or refresh Kenyan demo fixtures without deleting existing jobs. The seed includes 24 example jobs, 21 reviews, eight fundi companies, saved providers and derived performance totals. Known demo profiles are updated; existing passwords are preserved. New accounts use `password`. Old Australian reference areas remain inactive to preserve existing job relationships.
+
+Prices display as KSh and times use Africa/Nairobi. Existing numerical annual prices are illustrative placeholders (members: KSh 149/249/449; providers: KSh 499/999), not exchange-rate conversions or approved Kenyan prices. Payments and all contact details are for demonstration; no messages are sent externally. Location/postal values are representative fixtures, not a national address directory.

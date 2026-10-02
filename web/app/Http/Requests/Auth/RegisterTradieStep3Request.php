@@ -15,7 +15,7 @@ class RegisterTradieStep3Request extends FormRequest
     {
         return [
             'licence_number' => ['required', 'string', 'max:100'],
-            'licence_state' => ['required', 'string', 'in:WA,NSW,VIC,QLD,SA,TAS,ACT,NT'],
+            'licence_state' => ['required', 'string', 'in:KE'],
             'licence_expires_on' => ['required', 'date', 'after:today'],
             'insurance_expires_on' => ['required', 'date', 'after:today'],
             'licence_document_path' => ['required', 'string'],

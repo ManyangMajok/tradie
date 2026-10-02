@@ -41,7 +41,7 @@ export default function ServiceAreas({ service_areas, suburbs }: Props) {
             <div className="flex items-center justify-between">
                 <div>
                     <h1 className="text-2xl font-bold text-gray-900">Service Areas</h1>
-                    <p className="mt-1 text-sm text-gray-500">Suburbs where you accept jobs.</p>
+                    <p className="mt-1 text-sm text-gray-500">Locations where you accept jobs.</p>
                 </div>
                 <Button size="sm" onClick={() => setAdding((v) => !v)}>
                     {adding ? 'Cancel' : 'Add suburb'}
@@ -54,7 +54,7 @@ export default function ServiceAreas({ service_areas, suburbs }: Props) {
                         <input
                             type="search"
                             autoFocus
-                            placeholder="Search suburb or postcode…"
+                            placeholder="Search area or postal code…"
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                             className="block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"

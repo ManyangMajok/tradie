@@ -17,7 +17,7 @@ it('creates a member account and redirects to property step', function () {
         'first_name' => 'Jane',
         'last_name' => 'Smith',
         'email' => 'jane@example.com',
-        'phone' => '+61412345678',
+        'phone' => '+254712345678',
         'password' => 'password',
         'password_confirmation' => 'password',
     ])->assertRedirect('/register/member/property');
@@ -40,13 +40,13 @@ it('rejects registration with a duplicate email', function () {
         'first_name' => 'Jane',
         'last_name' => 'Smith',
         'email' => 'existing@example.com',
-        'phone' => '+61412345678',
+        'phone' => '+254712345678',
         'password' => 'password',
         'password_confirmation' => 'password',
     ])->assertSessionHasErrors('email');
 });
 
-it('rejects a non-Australian phone number', function () {
+it('rejects a non-Kenyan phone number', function () {
     $this->post('/register/member', [
         'first_name' => 'Jane',
         'last_name' => 'Smith',

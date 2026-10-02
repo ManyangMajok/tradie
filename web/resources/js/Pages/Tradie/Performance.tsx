@@ -38,9 +38,9 @@ function StatTile({ label, value, sub }: { label: string; value: string; sub?: s
 }
 
 export default function Performance({ stats, rating, daily }: Props) {
-    const revenue = (stats.reported_revenue_cents / 100).toLocaleString('en-AU', {
+    const revenue = (stats.reported_revenue_cents / 100).toLocaleString('en-KE', {
         style: 'currency',
-        currency: 'AUD',
+        currency: 'KES',
         maximumFractionDigits: 0,
     });
 

@@ -73,11 +73,11 @@ export default function TradieShow({ tradie }: Props) {
                 <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm space-y-3">
                     <h2 className="font-semibold text-gray-900">Business info</h2>
                     <dl className="space-y-2 text-sm">
-                        <div className="flex gap-2"><dt className="w-40 text-gray-500 shrink-0">ABN</dt><dd>{tradie.abn}</dd></div>
+                        <div className="flex gap-2"><dt className="w-40 text-gray-500 shrink-0">Business registration</dt><dd>{tradie.abn}</dd></div>
                         <div className="flex gap-2"><dt className="w-40 text-gray-500 shrink-0">Licence</dt><dd>{tradie.licence_number} ({tradie.licence_state})</dd></div>
                         {tradie.licence_expires_on && <div className="flex gap-2"><dt className="w-40 text-gray-500 shrink-0">Licence expires</dt><dd>{tradie.licence_expires_on}</dd></div>}
                         {tradie.insurance_expires_on && <div className="flex gap-2"><dt className="w-40 text-gray-500 shrink-0">Insurance expires</dt><dd>{tradie.insurance_expires_on}</dd></div>}
-                        {tradie.approved_at && <div className="flex gap-2"><dt className="w-40 text-gray-500 shrink-0">Approved</dt><dd>{new Date(tradie.approved_at).toLocaleDateString('en-AU')}</dd></div>}
+                        {tradie.approved_at && <div className="flex gap-2"><dt className="w-40 text-gray-500 shrink-0">Approved</dt><dd>{new Date(tradie.approved_at).toLocaleDateString('en-KE', { timeZone: 'Africa/Nairobi' })}</dd></div>}
                     </dl>
                     {tradie.about_text && <p className="text-sm text-gray-700 border-t border-gray-100 pt-3">{tradie.about_text}</p>}
                 </div>
@@ -173,7 +173,7 @@ export default function TradieShow({ tradie }: Props) {
                                 <th className="py-2 pr-4">Job</th>
                                 <th className="py-2 pr-4">Status</th>
                                 <th className="py-2 pr-4">Category</th>
-                                <th className="py-2 pr-4">Suburb</th>
+                                <th className="py-2 pr-4">Area</th>
                                 <th className="py-2">Date</th>
                             </tr>
                         </thead>
@@ -190,7 +190,7 @@ export default function TradieShow({ tradie }: Props) {
                                     </td>
                                     <td className="py-2 pr-4 text-gray-600">{job.category?.name ?? '—'}</td>
                                     <td className="py-2 pr-4 text-gray-600">{job.property?.suburb?.name ?? '—'}</td>
-                                    <td className="py-2 text-gray-400">{new Date(job.submitted_at).toLocaleDateString('en-AU')}</td>
+                                    <td className="py-2 text-gray-400">{new Date(job.submitted_at).toLocaleDateString('en-KE', { timeZone: 'Africa/Nairobi' })}</td>
                                 </tr>
                             ))}
                         </tbody>

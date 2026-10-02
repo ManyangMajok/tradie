@@ -91,7 +91,7 @@ export default function TradieStep2({ categories, suburbs, draft }: Props) {
                         </p>
                         <input
                             type="search"
-                            placeholder="Search suburb or postcode…"
+                            placeholder="Search area or postal code…"
                             value={suburbSearch}
                             onChange={(e) => setSuburbSearch(e.target.value)}
                             className="mb-3 block w-full rounded-lg border border-gray-300 px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-blue-500"

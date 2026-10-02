@@ -11,7 +11,7 @@ interface Props {
 }
 
 function formatPrice(cents: number): string {
-    return `$${(cents / 100).toFixed(0)}/yr`;
+    return `KSh ${(cents / 100).toFixed(0)}/yr`;
 }
 
 export default function MemberPlanPage({ plans, errors = {} }: Props) {
@@ -29,6 +29,7 @@ export default function MemberPlanPage({ plans, errors = {} }: Props) {
 
     return (
         <AuthLayout title="Choose your plan" subtitle="Step 3 of 3 — Select a membership">
+            <p className="mb-4 text-sm text-gray-600">Kenyan demo: KSh prices are illustrative placeholders. Payments are simulated.</p>
             <form onSubmit={submit}>
                 <div className="space-y-3">
                     {plans.map((plan) => (

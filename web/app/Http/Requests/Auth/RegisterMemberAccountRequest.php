@@ -18,7 +18,7 @@ class RegisterMemberAccountRequest extends FormRequest
             'first_name' => ['required', 'string', 'max:100'],
             'last_name' => ['required', 'string', 'max:100'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users,email'],
-            'phone' => ['required', 'string', 'regex:/^\+61[2-9]\d{8}$/', 'unique:users,phone'],
+            'phone' => ['required', 'string', 'regex:/^\+254[17]\d{8}$/', 'unique:users,phone'],
             'password' => ['required', 'confirmed', Password::defaults()],
         ];
     }
@@ -26,7 +26,7 @@ class RegisterMemberAccountRequest extends FormRequest
     public function messages(): array
     {
         return [
-            'phone.regex' => 'Phone number must be a valid Australian mobile number in E.164 format (e.g. +61412345678).',
+            'phone.regex' => 'Phone number must be a valid Kenyan mobile number in E.164 format (e.g. +254712345678).',
         ];
     }
 }

@@ -90,7 +90,7 @@ export default function TradieJobComplete({ job }: Props) {
                         {/* Invoice total */}
                         <div>
                             <label className="block text-sm font-medium text-gray-700">
-                                Invoice total (AUD) <span className="text-red-500">*</span>
+                                Invoice total (KES) <span className="text-red-500">*</span>
                             </label>
                             <div className="mt-1 flex items-center gap-2">
                                 <span className="text-sm text-gray-500">$</span>
@@ -141,7 +141,7 @@ export default function TradieJobComplete({ job }: Props) {
                         {form.discount_applied && (
                             <div>
                                 <label className="block text-sm font-medium text-gray-700">
-                                    Discount amount (AUD) <span className="text-red-500">*</span>
+                                    Discount amount (KES) <span className="text-red-500">*</span>
                                 </label>
                                 <div className="mt-1 flex items-center gap-2">
                                     <span className="text-sm text-gray-500">$</span>

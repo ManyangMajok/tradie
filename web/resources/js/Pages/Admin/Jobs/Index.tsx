@@ -106,7 +106,7 @@ export default function JobsIndex({ jobs, filters }: Props) {
                             <th className="px-4 py-3">Status</th>
                             <th className="px-4 py-3">Urgency</th>
                             <th className="px-4 py-3">Category</th>
-                            <th className="px-4 py-3">Suburb</th>
+                            <th className="px-4 py-3">Area</th>
                             <th className="px-4 py-3">Member</th>
                             <th className="px-4 py-3">Tradie</th>
                             <th className="px-4 py-3">Submitted</th>
@@ -133,7 +133,7 @@ export default function JobsIndex({ jobs, filters }: Props) {
                                 <td className="px-4 py-3 text-gray-600">{job.property?.suburb?.name ?? '—'}</td>
                                 <td className="px-4 py-3 text-gray-600">{job.member.first_name} {job.member.last_name}</td>
                                 <td className="px-4 py-3 text-gray-600">{job.assigned_company?.business_name ?? '—'}</td>
-                                <td className="px-4 py-3 text-gray-400">{new Date(job.submitted_at).toLocaleDateString('en-AU')}</td>
+                                <td className="px-4 py-3 text-gray-400">{new Date(job.submitted_at).toLocaleDateString('en-KE', { timeZone: 'Africa/Nairobi' })}</td>
                             </tr>
                         ))}
                         {jobs.data.length === 0 && (

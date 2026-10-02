@@ -39,7 +39,7 @@ interface Job {
     member: { id: number; first_name: string; last_name: string; email: string; phone: string | null };
     assigned_company: { id: number; business_name: string; owner: { first_name: string; last_name: string; email: string; phone: string | null } } | null;
     status_logs: StatusLog[];
-    completion_report: { work_value_cents: number; discount_applied: boolean; discount_amount_cents: number | null; notes: string | null } | null;
+    completion_report: { invoice_total_cents: number; discount_applied: boolean; discount_amount_cents: number | null; notes: string | null } | null;
     review: { stars: number; review_text: string | null; work_completed_status: string; was_auto_confirmed: boolean } | null;
 }
 
@@ -90,7 +90,7 @@ export default function JobShow({ job, tradieCompanies }: Props) {
                         <div className="flex gap-2"><dt className="w-32 text-gray-500 shrink-0">Issue</dt><dd>{job.issue_type?.name ?? job.custom_issue ?? '—'}</dd></div>
                         <div className="flex gap-2"><dt className="w-32 text-gray-500 shrink-0">Urgency</dt><dd>{job.urgency.replace(/_/g, ' ')}</dd></div>
                         <div className="flex gap-2"><dt className="w-32 text-gray-500 shrink-0">Address</dt><dd>{job.property?.address_line_1}, {job.property?.suburb?.name} {job.property?.suburb?.postcode}</dd></div>
-                        <div className="flex gap-2"><dt className="w-32 text-gray-500 shrink-0">Submitted</dt><dd>{new Date(job.submitted_at).toLocaleString('en-AU')}</dd></div>
+                        <div className="flex gap-2"><dt className="w-32 text-gray-500 shrink-0">Submitted</dt><dd>{new Date(job.submitted_at).toLocaleString('en-KE', { timeZone: 'Africa/Nairobi' })}</dd></div>
                     </dl>
                     {job.description && <p className="text-sm text-gray-700 border-t border-gray-100 pt-3">{job.description}</p>}
                 </div>
@@ -119,8 +119,8 @@ export default function JobShow({ job, tradieCompanies }: Props) {
                         <div className="rounded-xl border border-gray-200 bg-white p-5 shadow-sm space-y-2">
                             <h2 className="font-semibold text-gray-900">Completion report</h2>
                             <dl className="space-y-1 text-sm">
-                                <div className="flex gap-2"><dt className="w-40 text-gray-500">Work value</dt><dd>${(job.completion_report.work_value_cents / 100).toFixed(2)}</dd></div>
-                                <div className="flex gap-2"><dt className="w-40 text-gray-500">Discount applied</dt><dd>{job.completion_report.discount_applied ? `Yes — $${((job.completion_report.discount_amount_cents ?? 0) / 100).toFixed(2)}` : 'No'}</dd></div>
+                                <div className="flex gap-2"><dt className="w-40 text-gray-500">Work value</dt><dd>KSh {(job.completion_report.invoice_total_cents / 100).toFixed(2)}</dd></div>
+                                <div className="flex gap-2"><dt className="w-40 text-gray-500">Discount applied</dt><dd>{job.completion_report.discount_applied ? `Yes — KSh ${((job.completion_report.discount_amount_cents ?? 0) / 100).toFixed(2)}` : 'No'}</dd></div>
                                 {job.completion_report.notes && <div className="flex gap-2"><dt className="w-40 text-gray-500">Notes</dt><dd>{job.completion_report.notes}</dd></div>}
                             </dl>
                         </div>
@@ -218,7 +218,7 @@ export default function JobShow({ job, tradieCompanies }: Props) {
                     <ol className="space-y-3">
                         {job.status_logs.map((log) => (
                             <li key={log.id} className="flex gap-4 text-sm">
-                                <span className="text-gray-400 w-36 shrink-0">{new Date(log.created_at).toLocaleString('en-AU')}</span>
+                                <span className="text-gray-400 w-36 shrink-0">{new Date(log.created_at).toLocaleString('en-KE', { timeZone: 'Africa/Nairobi' })}</span>
                                 <span className="text-gray-700">
                                     {log.from_status ? `${log.from_status.replace(/_/g, ' ')} → ` : ''}<strong>{log.to_status.replace(/_/g, ' ')}</strong>
                                     {log.changed_by_system ? ' (system)' : log.changed_by ? ` by ${log.changed_by.first_name} ${log.changed_by.last_name}` : ''}

@@ -11,12 +11,12 @@ interface Props {
     draft?: Record<string, string>;
 }
 
-const states = ['WA', 'NSW', 'VIC', 'QLD', 'SA', 'TAS', 'ACT', 'NT'];
+const states = ['KE'];
 
 export default function TradieStep3({ draft = {} }: Props) {
     const { data, setData, post, processing, errors } = useForm({
         licence_number: draft.licence_number ?? '',
-        licence_state: draft.licence_state ?? 'WA',
+        licence_state: draft.licence_state ?? 'KE',
         licence_expires_on: draft.licence_expires_on ?? '',
         insurance_expires_on: draft.insurance_expires_on ?? '',
         licence_document_path: draft.licence_document_path ?? '',
@@ -58,7 +58,7 @@ export default function TradieStep3({ draft = {} }: Props) {
                             <FormField label="Licence number" error={errors.licence_number} required>
                                 <Input value={data.licence_number} onChange={(e) => setData('licence_number', e.target.value)} error={errors.licence_number} />
                             </FormField>
-                            <FormField label="Licence state" error={errors.licence_state} required>
+                            <FormField label="Licence country" error={errors.licence_state} required>
                                 <select
                                     value={data.licence_state}
                                     onChange={(e) => setData('licence_state', e.target.value)}

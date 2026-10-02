@@ -53,9 +53,9 @@ export default function Subscription({ subscription, has_stripe_customer }: Prop
 
     const cfg = statusConfig[subscription.status] ?? statusConfig['active'];
     const StatusIcon = cfg.icon;
-    const yearlyPrice = (subscription.plan.yearly_price_cents / 100).toLocaleString('en-AU', {
+    const yearlyPrice = (subscription.plan.yearly_price_cents / 100).toLocaleString('en-KE', {
         style: 'currency',
-        currency: 'AUD',
+        currency: 'KES',
         maximumFractionDigits: 0,
     });
 
@@ -93,7 +93,7 @@ export default function Subscription({ subscription, has_stripe_customer }: Prop
                         <div>
                             <p className="text-xs text-gray-500">Cancelled on</p>
                             <p className="mt-0.5 font-medium text-gray-900">
-                                {new Date(subscription.canceled_at).toLocaleDateString('en-AU')}
+                                {new Date(subscription.canceled_at).toLocaleDateString('en-KE', { timeZone: 'Africa/Nairobi' })}
                             </p>
                         </div>
                     )}

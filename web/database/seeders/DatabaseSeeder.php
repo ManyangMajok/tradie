@@ -14,7 +14,7 @@ class DatabaseSeeder extends Seeder
             IssueTypeSeeder::class,
             MemberPlanSeeder::class,
             TradiePlanSeeder::class,
-            DevUserSeeder::class,
+            KenyanDemoSeeder::class,
         ]);
     }
 }

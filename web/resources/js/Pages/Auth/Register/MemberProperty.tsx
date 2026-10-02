@@ -58,7 +58,7 @@ export default function MemberProperty({ suburbs }: Props) {
                             />
                         </FormField>
 
-                        <FormField label="Suburb" error={errors.suburb_id} required>
+                        <FormField label="Area" error={errors.suburb_id} required>
                             <select
                                 value={data.suburb_id}
                                 onChange={(e) => setData('suburb_id', e.target.value)}

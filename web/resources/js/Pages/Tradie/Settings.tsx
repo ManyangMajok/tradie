@@ -101,7 +101,7 @@ export default function Settings({ profile, company }: Props) {
                             className={inputCls}
                             value={profileForm.data.phone}
                             onChange={e => profileForm.setData('phone', e.target.value)}
-                            placeholder="+61 4xx xxx xxx"
+                            placeholder="+254 7xx xxx xxx"
                         />
                     </Field>
                     <p className="text-xs text-gray-400">Email address cannot be changed here — contact support.</p>

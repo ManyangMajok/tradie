@@ -27,3 +27,12 @@ The existing approval, subscription, availability/emergency, category, service-a
 On decline or expiry, existing admin escalation/notification is retained, but the system never automatically contacts another company for a member-selected job. The member can choose another eligible tradie on the same job page. Already attempted companies are excluded. A live offer or assigned job cannot be replaced by this action. Legacy requests and the preserved mobile API retain their existing dispatch behaviour.
 
 Web endpoints: GET /jobs/available-tradies accepts property_id, tradie_category_id, urgency and returns location plus a ratings-ordered tradies list. POST /jobs additionally requires selected_tradie_company_id; web submissions redirect to the new job, JSON clients retain the JSON response. POST /jobs/{publicId}/choose-tradie permits the owner to choose again only when a selected job is pending dispatch. The nullable jobs.selected_tradie_company_id records member choice separately from confirmed assignment.
+
+
+## Kenyan demonstration context
+
+The owner requested Kenyan context throughout the runnable web demo. Default seeding now uses Kenyan names, +254 phone placeholders, 12 representative service areas across Nairobi, Mombasa, Kisumu, Nakuru, Kiambu and Kajiado, eight fictional fundi businesses, member properties, completed jobs, reviews, saved tradies and performance totals derived from those records. The existing demo login emails remain unchanged; new accounts use password `password`. Reseeding preserves existing passwords and jobs and does not wipe the database. Known demo profiles are updated; older WA areas are retained but made inactive.
+
+Currency display is KES/KSh and times use Africa/Nairobi. Existing numerical subscription prices are retained as illustrative KSh placeholders, not converted prices or approved commercial pricing. Financial fields still store minor units (100 per shilling). Seed invoices show KSh 4,500 after a KSh 500 discount on KSh 5,000. Kenyan mobile signup accepts +2547XXXXXXXX and +2541XXXXXXXX. The legacy `abn` field is now an optional generic business registration reference; `licence_state` stores KE. This is a demo localisation, not a statement about Kenyan licensing or tax compliance. No real documents or external payments are seeded.
+
+`php artisan db:seed` installs or refreshes this context. Do not run migrate:fresh to update an existing demo. Original mobile/design and production specification files remain historical references; the Kenyan localisation applies to the runnable web app.

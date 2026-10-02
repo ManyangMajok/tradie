@@ -113,7 +113,7 @@ export default function TradiesIndex({ tradies, filters }: Props) {
                                         : <span className="text-gray-400">—</span>
                                     }
                                 </td>
-                                <td className="px-4 py-3 text-gray-400">{new Date(tradie.created_at).toLocaleDateString('en-AU')}</td>
+                                <td className="px-4 py-3 text-gray-400">{new Date(tradie.created_at).toLocaleDateString('en-KE', { timeZone: 'Africa/Nairobi' })}</td>
                             </tr>
                         ))}
                         {tradies.data.length === 0 && (

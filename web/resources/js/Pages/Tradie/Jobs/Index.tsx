@@ -58,7 +58,7 @@ export default function TradieJobsIndex({ jobs }: Props) {
                         </div>
                         <div className="flex shrink-0 items-center gap-2">
                             <span className="text-xs text-gray-400">
-                                {new Date(job.assigned_at).toLocaleDateString('en-AU')}
+                                {new Date(job.assigned_at).toLocaleDateString('en-KE', { timeZone: 'Africa/Nairobi' })}
                             </span>
                             <ChevronRight className="h-4 w-4 text-gray-300" />
                         </div>

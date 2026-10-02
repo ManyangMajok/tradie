@@ -148,7 +148,7 @@ export default function Overview({ counts, attention, liveJobs }: Props) {
                                     <th className="px-4 py-3">Job</th>
                                     <th className="px-4 py-3">Status</th>
                                     <th className="px-4 py-3">Category</th>
-                                    <th className="px-4 py-3">Suburb</th>
+                                    <th className="px-4 py-3">Area</th>
                                     <th className="px-4 py-3">Member</th>
                                     <th className="px-4 py-3">Tradie</th>
                                 </tr>

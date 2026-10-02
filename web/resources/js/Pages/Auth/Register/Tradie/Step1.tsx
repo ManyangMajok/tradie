@@ -47,8 +47,8 @@ export default function TradieStep1({ draft = {} }: Props) {
                             <Input type="email" value={data.email} onChange={(e) => setData('email', e.target.value)} autoComplete="email" error={errors.email} />
                         </FormField>
 
-                        <FormField label="Mobile number" error={errors.phone} required hint="Australian mobile, e.g. +61412345678">
-                            <Input type="tel" value={data.phone} onChange={(e) => setData('phone', e.target.value)} placeholder="+61412345678" error={errors.phone} />
+                        <FormField label="Mobile number" error={errors.phone} required hint="Kenyan mobile, e.g. +254712345678">
+                            <Input type="tel" value={data.phone} onChange={(e) => setData('phone', e.target.value)} placeholder="+254712345678" error={errors.phone} />
                         </FormField>
 
                         <FormField label="Password" error={errors.password} required>
@@ -69,8 +69,8 @@ export default function TradieStep1({ draft = {} }: Props) {
                             <Input value={data.trading_name} onChange={(e) => setData('trading_name', e.target.value)} error={errors.trading_name} />
                         </FormField>
 
-                        <FormField label="ABN" error={errors.abn} hint="11-digit Australian Business Number">
-                            <Input value={data.abn} onChange={(e) => setData('abn', e.target.value)} placeholder="12345678901" error={errors.abn} />
+                        <FormField label="Business registration number" error={errors.abn} hint="Optional business registration reference (demo)">
+                            <Input value={data.abn} onChange={(e) => setData('abn', e.target.value)} placeholder="DEMO-KE-001" error={errors.abn} />
                         </FormField>
 
                         <FormField label="About your business" error={errors.about_text} hint="Optional — shown to members">

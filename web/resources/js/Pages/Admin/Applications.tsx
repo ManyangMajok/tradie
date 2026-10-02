@@ -64,7 +64,7 @@ export default function Applications({ applications }: Props) {
                                             {app.owner.first_name} {app.owner.last_name} · {app.owner.email} · {app.owner.phone}
                                         </p>
                                         <div className="mt-2 flex flex-wrap gap-x-6 gap-y-1 text-xs text-gray-500">
-                                            {app.abn && <span>ABN: {app.abn}</span>}
+                                            {app.abn && <span>Business registration: {app.abn}</span>}
                                             {app.licence_number && <span>Licence: {app.licence_number} ({app.licence_state})</span>}
                                             {app.licence_expires_on && <span>Lic. exp: {app.licence_expires_on}</span>}
                                             {app.insurance_expires_on && <span>Ins. exp: {app.insurance_expires_on}</span>}

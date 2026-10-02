@@ -162,7 +162,7 @@ export default function DisputesIndex({ disputes }: Props) {
                                         )}
                                     </div>
                                     <div className="text-right shrink-0">
-                                        <p className="text-xs text-gray-400">{new Date(job.updated_at).toLocaleDateString('en-AU')}</p>
+                                        <p className="text-xs text-gray-400">{new Date(job.updated_at).toLocaleDateString('en-KE', { timeZone: 'Africa/Nairobi' })}</p>
                                         <button
                                             onClick={() => setExpanded(expanded === job.id ? null : job.id)}
                                             className="mt-2 rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-indigo-700"

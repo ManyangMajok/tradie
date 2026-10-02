@@ -98,7 +98,7 @@ export default function TradieJobShow({ job }: Props) {
                         <span className="text-gray-400">Urgency</span>
                         <span className="capitalize">{job.urgency.replace(/_/g, ' ')}</span>
                         <span className="text-gray-400">Assigned</span>
-                        <span>{new Date(job.assigned_at).toLocaleDateString('en-AU')}</span>
+                        <span>{new Date(job.assigned_at).toLocaleDateString('en-KE', { timeZone: 'Africa/Nairobi' })}</span>
                     </div>
                     <p className="border-t border-gray-100 pt-3 text-gray-700">{job.description}</p>
                 </CardBody>
@@ -178,7 +178,7 @@ export default function TradieJobShow({ job }: Props) {
                                         </span>
                                         {log.note && <span className="text-gray-400"> — {log.note}</span>}
                                         <p className="text-xs text-gray-400">
-                                            {new Date(log.created_at).toLocaleString('en-AU')}
+                                            {new Date(log.created_at).toLocaleString('en-KE', { timeZone: 'Africa/Nairobi' })}
                                         </p>
                                     </div>
                                 </li>

@@ -41,7 +41,7 @@ export default function SuburbsIndex({ suburbs, filters }: Props) {
         <AdminLayout>
             <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                    <h1 className="text-xl font-semibold text-gray-900">Suburbs <span className="ml-2 text-sm font-normal text-gray-500">({suburbs.total} total)</span></h1>
+                    <h1 className="text-xl font-semibold text-gray-900">Locations <span className="ml-2 text-sm font-normal text-gray-500">({suburbs.total} total)</span></h1>
                 </div>
 
                 <div className="flex flex-wrap gap-3">
@@ -73,14 +73,14 @@ export default function SuburbsIndex({ suburbs, filters }: Props) {
                         <thead className="bg-gray-50">
                             <tr>
                                 <th className="px-4 py-3 text-left font-medium text-gray-500">Name</th>
-                                <th className="px-4 py-3 text-left font-medium text-gray-500">Postcode</th>
-                                <th className="px-4 py-3 text-left font-medium text-gray-500">State</th>
+                                <th className="px-4 py-3 text-left font-medium text-gray-500">Postal code</th>
+                                <th className="px-4 py-3 text-left font-medium text-gray-500">County</th>
                                 <th className="px-4 py-3 text-left font-medium text-gray-500">Status</th>
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100">
                             {suburbs.data.length === 0 && (
-                                <tr><td colSpan={4} className="px-4 py-8 text-center text-gray-400">No suburbs found.</td></tr>
+                                <tr><td colSpan={4} className="px-4 py-8 text-center text-gray-400">No locations found.</td></tr>
                             )}
                             {suburbs.data.map(s => (
                                 <tr key={s.id} className="hover:bg-gray-50">

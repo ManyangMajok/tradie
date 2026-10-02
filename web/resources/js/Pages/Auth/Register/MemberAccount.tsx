@@ -62,14 +62,14 @@ export default function MemberAccount() {
                             label="Mobile number"
                             error={errors.phone}
                             required
-                            hint="Australian mobile, e.g. +61412345678"
+                            hint="Kenyan mobile, e.g. +254712345678"
                         >
                             <Input
                                 type="tel"
                                 value={data.phone}
                                 onChange={(e) => setData('phone', e.target.value)}
                                 autoComplete="tel"
-                                placeholder="+61412345678"
+                                placeholder="+254712345678"
                                 error={errors.phone}
                             />
                         </FormField>
