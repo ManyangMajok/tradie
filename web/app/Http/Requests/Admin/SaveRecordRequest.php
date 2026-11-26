@@ -21,7 +21,11 @@ class SaveRecordRequest extends FormRequest
         foreach (CrudResources::definition($resource)['fields'] as $field) {
             $name = $field['name'];
             $rule = [$field['required'] ? 'required' : 'nullable'];
-            if ($field['type'] === 'checkbox') {
+            if ($resource === 'locations' && in_array($name, ['latitude', 'longitude'])) {
+                $other = $name === 'latitude' ? 'longitude' : 'latitude';
+                $limit = $name === 'latitude' ? 90 : 180;
+                $rule = ['nullable', 'required_with:'.$other, 'numeric', 'between:-'.$limit.','.$limit];
+            } elseif ($field['type'] === 'checkbox') {
                 $rule = ['required', 'boolean'];
             } elseif ($field['type'] === 'number') {
                 $rule = array_merge($rule, ['integer', 'min:0', 'max:10000']);

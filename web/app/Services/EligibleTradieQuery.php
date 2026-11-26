@@ -27,7 +27,7 @@ final class EligibleTradieQuery
      *
      * @return Collection<int, EligibleTradie>
      */
-    public function get(Job $job): Collection
+    public function get(Job $job, bool $allowOtherAreas = false): Collection
     {
         $graceDays = config('dispatch.past_due_grace_days', 3);
         $disputeLookback = config('dispatch.scoring.dispute_lookback_days', 30);
@@ -119,7 +119,8 @@ final class EligibleTradieQuery
             -- Must cover the job's suburb
             JOIN tradie_service_areas tsa
               ON  tsa.tradie_company_id = tc.id
-              AND tsa.suburb_id         = :suburb_id
+              AND (tsa.suburb_id = :suburb_id OR :allow_other_areas = 1)
+              AND tsa.deleted_at IS NULL
               AND tsa.is_active         = true
 
             -- Join the plan to get dispatch_rank_boost
@@ -173,6 +174,7 @@ final class EligibleTradieQuery
                 'grace_days' => $graceDays,
                 'category_id' => $job->tradie_category_id,
                 'suburb_id' => $job->property->suburb_id,
+                'allow_other_areas' => $allowOtherAreas ? 1 : 0,
                 'day_of_week' => $dayOfWeek,
                 'time_now' => $timeNow,
                 'is_emergency' => $isEmergency ? 1 : 0,

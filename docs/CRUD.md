@@ -39,3 +39,11 @@ The test suite covers role separation, inactive accounts, private single-use set
 The owner-provided dashboard reference informs the shared admin, client and fundi workspaces: a soft grey canvas, rounded white cards, compact icon navigation, dark pill actions and warm orange accents. Navigation stays labelled on small screens and icon links expose accessible names and keyboard focus. Sign-in and overview pages use the same visual system. Overview counts come from existing records; no synthetic financial charts or activity are introduced. Routes, validation and job rules are unchanged by this visual refresh.
 
 Actions use the shared Lucide ActionIcon component alongside visible labels. Shared buttons accept a semantic icon name; loading states replace the action icon with a decorative spinner and expose aria-busy. Icons do not change routes, confirmation steps or form handling.
+
+## Local-first selection and alternatives
+
+The client sees all eligible fundis serving their area, ordered by ratings. Only when none are available do other active service areas appear as alternatives, labelled Travel needs confirmation. All other checks (trade, approval, subscription, hours, active account, existing offers and dispute flags) remain. Local availability is rechecked on submission. An outside-area offer records its travel flag; the fundi sees the warning and accepts to confirm travel, or declines. No automatic selection occurs.
+
+Where stored area coordinates exist, alternatives are ordered by approximate straight-line distance to their nearest service area. Unknown distances sort after known ones; county and rating break ties. Coordinates are not currently seeded for Kenyan areas, so the demo uses same-county and rating fallback, with Distance unavailable shown honestly. A map and live GPS positions are not part of this change.
+
+Admins can enter optional paired latitude/longitude values on Locations. These are area-centre coordinates, not home addresses or live fundi locations. Both coordinates are validated and must be supplied together.

@@ -18,6 +18,7 @@ interface Job {
     custom_issue: string | null;
 }
 interface Lead {
+    travel_confirmation_required: boolean;
     id: number;
     offered_at: string;
     expires_at: string;
@@ -79,6 +80,7 @@ export default function LeadsIndex({ leads }: Props) {
                                                     in {lead.job.property.suburb.name}
                                                 </span>
                                             </div>
+                                            {lead.travel_confirmation_required && <p className="mt-2 text-sm font-medium text-amber-800">Outside your service area · Travel needs confirmation</p>}
                                             <p className="mt-1 text-sm text-gray-500">
                                                 {lead.job.issue_type?.name ?? lead.job.custom_issue ?? 'General enquiry'}
                                             </p>

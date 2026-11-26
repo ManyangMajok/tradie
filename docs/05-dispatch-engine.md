@@ -1,3 +1,5 @@
+> **Approved web fallback (26 November 2026):** Member choice first returns eligible providers serving the requested area, ordered by rating. Only if none exist, return otherwise eligible providers from other active areas. Rank alternatives by known straight-line area distance; unknown distances follow, prioritising the same county then rating. Never claim live fundi distance. Outside-area offers persist a travel-confirmation flag and accepting confirms willingness to travel. No automatic reassignment or legacy scoring change.
+
 > **Member-choice update:** The web demo uses explicit member selection as described in `docs/DEMO.md`. Do not automatically advance a member-selected job to a different tradie. The scoring rules below still apply to legacy/mobile automatic dispatch.
 
 > **Demo variant:** Read `docs/DEMO.md` and the root `README.md` first. Their owner-approved MySQL/local-integration choices supersede the production infrastructure and billing instructions below. Preserve all other business rules.

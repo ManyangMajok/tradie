@@ -66,7 +66,7 @@ Forgot password sends its reset message to `web/storage/logs/laravel.log`, becau
 
 1. Sign in as the fundi. Set **Trade Categories**, **Service Areas** and **Availability**, then activate a **demo subscription**. The seeded fundi already has plumbing, Westlands and daily availability configured. New profiles should configure their own coverage.
 2. Sign in as a client in another browser profile/private window. Activate a demo membership and add a property if needed.
-3. Request a job, view fundis serving that location, compare ratings and choose one. Only the chosen fundi receives the offer.
+3. Request a job, view fundis serving that location, compare ratings and choose one. Only the chosen fundi receives the offer. If no local fundi is available, alternatives from other areas appear with a Travel needs confirmation notice. The fundi must accept to confirm travel.
 4. The fundi opens the lead and accepts or declines. On acceptance, update progress under **My Jobs** and submit the completion report.
 5. The client reviews the completed work. The fundi's rating and performance reflect actual saved records.
 6. The admin can still edit basic records. Jobs with offers, reports or reviews cannot have their assignment/status overwritten or be deleted through generic CRUD.
@@ -123,3 +123,5 @@ Coverage includes role-isolated access, password setup, CRUD, relationship/uniqu
 - `docs/CRUD.md`: branch behaviour and architecture notes.
 
 The original schema and domain services support the restored web portals; the admin uses the explicit CRUD field allowlist. The retained platform/production docs are historical references; this README and `docs/CRUD.md` are authoritative for this branch.
+
+For approximate nearest-area suggestions, add paired latitude/longitude values under Admin → Locations. Without coordinates, alternatives prioritise the same county and then ratings; no distance is fabricated. A map is not required for matching.

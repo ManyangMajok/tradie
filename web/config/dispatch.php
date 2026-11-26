@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'version' => 2,
 
     'mode' => env('DISPATCH_MODE', 'sequential'), // 'sequential' | 'parallel'
 

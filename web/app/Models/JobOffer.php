@@ -16,6 +16,7 @@ class JobOffer extends Model
     public const UPDATED_AT = null;
 
     protected $fillable = [
+        'travel_confirmation_required',
         'job_id',
         'tradie_company_id',
         'round',
@@ -39,6 +40,7 @@ class JobOffer extends Model
     {
         return [
             'status' => OfferStatus::class,
+            'travel_confirmation_required' => 'boolean',
             'score' => 'float',
             'round' => 'integer',
             'rank_in_round' => 'integer',

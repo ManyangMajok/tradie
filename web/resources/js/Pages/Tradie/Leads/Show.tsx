@@ -20,6 +20,7 @@ interface Job {
     custom_issue: string | null;
 }
 interface Offer {
+    travel_confirmation_required: boolean;
     id: number;
     status: string;
     expires_at: string;
@@ -81,6 +82,7 @@ export default function LeadShow({ offer }: Props) {
 
     return (
         <div className="mx-auto max-w-lg space-y-4">
+            {offer.travel_confirmation_required && <p className="rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-900"><strong>Travel needs confirmation.</strong> This client is outside your listed service areas. Accept only if you are willing to travel to {offer.job.property.suburb.name}. You can decline if it is too far away.</p>}
             {/* Timer */}
             {isActive && !expired && (
                 <div className={`flex items-center justify-center gap-2 rounded-xl p-4 text-center ${
@@ -148,7 +150,7 @@ export default function LeadShow({ offer }: Props) {
             {isActive && !expired && !showDecline && (
                 <div className="flex flex-col gap-3">
                     <Button icon="accept" className="w-full" onClick={accept} loading={processing}>
-                        Accept this lead
+                        {offer.travel_confirmation_required ? 'Accept and confirm travel' : 'Accept this lead'}
                     </Button>
                     <button
                         type="button"

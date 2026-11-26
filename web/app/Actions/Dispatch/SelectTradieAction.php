@@ -25,7 +25,8 @@ class SelectTradieAction
             abort_unless($locked->status === JobStatus::PendingDispatch, 409, 'This job already has an active offer or assignment.');
             // Recheck eligibility at submission: the list may have changed since it was displayed.
             TradieCompany::whereKey($companyId)->lockForUpdate()->first();
-            if (! $this->available->forJob($locked)->contains('id', $companyId)) {
+            $candidate = $this->available->forJob($locked)->firstWhere('id', $companyId);
+            if (! $candidate) {
                 throw ValidationException::withMessages([
                     'selected_tradie_company_id' => 'This tradie is no longer available for this job. Please choose another tradie.',
                 ]);
@@ -34,6 +35,7 @@ class SelectTradieAction
             $seconds = config('dispatch.windows_seconds.'.$locked->urgency->value);
             $offer = JobOffer::create([
                 'job_id' => $locked->id, 'tradie_company_id' => $companyId,
+                'travel_confirmation_required' => $candidate->match_type === 'alternative',
                 'round' => $round, 'rank_in_round' => 1, 'score' => null,
                 'status' => OfferStatus::Offered, 'offered_at' => now(),
                 'expires_at' => now()->addSeconds($seconds),
@@ -46,7 +48,7 @@ class SelectTradieAction
             JobStatusLog::create([
                 'job_id' => $locked->id, 'from_status' => JobStatus::PendingDispatch,
                 'to_status' => JobStatus::Offered, 'changed_by_user_id' => $locked->member_user_id,
-                'changed_by_system' => false, 'note' => 'Member selected their tradie.',
+                'changed_by_system' => false, 'note' => $candidate->match_type === 'alternative' ? 'Member selected an outside-area fundi; acceptance confirms willingness to travel.' : 'Member selected their tradie.',
             ]);
             SendLeadNotification::dispatch($offer->id)->afterCommit();
             ExpireOffer::dispatch($offer->id)->delay($offer->expires_at)->afterCommit();

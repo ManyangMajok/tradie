@@ -71,7 +71,9 @@ final class CrudResources
             'locations' => ['label' => 'Locations', 'singular' => 'location', 'model' => Suburb::class, 'search' => ['name', 'postcode', 'state'], 'fields' => [
                 $field('name', 'Location name', 'text', true, ['max' => 120]),
                 $field('postcode', 'Postcode', 'text', true, ['max' => 10]),
-                $field('state', 'Country / region code', 'text', true, ['max' => 8, 'default' => 'KE']),
+                $field('state', 'County / region code', 'text', true, ['max' => 8, 'default' => 'KE']),
+                $field('latitude', 'Area latitude', 'text', false, ['help' => 'Optional area centre, between -90 and 90. Enter longitude too. Used for approximate area distance.']),
+                $field('longitude', 'Area longitude', 'text', false, ['help' => 'Optional area centre, between -180 and 180. Enter latitude too.']),
                 $active,
             ]],
             'categories' => ['label' => 'Trade categories', 'singular' => 'trade category', 'model' => TradieCategory::class, 'search' => ['name', 'slug'], 'fields' => [

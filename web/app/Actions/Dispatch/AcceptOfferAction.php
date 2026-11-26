@@ -56,7 +56,7 @@ class AcceptOfferAction
                 'to_status' => JobStatus::Assigned,
                 'changed_by_user_id' => $tradieUser->id,
                 'changed_by_system' => false,
-                'note' => "Accepted by tradie company #{$offer->tradie_company_id}",
+                'note' => "Accepted by tradie company #{$offer->tradie_company_id}".($offer->travel_confirmation_required ? '; travel confirmed for outside-area request.' : '.'),
             ]);
 
             // Supersede sibling offers in the same round (defensive — sequential only has 1)

@@ -7,10 +7,13 @@ use App\Jobs\Dispatch\AdvanceToNextRank;
 use App\Jobs\Dispatch\ExpireOffer;
 use App\Models\Job;
 use App\Models\Property;
+use App\Models\Suburb;
 use App\Models\TradieCompany;
 use App\Models\TradiePlan;
 use App\Models\TradieSubscription;
 use App\Models\User;
+use App\Services\AvailableTradies;
+use App\Services\EligibleTradieQuery;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Queue;
@@ -164,4 +167,74 @@ it('assigns the chosen tradie only after they accept and rejects a different dup
     app(AcceptOfferAction::class)->execute($created->offers()->first(), $chosen->owner);
     expect($created->fresh()->status)->toBe(JobStatus::Assigned)
         ->and($created->fresh()->assigned_tradie_company_id)->toBe($chosen->id);
+});
+
+it('suggests other areas only when no local candidate exists and preserves normal eligibility', function () {
+    $job = choiceJob();
+    $area = Suburb::factory()->create(['state' => $job->property->suburb->state]);
+    $alternative = choiceCandidate($job, 4.9);
+    $alternative->serviceAreas()->update(['suburb_id' => $area->id]);
+    $inactive = choiceCandidate($job);
+    $inactive->serviceAreas()->update(['suburb_id' => $area->id]);
+    $inactive->owner->update(['status' => 'suspended']);
+    $local = choiceCandidate($job, 3.0);
+    $service = app(AvailableTradies::class);
+    expect($service->forJob($job)->pluck('id')->all())->toBe([$local->id]);
+    $local->availability()->delete();
+    $results = $service->forJob($job);
+    expect($results->pluck('id')->all())->toBe([$alternative->id])
+        ->and($results->first()->match_type)->toBe('alternative')
+        ->and($results->first()->service_area_names)->toContain($area->name);
+    expect(app(EligibleTradieQuery::class)->get($job)->pluck('id')->all())->not->toContain($alternative->id);
+});
+
+it('orders alternatives by area distance then ratings and handles missing coordinates honestly', function () {
+    $job = choiceJob();
+    $job->property->suburb->update(['latitude' => 0, 'longitude' => 0]);
+    $near = choiceCandidate($job, 3.0);
+    $far = choiceCandidate($job, 5.0);
+    $unknown = choiceCandidate($job, 5.0);
+    foreach ([[$near, 0.1], [$far, 1], [$unknown, null]] as [$company, $longitude]) {
+        $area = Suburb::factory()->create(['latitude' => $longitude === null ? null : 0, 'longitude' => $longitude]);
+        $company->serviceAreas()->update(['suburb_id' => $area->id]);
+    }
+    $results = app(AvailableTradies::class)->forJob($job);
+    expect($results->pluck('id')->all())->toBe([$near->id, $far->id, $unknown->id])
+        ->and($results->first()->area_distance_km)->toBe(11.1)
+        ->and($results->last()->area_distance_km)->toBeNull();
+});
+
+it('allows an explicitly selected alternative and records travel confirmation on its offer', function () {
+    $job = choiceJob();
+    $company = choiceCandidate($job);
+    $company->serviceAreas()->update(['suburb_id' => Suburb::factory()->create()->id]);
+    $response = $this->actingAs($job->member)->postJson('/jobs', choicePayload($job, $company->id))->assertCreated();
+    $created = Job::findOrFail($response->json('job.id'));
+    $offer = $created->offers()->first();
+    expect($offer->travel_confirmation_required)->toBeTrue();
+    $this->actingAs($company->owner)->get('/tradie/leads/'.$offer->id)->assertOk();
+    app(AcceptOfferAction::class)->execute($offer, $company->owner);
+    expect($created->fresh()->assigned_tradie_company_id)->toBe($company->id);
+});
+
+it('prioritises the same county when distances are unknown and rejects a stale alternative choice', function () {
+    $job = choiceJob();
+    $job->property->suburb->update(['latitude' => null, 'longitude' => null]);
+    $same = choiceCandidate($job, 3);
+    $other = choiceCandidate($job, 5);
+    $same->serviceAreas()->update(['suburb_id' => Suburb::factory()->create(['state' => $job->property->suburb->state, 'latitude' => null, 'longitude' => null])->id]);
+    $other->serviceAreas()->update(['suburb_id' => Suburb::factory()->create(['state' => 'Kiambu', 'latitude' => null, 'longitude' => null])->id]);
+    expect(app(AvailableTradies::class)->forJob($job)->pluck('id')->all())->toBe([$same->id, $other->id]);
+    choiceCandidate($job);
+    $this->actingAs($job->member)->postJson('/jobs', choicePayload($job, $same->id))->assertUnprocessable();
+    $this->assertDatabaseCount('job_offers', 0);
+});
+
+it('validates paired area coordinates through admin location editing', function () {
+    $area = Suburb::factory()->create();
+    $payload = ['name' => $area->name, 'postcode' => $area->postcode, 'state' => $area->state, 'is_active' => true, 'latitude' => -1.28, 'longitude' => 36.82];
+    $this->actingAs(User::factory()->admin()->create())->put('/admin/locations/'.$area->id, $payload)->assertSessionHasNoErrors();
+    expect($area->fresh()->latitude)->toBe(-1.28)->and($area->fresh()->longitude)->toBe(36.82);
+    $this->put('/admin/locations/'.$area->id, [...$payload, 'latitude' => 91])->assertSessionHasErrors('latitude');
+    $this->put('/admin/locations/'.$area->id, [...$payload, 'longitude' => null])->assertSessionHasErrors('longitude');
 });

@@ -34,6 +34,7 @@ class TradieLeadOffered extends Notification
             ->line("**{$urgency} {$category}** in {$suburb}")
             ->line('Issue: '.($job->issueType?->name ?? $job->custom_issue ?? 'Not specified'))
             ->line('Description: '.$job->description)
+            ->lineIf($this->offer->travel_confirmation_required, 'Travel needs confirmation: this job is outside your listed service areas. Accept only if you are willing to travel.')
             ->action('View & Accept Lead', $leadUrl)
             ->salutation('— TradeFinder');
     }
