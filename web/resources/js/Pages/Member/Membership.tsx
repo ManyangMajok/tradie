@@ -1,3 +1,4 @@
+import { ActionIcon } from '../../Components/ui/ActionIcon';
 import React, { useState } from 'react';
 import MemberLayout from '../../Layouts/MemberLayout';
 import { router, Link } from '@inertiajs/react';
@@ -78,11 +79,11 @@ export default function Membership({ subscription, plans }: Props) {
                             <Link
                                 href="/membership/portal"
                                 className="inline-flex items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
-                            >
+                            ><ActionIcon name="billing" inline />
                                 Manage billing
                             </Link>
                             {subscription.status === 'active' && subscription.auto_renew && (
-                                <Button
+                                <Button icon="cancel"
                                     onClick={handleCancel}
                                     variant="ghost"
                                     size="sm"
@@ -98,7 +99,7 @@ export default function Membership({ subscription, plans }: Props) {
             ) : (
                 <div className="mt-6">
                     <p className="text-gray-600">You don't have an active membership. Activate a demo plan to try membership features.</p>
-                    <Link href="/register/member/plan" className="mt-4 inline-block rounded-lg bg-brand-600 px-4 py-2 font-medium text-white">Activate demo membership</Link>
+                    <Link href="/register/member/plan" className="mt-4 inline-block rounded-lg bg-brand-600 px-4 py-2 font-medium text-white"><ActionIcon name="billing" inline />Activate demo membership</Link>
                     <div className="mt-4 space-y-3">
                         {plans.map((plan) => (
                             <div key={plan.id} className="rounded-xl border border-gray-200 bg-white px-5 py-4">

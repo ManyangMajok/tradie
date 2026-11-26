@@ -1,3 +1,4 @@
+import { ActionIcon } from '../../Components/ui/ActionIcon';
 import React from 'react';
 import { useForm, Link } from '@inertiajs/react';
 import AuthLayout from '../../Layouts/AuthLayout';
@@ -53,11 +54,11 @@ export default function Login() {
                                 />
                                 Remember me
                             </label>
-                            <Link href="/password/forgot" className="text-brand-700 underline">Forgot password?</Link>
+                            <Link href="/password/forgot" className="text-brand-700 underline"><ActionIcon name="password" inline />Forgot password?</Link>
 
                         </div>
 
-                        <Button type="submit" className="w-full" loading={processing}>
+                        <Button icon="login" type="submit" className="w-full" loading={processing}>
                             Sign in
                         </Button>
                     </form>

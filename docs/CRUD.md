@@ -37,3 +37,5 @@ The test suite covers role separation, inactive accounts, private single-use set
 ## UI direction
 
 The owner-provided dashboard reference informs the shared admin, client and fundi workspaces: a soft grey canvas, rounded white cards, compact icon navigation, dark pill actions and warm orange accents. Navigation stays labelled on small screens and icon links expose accessible names and keyboard focus. Sign-in and overview pages use the same visual system. Overview counts come from existing records; no synthetic financial charts or activity are introduced. Routes, validation and job rules are unchanged by this visual refresh.
+
+Actions use the shared Lucide ActionIcon component alongside visible labels. Shared buttons accept a semantic icon name; loading states replace the action icon with a decorative spinner and expose aria-busy. Icons do not change routes, confirmation steps or form handling.

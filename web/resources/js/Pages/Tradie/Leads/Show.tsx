@@ -1,3 +1,4 @@
+import { ActionIcon } from '../../../Components/ui/ActionIcon';
 import React, { useEffect, useState } from 'react';
 import TradieLayout from '../../../Layouts/TradieLayout';
 import { router } from '@inertiajs/react';
@@ -146,14 +147,14 @@ export default function LeadShow({ offer }: Props) {
             {/* Actions */}
             {isActive && !expired && !showDecline && (
                 <div className="flex flex-col gap-3">
-                    <Button className="w-full" onClick={accept} loading={processing}>
+                    <Button icon="accept" className="w-full" onClick={accept} loading={processing}>
                         Accept this lead
                     </Button>
                     <button
                         type="button"
                         onClick={() => setShowDecline(true)}
                         className="w-full rounded-lg border border-gray-200 py-2.5 text-sm text-gray-500 transition-colors hover:border-gray-300 hover:text-gray-700"
-                    >
+                    ><ActionIcon name="cancel" inline />
                         Decline
                     </button>
                 </div>
@@ -180,7 +181,7 @@ export default function LeadShow({ offer }: Props) {
                             ))}
                         </div>
                         <div className="flex gap-2 pt-2">
-                            <Button
+                            <Button icon="cancel"
                                 variant="destructive"
                                 className="flex-1"
                                 onClick={decline}
@@ -192,7 +193,7 @@ export default function LeadShow({ offer }: Props) {
                                 type="button"
                                 onClick={() => setShowDecline(false)}
                                 className="flex-1 rounded-lg border border-gray-200 py-2 text-sm text-gray-500 hover:border-gray-300"
-                            >
+                            ><ActionIcon name="cancel" inline />
                                 Cancel
                             </button>
                         </div>

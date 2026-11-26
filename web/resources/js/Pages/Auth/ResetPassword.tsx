@@ -58,7 +58,7 @@ export default function ResetPassword({ token, email }: Props) {
                             />
                         </FormField>
 
-                        <Button type="submit" className="w-full" loading={processing}>
+                        <Button icon="password" type="submit" className="w-full" loading={processing}>
                             Reset password
                         </Button>
                     </form>

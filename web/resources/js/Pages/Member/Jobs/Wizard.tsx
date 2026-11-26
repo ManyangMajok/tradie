@@ -1,3 +1,4 @@
+import { ActionIcon } from '../../../Components/ui/ActionIcon';
 import React, { useState } from 'react';
 import MemberLayout from '../../../Layouts/MemberLayout';
 import { Link, router } from '@inertiajs/react';
@@ -153,7 +154,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
         });
     }
 
-    if (!properties.length) return <div className="rounded-xl border border-gray-200 bg-white p-6"><h1 className="text-xl font-semibold">Add a property first</h1><p className="mt-2 text-gray-600">We use your property location to find available fundis.</p><Link href="/properties/create" className="mt-4 inline-block text-brand-700 underline">Add property</Link></div>;
+    if (!properties.length) return <div className="rounded-xl border border-gray-200 bg-white p-6"><h1 className="text-xl font-semibold">Add a property first</h1><p className="mt-2 text-gray-600">We use your property location to find available fundis.</p><Link href="/properties/create" className="mt-4 inline-block text-brand-700 underline"><ActionIcon name="add" inline />Add property</Link></div>;
 
     const totalSteps = properties.length === 1 ? 5 : 6;
     const currentProgress = step - (properties.length === 1 ? 1 : 0);
@@ -221,7 +222,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                                                 ? 'border-brand-500 bg-brand-50 text-brand-700'
                                                 : 'border-gray-200 text-gray-700 hover:border-gray-300'
                                         }`}
-                                    >
+                                    ><ActionIcon name="trade" inline />
                                         {c.name}
                                     </button>
                                 ))}
@@ -252,7 +253,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                                                 ? 'border-brand-500 bg-brand-50'
                                                 : 'border-gray-200 hover:border-gray-300'
                                         }`}
-                                    >
+                                    ><ActionIcon name="trade" inline />
                                         {i.name}
                                     </button>
                                 ))}
@@ -343,7 +344,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                             <TradieChoices tradies={tradies} selected={state.selected_tradie_company_id}
                                 onChange={(id) => set('selected_tradie_company_id', id)} location={location}
                                 error={errors.selected_tradie_company_id} disabled={processing || loadingTradies} />
-                            <Button variant="secondary" onClick={() => void loadTradies()} disabled={processing} loading={loadingTradies}>
+                            <Button icon="refresh" variant="secondary" onClick={() => void loadTradies()} disabled={processing} loading={loadingTradies}>
                                 Refresh availability
                             </Button>
                         </>
@@ -353,7 +354,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                             {Object.entries(errors).filter(([key]) => key !== 'selected_tradie_company_id').map(([key, message]) => message && <p key={key}>{message}</p>)}
                         </div>
                     )}
-                    {properties.length === 0 && <Link href="/properties/create" className="text-sm text-brand-500 underline">Add a property to find local tradies</Link>}
+                    {properties.length === 0 && <Link href="/properties/create" className="text-sm text-brand-500 underline"><ActionIcon name="property" inline />Add a property to find local tradies</Link>}
                 </CardBody>
             </Card>
 
@@ -383,11 +384,11 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                 </div>
 
                 {step < 6 ? (
-                    <Button onClick={next} loading={loadingTradies} disabled={properties.length === 0}>
+                    <Button icon={step === 5 ? 'search' : 'next'} onClick={next} loading={loadingTradies} disabled={properties.length === 0}>
                         {step === 5 ? 'Find local tradies' : 'Continue'}
                     </Button>
                 ) : (
-                    <Button onClick={submit} loading={processing} disabled={loadingTradies || tradies.length === 0}>
+                    <Button icon="send" onClick={submit} loading={processing} disabled={loadingTradies || tradies.length === 0}>
                         Send to chosen tradie
                     </Button>
                 )}

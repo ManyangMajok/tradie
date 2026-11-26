@@ -173,7 +173,7 @@ export default function TradieJobComplete({ job }: Props) {
                             />
                         </div>
 
-                        <Button type="submit" className="w-full" loading={processing}>
+                        <Button icon="report" type="submit" className="w-full" loading={processing}>
                             Submit completion report
                         </Button>
                     </CardBody>

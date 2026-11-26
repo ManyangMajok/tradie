@@ -1,3 +1,4 @@
+import { ActionIcon } from '../../Components/ui/ActionIcon';
 import React from 'react';
 import { router } from '@inertiajs/react';
 import TradieLayout from '../../Layouts/TradieLayout';
@@ -43,7 +44,7 @@ export default function Subscription({ subscription, has_stripe_customer }: Prop
                     <button
                         onClick={() => router.visit('/tradie/activate-subscription')}
                         className="mt-4 inline-flex items-center rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600"
-                    >
+                    ><ActionIcon name="billing" inline />
                         Choose a plan
                     </button>
                 </div>

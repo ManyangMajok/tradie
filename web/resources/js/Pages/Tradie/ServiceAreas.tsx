@@ -43,7 +43,7 @@ export default function ServiceAreas({ service_areas, suburbs }: Props) {
                     <h1 className="text-2xl font-bold text-gray-900">Service Areas</h1>
                     <p className="mt-1 text-sm text-gray-500">Locations where you accept jobs.</p>
                 </div>
-                <Button size="sm" onClick={() => setAdding((v) => !v)}>
+                <Button icon={adding ? 'cancel' : 'add'} size="sm" onClick={() => setAdding((v) => !v)}>
                     {adding ? 'Cancel' : 'Add suburb'}
                 </Button>
             </div>

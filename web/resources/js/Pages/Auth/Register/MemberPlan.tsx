@@ -76,7 +76,7 @@ export default function MemberPlanPage({ plans, errors = {} }: Props) {
                     <p className="mt-3 text-sm text-red-600">{errors.plan_id}</p>
                 )}
 
-                <Button
+                <Button icon="billing"
                     type="submit"
                     className="mt-6 w-full"
                     loading={processing}

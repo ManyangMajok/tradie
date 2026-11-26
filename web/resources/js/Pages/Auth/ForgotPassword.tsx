@@ -1,3 +1,4 @@
+import { ActionIcon } from '../../Components/ui/ActionIcon';
 import React from 'react';
 import { useForm, Link } from '@inertiajs/react';
 import AuthLayout from '../../Layouts/AuthLayout';
@@ -32,7 +33,7 @@ export default function ForgotPassword() {
                             />
                         </FormField>
 
-                        <Button type="submit" className="w-full" loading={processing}>
+                        <Button icon="send" type="submit" className="w-full" loading={processing}>
                             Send reset link
                         </Button>
                     </form>
@@ -40,7 +41,7 @@ export default function ForgotPassword() {
             </Card>
 
             <p className="mt-6 text-center text-sm text-gray-500">
-                <Link href="/login" className="text-brand-500 hover:underline">
+                <Link href="/login" className="text-brand-500 hover:underline"><ActionIcon name="back" inline />
                     Back to sign in
                 </Link>
             </p>

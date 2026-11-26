@@ -1,3 +1,4 @@
+import { ActionIcon } from '../../../Components/ui/ActionIcon';
 import React, { useState } from 'react';
 import MemberLayout from '../../../Layouts/MemberLayout';
 import { router } from '@inertiajs/react';
@@ -167,7 +168,7 @@ function ReviewForm({ job }: { job: Job }) {
                         />
                     </div>
 
-                    <Button type="submit" className="w-full" loading={processing}>
+                    <Button icon="review" type="submit" className="w-full" loading={processing}>
                         Submit review
                     </Button>
                 </form>
@@ -257,7 +258,7 @@ export default function JobShow({ job, available_tradies }: Props) {
                 <Card><CardBody>
                     <h2 className="font-semibold text-gray-900">Request sent to {job.selected_company?.business_name ?? 'your chosen tradie'}</h2>
                     <p className="mt-2 text-sm text-gray-600">Waiting for them to accept. If they decline or do not respond in time, you can choose another available tradie here.</p>
-                    <Button variant="secondary" className="mt-3" onClick={() => router.reload()}>Refresh status</Button>
+                    <Button icon="refresh" variant="secondary" className="mt-3" onClick={() => router.reload()}>Refresh status</Button>
                 </CardBody></Card>
             )}
             {memberChoice && job.status === 'pending_dispatch' && (
@@ -267,8 +268,8 @@ export default function JobShow({ job, available_tradies }: Props) {
                         <TradieChoices tradies={available_tradies} selected={selectedTradie}
                             onChange={(id) => { setSelectedTradie(id); setChoiceError(''); }}
                             location={job.property.suburb.name} error={choiceError} disabled={choosing} />
-                        <Button type="submit" loading={choosing} disabled={available_tradies.length === 0}>Send to chosen tradie</Button>
-                        <Button type="button" variant="secondary" disabled={choosing} onClick={() => router.reload()}>Refresh availability</Button>
+                        <Button icon="send" type="submit" loading={choosing} disabled={available_tradies.length === 0}>Send to chosen tradie</Button>
+                        <Button icon="refresh" type="button" variant="secondary" disabled={choosing} onClick={() => router.reload()}>Refresh availability</Button>
                     </form>
                 </CardBody></Card>
             )}
@@ -280,7 +281,7 @@ export default function JobShow({ job, available_tradies }: Props) {
                         <h2 className="mb-2 text-sm font-semibold text-gray-700">Your tradie</h2>
                         <p className="text-lg font-semibold text-gray-900">{job.assigned_company.business_name}</p>
                         {job.assigned_company.phone && (
-                            <a href={`tel:${job.assigned_company.phone}`} className="mt-1 text-sm text-brand-500 hover:underline">
+                            <a href={`tel:${job.assigned_company.phone}`} className="mt-1 text-sm text-brand-500 hover:underline"><ActionIcon name="phone" inline />
                                 {job.assigned_company.phone}
                             </a>
                         )}
@@ -363,7 +364,7 @@ export default function JobShow({ job, available_tradies }: Props) {
                         type="button"
                         onClick={cancelJob}
                         className="text-sm text-red-500 hover:text-red-700"
-                    >
+                    ><ActionIcon name="cancel" inline />
                         Cancel this request
                     </button>
                 </div>

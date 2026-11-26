@@ -111,7 +111,7 @@ export default function TradieJobShow({ job }: Props) {
                         <h2 className="text-sm font-semibold text-gray-700">Update status</h2>
 
                         {canMarkOnTheWay && (
-                            <Button
+                            <Button icon="travel"
                                 className="w-full"
                                 onClick={() => updateStatus('tradie_on_the_way')}
                                 loading={processing}
@@ -121,7 +121,7 @@ export default function TradieJobShow({ job }: Props) {
                         )}
 
                         {canMarkInProgress && (
-                            <Button
+                            <Button icon="start"
                                 variant="secondary"
                                 className="w-full"
                                 onClick={() => updateStatus('in_progress')}
@@ -132,7 +132,7 @@ export default function TradieJobShow({ job }: Props) {
                         )}
 
                         {canComplete && (
-                            <Button
+                            <Button icon="complete"
                                 className="w-full"
                                 onClick={() => router.visit(`/tradie/jobs/${job.public_id}/complete`)}
                             >

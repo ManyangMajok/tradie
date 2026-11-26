@@ -1,3 +1,4 @@
+import { ActionIcon } from '../../../Components/ui/ActionIcon';
 import React from 'react';
 import MemberLayout from '../../../Layouts/MemberLayout';
 import { Link } from '@inertiajs/react';
@@ -52,7 +53,7 @@ export default function JobsIndex({ jobs }: Props) {
                 <Link
                     href="/jobs/new"
                     className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600"
-                >
+                ><ActionIcon name="add" inline />
                     Request a tradie
                 </Link>
             </div>
@@ -61,7 +62,7 @@ export default function JobsIndex({ jobs }: Props) {
                 <div className="mt-16 flex flex-col items-center gap-3 text-gray-400">
                     <Inbox className="h-12 w-12" />
                     <p className="text-sm">No jobs yet</p>
-                    <Link href="/jobs/new" className="text-sm text-brand-500 hover:underline">
+                    <Link href="/jobs/new" className="text-sm text-brand-500 hover:underline"><ActionIcon name="add" inline />
                         Request your first tradie
                     </Link>
                 </div>

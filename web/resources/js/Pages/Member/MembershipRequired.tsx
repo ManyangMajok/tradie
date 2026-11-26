@@ -1,3 +1,4 @@
+import { ActionIcon } from '../../Components/ui/ActionIcon';
 import React from 'react';
 import AuthLayout from '../../Layouts/AuthLayout';
 import { Link } from '@inertiajs/react';
@@ -16,11 +17,11 @@ export default function MembershipRequired() {
                 <Link
                     href="/membership"
                     className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-brand-600"
-                >
+                ><ActionIcon name="billing" inline />
                     View membership options
                 </Link>
                 <p className="mt-4 text-center text-sm text-gray-500">
-                    <Link href="/logout" method="post" as="button" className="text-brand-500 hover:underline">
+                    <Link href="/logout" method="post" as="button" className="text-brand-500 hover:underline"><ActionIcon name="logout" inline />
                         Sign out
                     </Link>
                 </p>

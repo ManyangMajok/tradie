@@ -77,7 +77,7 @@ export default function ActivateSubscription({ plans, errors = {} }: Props) {
 
                 {errors.plan_id && <p className="mt-3 text-sm text-red-600">{errors.plan_id}</p>}
 
-                <Button type="submit" className="mt-6 w-full" loading={processing} disabled={!selectedId}>
+                <Button icon="billing" type="submit" className="mt-6 w-full" loading={processing} disabled={!selectedId}>
                     Simulate payment
                 </Button>
 

@@ -1,3 +1,4 @@
+import { ActionIcon } from '../../Components/ui/ActionIcon';
 import React from 'react';
 import { FormField } from '../../Components/ui/FormField';
 import { useForm } from '@inertiajs/react';
@@ -102,7 +103,7 @@ export default function Settings({ profile, company }: Props) {
                         type="submit"
                         disabled={profileForm.processing}
                         className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-50"
-                    >
+                    ><ActionIcon name="save" inline />
                         Save
                     </button>
                 </form>
@@ -141,7 +142,7 @@ export default function Settings({ profile, company }: Props) {
                         type="submit"
                         disabled={companyForm.processing}
                         className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-50"
-                    >
+                    ><ActionIcon name="save" inline />
                         Save
                     </button>
                 </form>
@@ -182,7 +183,7 @@ export default function Settings({ profile, company }: Props) {
                         type="submit"
                         disabled={passwordForm.processing}
                         className="rounded-lg bg-brand-500 px-4 py-2 text-sm font-medium text-white hover:bg-brand-600 disabled:opacity-50"
-                    >
+                    ><ActionIcon name="password" inline />
                         Change password
                     </button>
                 </form>

@@ -104,7 +104,7 @@ export default function Availability({ availability: initial }: Props) {
                     </CardBody>
                 </Card>
 
-                <Button type="submit" className="mt-4 w-full" loading={processing}>
+                <Button icon="save" type="submit" className="mt-4 w-full" loading={processing}>
                     Save availability
                 </Button>
             </form>

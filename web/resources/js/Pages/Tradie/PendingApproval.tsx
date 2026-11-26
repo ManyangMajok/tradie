@@ -1,3 +1,4 @@
+import { ActionIcon } from '../../Components/ui/ActionIcon';
 import React from 'react';
 import AuthLayout from '../../Layouts/AuthLayout';
 import { Link } from '@inertiajs/react';
@@ -14,7 +15,7 @@ export default function PendingApproval() {
                     Our team is reviewing your application. We'll send you an email once it's been approved — usually within 1 business day.
                 </p>
                 <p className="mt-6 text-center text-sm text-gray-500">
-                    <Link href="/logout" method="post" as="button" className="text-brand-500 hover:underline">
+                    <Link href="/logout" method="post" as="button" className="text-brand-500 hover:underline"><ActionIcon name="logout" inline />
                         Sign out
                     </Link>
                 </p>
