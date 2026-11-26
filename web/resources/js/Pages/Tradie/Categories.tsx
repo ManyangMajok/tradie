@@ -37,6 +37,7 @@ export default function Categories({ my_categories, all_categories }: Props) {
                             return (
                                 <button
                                     key={cat.id}
+                                    aria-pressed={active}
                                     type="button"
                                     onClick={() => active && myEntry ? remove(myEntry.id) : add(cat.id)}
                                     className={`flex items-center justify-between gap-2 rounded-lg border-2 px-3 py-2 text-left text-sm transition-colors ${
@@ -44,7 +45,7 @@ export default function Categories({ my_categories, all_categories }: Props) {
                                     }`}
                                 >
                                     <span>{cat.name}</span>
-                                    {active ? <X className="h-3.5 w-3.5" /> : <CheckCircle2 className="h-3.5 w-3.5 text-gray-300" />}
+                                    {active ? <X aria-hidden="true" className="h-3.5 w-3.5" /> : <CheckCircle2 aria-hidden="true" className="h-3.5 w-3.5 text-gray-300" />}
                                 </button>
                             );
                         })}

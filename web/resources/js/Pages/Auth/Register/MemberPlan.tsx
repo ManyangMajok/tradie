@@ -35,6 +35,7 @@ export default function MemberPlanPage({ plans, errors = {} }: Props) {
                     {plans.map((plan) => (
                         <button
                             key={plan.id}
+                            aria-pressed={selectedId === plan.id}
                             type="button"
                             onClick={() => setSelectedId(plan.id)}
                             className={`w-full rounded-xl border-2 px-5 py-4 text-left transition-colors ${
@@ -51,7 +52,7 @@ export default function MemberPlanPage({ plans, errors = {} }: Props) {
                                     </span>
                                 </div>
                                 {selectedId === plan.id && (
-                                    <CheckCircle2 className="h-5 w-5 text-brand-500" />
+                                    <CheckCircle2 aria-hidden="true" className="h-5 w-5 text-brand-500" />
                                 )}
                             </div>
                             <ul className="mt-2 space-y-1 text-sm text-gray-600">

@@ -184,6 +184,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                                 {properties.map((p) => (
                                     <button
                                         key={p.id}
+                                        aria-pressed={state.property_id === p.id}
                                         type="button"
                                         onClick={() => set('property_id', p.id)}
                                         className={`w-full rounded-lg border p-3 text-left transition-colors ${
@@ -192,7 +193,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                                                 : 'border-gray-200 hover:border-gray-300'
                                         }`}
                                     >
-                                        <p className="font-medium text-gray-900">{p.label}</p>
+                                        <p className="font-medium text-gray-900"><ActionIcon name={state.property_id === p.id ? "accept" : "property"} inline />{p.label}</p>
                                         <p className="text-sm text-gray-500">
                                             {p.address_line_1}
                                             {p.suburb && `, ${p.suburb.name} ${p.suburb.postcode}`}
@@ -212,6 +213,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                                 {categories.map((c) => (
                                     <button
                                         key={c.id}
+                                        aria-pressed={state.tradie_category_id === c.id}
                                         type="button"
                                         onClick={() => {
                                             set('tradie_category_id', c.id);
@@ -243,6 +245,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                                 {filteredIssues.map((i) => (
                                     <button
                                         key={i.id}
+                                        aria-pressed={state.issue_type_id === i.id}
                                         type="button"
                                         onClick={() => {
                                             set('issue_type_id', i.id);
@@ -289,6 +292,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                                 {URGENCY_OPTIONS.map((o) => (
                                     <button
                                         key={o.value}
+                                        aria-pressed={state.urgency === o.value}
                                         type="button"
                                         onClick={() => set('urgency', o.value)}
                                         className={`w-full rounded-lg border p-3 text-left transition-colors ${
@@ -297,7 +301,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                                                 : 'border-gray-200 hover:border-gray-300'
                                         }`}
                                     >
-                                        <p className="font-medium text-gray-900">{o.label}</p>
+                                        <p className="font-medium text-gray-900"><ActionIcon name={state.urgency === o.value ? "accept" : "urgency"} inline />{o.label}</p>
                                         <p className="text-sm text-gray-500">{o.hint}</p>
                                     </button>
                                 ))}
@@ -368,7 +372,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                             disabled={processing || loadingTradies}
                             className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700"
                         >
-                            <ChevronLeft className="h-4 w-4" /> Back
+                            <ChevronLeft aria-hidden="true" className="h-4 w-4" /> Back
                         </button>
                     )}
                     {step > 2 && properties.length === 1 && (
@@ -378,7 +382,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                             disabled={processing || loadingTradies}
                             className="flex items-center gap-1 text-sm text-gray-500 hover:text-gray-700"
                         >
-                            <ChevronLeft className="h-4 w-4" /> Back
+                            <ChevronLeft aria-hidden="true" className="h-4 w-4" /> Back
                         </button>
                     )}
                 </div>
