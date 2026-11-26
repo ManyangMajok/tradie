@@ -1,5 +1,7 @@
 # TradeFinder — admin CRUD
 
+> **Existing Windows Desktop checkout failing at setup?** Read [Desktop setup recovery and agent handoff](README-DESKTOP-SETUP.md). It records the confirmed bootstrap/cache error and resumes setup in the existing folder with the already created database.
+
 The **tradie-crud** branch of [ManyangMajok/tradie](https://github.com/ManyangMajok/tradie) is a web-only copy using Laravel 13, React 19, Inertia 3, TypeScript 6, Tailwind 4 and MySQL 8.4. No Expo apps, mobile workspaces or external services are required.
 
 The admin keeps full CRUD for people, fundis (optional business details), properties, jobs, locations, categories and issue types. **Clients and fundis also have their own web accounts and dashboards.** Mobile apps remain excluded.
