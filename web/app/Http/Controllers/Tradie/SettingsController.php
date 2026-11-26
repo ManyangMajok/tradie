@@ -3,10 +3,11 @@
 namespace App\Http\Controllers\Tradie;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Account\UpdatePasswordRequest;
+use App\Http\Requests\Account\UpdateProfileRequest;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\DB;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -25,24 +26,21 @@ class SettingsController extends Controller
                 'phone' => $user->phone,
             ],
             'company' => [
-                'business_name' => $company->business_name,
+                'business_name' => $company->is_independent ? '' : $company->business_name,
                 'trading_name' => $company->trading_name,
                 'about_text' => $company->about_text,
             ],
         ]);
     }
 
-    public function updateProfile(Request $request): RedirectResponse
+    public function updateProfile(UpdateProfileRequest $request): RedirectResponse
     {
-        $user = $request->user();
-
-        $data = $request->validate([
-            'first_name' => ['required', 'string', 'max:80'],
-            'last_name' => ['required', 'string', 'max:80'],
-            'phone' => ['nullable', 'string', 'max:20'],
-        ]);
-
-        $user->update($data);
+        DB::transaction(function () use ($request) {
+            $request->user()->update($request->validated());
+            if ($request->user()->tradieCompany->is_independent) {
+                $request->user()->tradieCompany->update(['business_name' => trim($request->user()->first_name.' '.$request->user()->last_name)]);
+            }
+        });
 
         return back()->with('success', 'Profile updated.');
     }
@@ -50,26 +48,21 @@ class SettingsController extends Controller
     public function updateCompany(Request $request): RedirectResponse
     {
         $data = $request->validate([
-            'business_name' => ['required', 'string', 'max:120'],
+            'business_name' => ['nullable', 'string', 'max:200'],
             'trading_name' => ['nullable', 'string', 'max:120'],
             'about_text' => ['nullable', 'string', 'max:2000'],
         ]);
 
+        $data['is_independent'] = empty($data['business_name']);
+        $data['business_name'] = $data['business_name'] ?: trim($request->user()->first_name.' '.$request->user()->last_name);
         $request->user()->tradieCompany->update($data);
 
         return back()->with('success', 'Business details updated.');
     }
 
-    public function updatePassword(Request $request): RedirectResponse
+    public function updatePassword(UpdatePasswordRequest $request): RedirectResponse
     {
-        $request->validate([
-            'current_password' => ['required', 'current_password'],
-            'password' => ['required', 'confirmed', Password::min(8)->mixedCase()->numbers()],
-        ]);
-
-        $request->user()->update([
-            'password' => Hash::make($request->password),
-        ]);
+        $request->user()->update(['password' => $request->validated('password')]);
 
         return back()->with('success', 'Password changed.');
     }

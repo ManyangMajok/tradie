@@ -36,6 +36,7 @@ final class CrudResources
                 $field('email', 'Email', 'email', true, ['max' => 255]),
                 $field('phone', 'Phone', 'tel', true, ['max' => 32]),
                 $field('status', 'Fundi status', 'select', true, ['choices' => ['active' => 'Active', 'suspended' => 'Suspended'], 'default' => 'active']),
+                $field('provider_status', 'Service profile approval', 'select', false, ['choices' => ['approved' => 'Approved', 'pending_review' => 'Pending review', 'suspended' => 'Suspended', 'rejected' => 'Rejected'], 'default' => 'approved']),
                 $field('business_name', 'Business name', 'text', false, ['max' => 200, 'section' => 'Business information (optional)', 'help' => 'Leave all business fields blank for an independent fundi. Add a business name to save business information.']),
                 $field('trading_name', 'Trading name', 'text', false, ['max' => 200, 'section' => 'Business information (optional)']),
                 $field('abn', 'Business registration reference', 'text', false, ['max' => 20, 'section' => 'Business information (optional)']),
@@ -64,8 +65,8 @@ final class CrudResources
                 $field('tradie_category_id', 'Trade category', 'select', true, ['reference' => 'categories']),
                 $field('description', 'Description', 'textarea', false, ['max' => 2000]),
                 $field('urgency', 'Urgency', 'select', true, ['choices' => ['flexible' => 'Flexible', 'within_48h' => 'Within 48 hours', 'same_day' => 'Same day', 'emergency' => 'Emergency']]),
-                $field('assigned_tradie_company_id', 'Assigned fundi business', 'select', false, ['reference' => 'tradies']),
-                $field('status', 'Status', 'select', true, ['choices' => ['pending_dispatch' => 'Open', 'in_progress' => 'In progress', 'completed' => 'Completed', 'cancelled' => 'Cancelled']]),
+                $field('assigned_tradie_company_id', 'Assigned fundi', 'select', false, ['reference' => 'tradies']),
+                $field('status', 'Status', 'select', true, ['choices' => ['pending_dispatch' => 'Open', 'offered' => 'Offered', 'assigned' => 'Assigned', 'tradie_on_the_way' => 'On the way', 'awaiting_client_response' => 'Awaiting client', 'rescheduled' => 'Rescheduled', 'confirmed' => 'Confirmed', 'disputed' => 'Disputed', 'in_progress' => 'In progress', 'completed' => 'Completed', 'cancelled' => 'Cancelled']]),
             ]],
             'locations' => ['label' => 'Locations', 'singular' => 'location', 'model' => Suburb::class, 'search' => ['name', 'postcode', 'state'], 'fields' => [
                 $field('name', 'Location name', 'text', true, ['max' => 120]),
@@ -143,8 +144,11 @@ final class CrudResources
         $values = [];
         foreach (self::definition($resource)['fields'] as $field) {
             $value = $resource === 'fundis' && isset($field['section'])
-                ? $record?->tradieCompany?->getAttribute($field['name'])
+                ? ($record?->tradieCompany?->is_independent ? null : $record?->tradieCompany?->getAttribute($field['name']))
                 : $record?->getAttribute($field['name']);
+            if ($resource === 'fundis' && $field['name'] === 'provider_status') {
+                $value = $record?->tradieCompany?->status;
+            }
             $values[$field['name']] = $field['type'] === 'password' ? '' : ($value instanceof \BackedEnum ? $value->value : ($value ?? $field['default'] ?? ''));
         }
 

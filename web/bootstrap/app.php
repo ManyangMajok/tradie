@@ -1,7 +1,9 @@
 <?php
 
+use App\Http\Middleware\EnsureActiveAccount;
 use App\Http\Middleware\EnsureActiveMemberSubscription;
 use App\Http\Middleware\EnsureApprovedTradie;
+use App\Http\Middleware\EnsureFundiProfile;
 use App\Http\Middleware\EnsureRole;
 use App\Http\Middleware\HandleInertiaRequests;
 use Illuminate\Foundation\Application;
@@ -18,10 +20,12 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->web(append: [
             HandleInertiaRequests::class,
+            EnsureActiveAccount::class,
         ]);
 
         $middleware->alias([
             'role' => EnsureRole::class,
+            'fundi.profile' => EnsureFundiProfile::class,
             'member.subscribed' => EnsureActiveMemberSubscription::class,
             'tradie.approved' => EnsureApprovedTradie::class,
         ]);

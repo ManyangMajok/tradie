@@ -11,7 +11,9 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Tradie\DeclineOfferRequest;
 use App\Models\JobOffer;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -39,7 +41,6 @@ class LeadController extends Controller
         // Mark as viewed
         if ($offer->status === OfferStatus::Offered && $offer->viewed_at === null) {
             $offer->update([
-                'status' => OfferStatus::Viewed,
                 'viewed_at' => now(),
             ]);
         }
@@ -49,7 +50,7 @@ class LeadController extends Controller
         return Inertia::render('Tradie/Leads/Show', ['offer' => $offer]);
     }
 
-    public function accept(Request $request, JobOffer $offer, AcceptOfferAction $action): JsonResponse
+    public function accept(Request $request, JobOffer $offer, AcceptOfferAction $action): JsonResponse|RedirectResponse
     {
         $company = $request->user()->tradieCompany;
         abort_if($offer->tradie_company_id !== $company->id, 403);
@@ -57,9 +58,21 @@ class LeadController extends Controller
         try {
             $job = $action->execute($offer, $request->user());
         } catch (OfferExpiredException) {
+            if (! $request->expectsJson()) {
+                throw ValidationException::withMessages(['offer' => 'This offer has expired.']);
+            }
+
             return response()->json(['message' => 'This offer has expired.'], 410);
         } catch (OfferNoLongerAvailableException) {
+            if (! $request->expectsJson()) {
+                throw ValidationException::withMessages(['offer' => 'This offer is no longer available.']);
+            }
+
             return response()->json(['message' => 'This offer is no longer available.'], 409);
+        }
+
+        if (! $request->expectsJson()) {
+            return redirect('/tradie/jobs/'.$job->public_id);
         }
 
         return response()->json([
@@ -68,7 +81,7 @@ class LeadController extends Controller
         ]);
     }
 
-    public function decline(DeclineOfferRequest $request, JobOffer $offer, DeclineOfferAction $action): JsonResponse
+    public function decline(DeclineOfferRequest $request, JobOffer $offer, DeclineOfferAction $action): JsonResponse|RedirectResponse
     {
         $company = $request->user()->tradieCompany;
         abort_if($offer->tradie_company_id !== $company->id, 403);
@@ -76,7 +89,15 @@ class LeadController extends Controller
         try {
             $action->execute($offer, $request->user(), $request->validated('reason'));
         } catch (OfferNoLongerAvailableException) {
+            if (! $request->expectsJson()) {
+                throw ValidationException::withMessages(['offer' => 'Offer no longer available.']);
+            }
+
             return response()->json(['message' => 'Offer no longer available.'], 409);
+        }
+
+        if (! $request->expectsJson()) {
+            return redirect('/tradie')->with('success', 'Offer declined.');
         }
 
         return response()->json(['message' => 'Offer declined.']);

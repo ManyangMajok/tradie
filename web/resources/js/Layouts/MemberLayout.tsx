@@ -8,6 +8,8 @@ import { Logo } from '../Components/ui/Logo';
 const nav = [
     { href: '/dashboard', label: 'Dashboard', icon: Home },
     { href: '/jobs', label: 'My Jobs', icon: Wrench },
+    { href: '/properties', label: 'My Properties', icon: Home },
+    { href: '/settings', label: 'Settings', icon: Wrench },
     { href: '/saved-tradies', label: 'Saved Tradies', icon: Star },
     { href: '/membership', label: 'Membership', icon: CreditCard },
 ];
@@ -28,6 +30,7 @@ export default function MemberLayout({ children }: { children: React.ReactNode }
             </a>
 
             <aside
+                id="main-sidebar"
                 aria-label="Main navigation"
                 className={`fixed inset-y-0 left-0 z-40 w-64 transform bg-white shadow-md transition-transform lg:static lg:translate-x-0 ${
                     mobileOpen ? 'translate-x-0' : '-translate-x-full'

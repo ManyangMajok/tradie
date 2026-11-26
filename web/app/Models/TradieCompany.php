@@ -17,6 +17,7 @@ class TradieCompany extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'is_independent',
         'owner_user_id',
         'business_name',
         'trading_name',
@@ -40,6 +41,7 @@ class TradieCompany extends Model
     protected function casts(): array
     {
         return [
+            'is_independent' => 'boolean',
             'status' => TradieCompanyStatus::class,
             'rating_average' => 'float',
             'rating_count' => 'integer',

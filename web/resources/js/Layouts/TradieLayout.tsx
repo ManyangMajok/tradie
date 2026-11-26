@@ -8,6 +8,7 @@ const nav = [
     { href: '/tradie', label: 'Leads', icon: LayoutDashboard },
     { href: '/tradie/jobs', label: 'My Jobs', icon: Briefcase },
     { href: '/tradie/performance', label: 'Performance', icon: BarChart2 },
+    { href: '/tradie/categories', label: 'Trade Categories', icon: Briefcase },
     { href: '/tradie/service-areas', label: 'Service Areas', icon: MapPin },
     { href: '/tradie/availability', label: 'Availability', icon: Calendar },
     { href: '/tradie/subscription', label: 'Subscription', icon: CreditCard },
@@ -43,7 +44,7 @@ export default function TradieLayout({ children }: { children: React.ReactNode }
                 </div>
                 <nav aria-label="Tradie menu" className="mt-4 px-3">
                     {nav.map(({ href, label, icon: Icon }) => {
-                        const active = currentUrl === href || currentUrl.startsWith(href + '/');
+                        const active = currentUrl === href || (href !== '/tradie' && currentUrl.startsWith(href + '/'));
                         return (
                             <Link
                                 key={href}

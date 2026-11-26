@@ -26,7 +26,7 @@ class AdminJobUnassigned extends Notification
         $category = $job->category->name;
         $suburb = $job->property->suburb->name;
         $urgency = ucwords(str_replace('_', ' ', $job->urgency->value));
-        $adminUrl = url("/admin/jobs/{$job->public_id}");
+        $adminUrl = url("/admin/jobs/{$job->id}");
 
         $offerLines = $job->offers->map(function ($offer) {
             $company = $offer->company->business_name ?? '(unknown)';
@@ -49,7 +49,7 @@ class AdminJobUnassigned extends Notification
             ->line("**Rounds attempted:** {$job->dispatch_round}")
             ->line('**Submitted:** '.$job->submitted_at?->format('d/m/Y H:i'))
             ->line("**Tradies offered (none accepted):**\n{$offerLines}")
-            ->action('Assign manually', $adminUrl)
+            ->action('View job', $adminUrl)
             ->salutation('— TradeFinder System');
     }
 }

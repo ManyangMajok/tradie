@@ -1,4 +1,4 @@
-> **Admin CRUD branch:** Read the root `README.md` and `docs/CRUD.md` first. The owner-requested web-only CRUD scope supersedes original platform/mobile requirements below.
+> **Admin CRUD branch:** Read the root `README.md` and `docs/CRUD.md` first. The owner-requested web-only CRUD scope, with restored client/fundi portals, supersedes original platform/mobile requirements below.
 
 # Demonstration variant — approved 2 October 2026
 

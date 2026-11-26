@@ -26,6 +26,11 @@ class CrudDemoSeeder extends Seeder
             $location = Suburb::where('name', 'Westlands')->firstOrFail();
             $property = Property::firstOrCreate(['member_user_id' => $member->id, 'label' => 'Westlands home'], ['address_line_1' => '10 Demo Road', 'suburb_id' => $location->id, 'property_type' => 'apartment', 'is_primary' => false]);
             $category = TradieCategory::where('slug', 'plumber')->firstOrFail();
+            $company->categories()->firstOrCreate(['tradie_category_id' => $category->id], ['is_active' => true]);
+            $company->serviceAreas()->firstOrCreate(['suburb_id' => $location->id], ['is_active' => true]);
+            foreach (range(0, 6) as $day) {
+                $company->availability()->firstOrCreate(['day_of_week' => $day], ['opens_at' => '00:00', 'closes_at' => '23:59', 'accepts_emergency' => true]);
+            }
             Job::firstOrCreate(['property_id' => $property->id, 'custom_issue' => 'Repair a leaking kitchen tap'], ['member_user_id' => $member->id, 'tradie_category_id' => $category->id, 'description' => 'Example job managed manually by the admin.', 'urgency' => 'flexible', 'status' => 'pending_dispatch', 'assigned_tradie_company_id' => $company->id]);
         });
     }

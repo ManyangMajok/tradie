@@ -47,7 +47,7 @@
         ],
         "dev": [
             "Composer\\Config::disableProcessTimeout",
-            "@php artisan serve --host=127.0.0.1"
+            "npx concurrently --kill-others --names=web,queue,scheduler \"php artisan serve --host=127.0.0.1\" \"php artisan queue:work --sleep=1 --tries=3\" \"php artisan schedule:work\""
         ],
         "test": [
             "@php artisan config:clear --ansi",

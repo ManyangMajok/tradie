@@ -126,12 +126,17 @@ class JobController extends Controller
                 'issueType',
                 'images',
                 'statusLogs' => fn ($q) => $q->orderBy('created_at'),
-                'assignedCompany',
+                'assignedCompany.owner:id,phone',
                 'selectedCompany:id,business_name,rating_average,rating_count',
                 'completionReport',
                 'review',
             ])
             ->firstOrFail();
+
+        if ($job->assignedCompany) {
+            $job->assignedCompany->setAttribute('phone', $job->assignedCompany->owner?->phone);
+            $job->assignedCompany->unsetRelation('owner');
+        }
 
         return Inertia::render('Member/Jobs/Show', [
             'job' => $job,
@@ -140,7 +145,7 @@ class JobController extends Controller
         ]);
     }
 
-    public function availableTradies(Request $request, AvailableTradies $available): JsonResponse
+    public function availableTradies(Request $request, AvailableTradies $available): JsonResponse|RedirectResponse
     {
         $data = $request->validate([
             'property_id' => ['required', 'integer', Rule::exists('properties', 'id')->where('member_user_id', $request->user()->id)->whereNull('deleted_at')],
@@ -175,7 +180,7 @@ class JobController extends Controller
         return Inertia::render('Member/Jobs/Index', ['jobs' => $jobs]);
     }
 
-    public function cancel(Request $request, string $publicId): JsonResponse
+    public function cancel(Request $request, string $publicId): JsonResponse|RedirectResponse
     {
         $request->validate(['reason' => ['nullable', 'string', 'max:500']]);
 
@@ -211,10 +216,14 @@ class JobController extends Controller
             ]);
         });
 
+        if (! $request->expectsJson()) {
+            return redirect('/jobs/'.$job->public_id)->with('success', 'Job cancelled.');
+        }
+
         return response()->json(['job' => $job->fresh()->only(['id', 'public_id', 'status'])]);
     }
 
-    public function review(StoreReviewRequest $request, string $publicId, SubmitReviewAction $action): JsonResponse
+    public function review(StoreReviewRequest $request, string $publicId, SubmitReviewAction $action): JsonResponse|RedirectResponse
     {
         $job = Job::where('public_id', $publicId)
             ->where('member_user_id', $request->user()->id)
@@ -232,6 +241,10 @@ class JobController extends Controller
             User::where('role', UserRole::Admin)->get()->each(
                 fn (User $admin) => $admin->notify(new AdminJobDisputed($job, $review))
             );
+        }
+
+        if (! $request->expectsJson()) {
+            return redirect('/jobs/'.$job->public_id)->with('success', 'Review submitted.');
         }
 
         return response()->json([

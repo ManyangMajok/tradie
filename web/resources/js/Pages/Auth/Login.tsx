@@ -1,5 +1,5 @@
 import React from 'react';
-import { useForm } from '@inertiajs/react';
+import { useForm, Link } from '@inertiajs/react';
 import AuthLayout from '../../Layouts/AuthLayout';
 import { Button } from '../../Components/ui/Button';
 import { Input } from '../../Components/ui/Input';
@@ -19,7 +19,7 @@ export default function Login() {
     }
 
     return (
-        <AuthLayout title="Welcome back" subtitle="Sign in to the TradeFinder admin workspace">
+        <AuthLayout title="Welcome back" subtitle="Sign in to your TradeFinder account">
             <Card>
                 <CardBody>
                     <form onSubmit={submit} className="space-y-4">
@@ -53,6 +53,7 @@ export default function Login() {
                                 />
                                 Remember me
                             </label>
+                            <Link href="/password/forgot" className="text-brand-700 underline">Forgot password?</Link>
 
                         </div>
 

@@ -91,6 +91,9 @@ class CrudController extends Controller
         try {
             DB::transaction(function () use ($resource, $record) {
                 $model = CrudResources::query($resource)->lockForUpdate()->findOrFail($record);
+                if ($resource === 'jobs' && ($model->offers()->exists() || $model->completionReport()->exists() || $model->review()->exists())) {
+                    throw ValidationException::withMessages(['record' => 'This job has client/fundi workflow records and cannot be deleted.']);
+                }
                 if ($resource === 'fundis') {
                     $company = $model->tradieCompany()->lockForUpdate()->first();
                     $company?->forceDelete();

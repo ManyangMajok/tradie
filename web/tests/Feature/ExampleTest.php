@@ -1,5 +1,5 @@
 <?php
 
-it('redirects the home page to the admin workspace', function () {
-    $this->get('/')->assertRedirect('/admin');
+it('redirects guests to login', function () {
+    $this->get('/')->assertRedirect('/login');
 });

@@ -14,8 +14,10 @@ use App\Notifications\MemberJobCompletedPromptReview;
 use App\Notifications\MemberTradieOnTheWay;
 use App\Services\JobStatusTransition;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Validation\ValidationException;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -65,7 +67,7 @@ class JobController extends Controller
         return Inertia::render('Tradie/Jobs/Show', ['job' => $job]);
     }
 
-    public function updateStatus(UpdateJobStatusRequest $request, string $publicId): JsonResponse
+    public function updateStatus(UpdateJobStatusRequest $request, string $publicId): JsonResponse|RedirectResponse
     {
         $company = $request->user()->tradieCompany;
 
@@ -99,11 +101,19 @@ class JobController extends Controller
                 ]);
             });
         } catch (InvalidStatusTransitionException $e) {
+            if (! $request->expectsJson()) {
+                throw ValidationException::withMessages(['job' => $e->getMessage()]);
+            }
+
             return response()->json(['message' => $e->getMessage()], 409);
         }
 
         if ($toStatus === JobStatus::TradieOnTheWay) {
             $job->member->notify(new MemberTradieOnTheWay($job->fresh()));
+        }
+
+        if (! $request->expectsJson()) {
+            return redirect('/tradie/jobs/'.$job->public_id);
         }
 
         return response()->json(['job' => $job->fresh()->only(['id', 'public_id', 'status'])]);
@@ -126,7 +136,7 @@ class JobController extends Controller
         StoreCompletionReportRequest $request,
         string $publicId,
         SubmitCompletionReportAction $action
-    ): JsonResponse {
+    ): JsonResponse|RedirectResponse {
         $company = $request->user()->tradieCompany;
 
         $job = Job::where('public_id', $publicId)
@@ -136,10 +146,18 @@ class JobController extends Controller
         try {
             $report = $action->execute($job, $request->user(), $request->validated());
         } catch (InvalidStatusTransitionException $e) {
+            if (! $request->expectsJson()) {
+                throw ValidationException::withMessages(['job' => $e->getMessage()]);
+            }
+
             return response()->json(['message' => $e->getMessage()], 409);
         }
 
         $job->member->notify(new MemberJobCompletedPromptReview($job->fresh()));
+
+        if (! $request->expectsJson()) {
+            return redirect('/tradie/jobs/'.$job->public_id)->with('success', 'Completion report submitted.');
+        }
 
         return response()->json([
             'report' => $report,

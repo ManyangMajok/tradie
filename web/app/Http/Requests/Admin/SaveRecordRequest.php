@@ -62,7 +62,7 @@ class SaveRecordRequest extends FormRequest
         }
         if ($resource === 'fundis') {
             $existingBusiness = $id ? CrudResources::query('fundis')->findOrFail($id)->tradieCompany : null;
-            $rules['business_name'] = [Rule::requiredIf($existingBusiness !== null || $this->filled('trading_name') || $this->filled('abn') || $this->filled('about_text')), 'nullable', 'string', 'max:200'];
+            $rules['business_name'] = [Rule::requiredIf(($existingBusiness !== null && ! $existingBusiness->is_independent) || $this->filled('trading_name') || $this->filled('abn') || $this->filled('about_text')), 'nullable', 'string', 'max:200'];
         }
         if ($resource === 'tradies') {
             $rules['owner_user_id'][] = Rule::unique('tradie_companies', 'owner_user_id')->whereNull('deleted_at')->ignore($id);

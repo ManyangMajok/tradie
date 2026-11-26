@@ -15,6 +15,7 @@ class AvailableTradies
         $ids = $this->eligibility->get($job)->pluck('id')->unique();
 
         return TradieCompany::query()->whereIn('id', $ids)
+            ->whereHas('owner', fn ($query) => $query->where('status', 'active')->where('role', 'tradie'))
             ->whereHas('serviceAreas', fn ($query) => $query
                 ->where('suburb_id', $job->property->suburb_id)->where('is_active', true))
             ->orderByRaw('rating_average IS NULL')->orderByDesc('rating_average')

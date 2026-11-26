@@ -31,12 +31,12 @@ it('restricts every CRUD operation to active admins', function () {
     $this->actingAs($this->admin)->get('/admin')->assertForbidden();
 });
 
-it('allows only active admin sign in', function () {
+it('allows active role sign in and rejects suspended admins', function () {
     $this->post('/login', ['email' => $this->admin->email, 'password' => 'password'])->assertRedirect('/admin');
     $this->post('/logout')->assertRedirect('/login');
     $member = User::factory()->create(['role' => 'member']);
-    $this->post('/login', ['email' => $member->email, 'password' => 'password'])->assertSessionHasErrors('email');
-    $this->assertGuest();
+    $this->post('/login', ['email' => $member->email, 'password' => 'password'])->assertRedirect('/dashboard');
+    $this->post('/logout');
     $this->admin->update(['status' => 'suspended']);
     $this->post('/login', ['email' => $this->admin->email, 'password' => 'password'])->assertSessionHasErrors('email');
 });

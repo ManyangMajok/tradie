@@ -29,9 +29,16 @@ final class SaveCrudRecord
                 if (! empty($business['business_name'])) {
                     $company = TradieCompany::where('owner_user_id', $record->id)->lockForUpdate()->first();
                     if (! $company) {
-                        $company = new TradieCompany(['owner_user_id' => $record->id]);
+                        $company = new TradieCompany(['owner_user_id' => $record->id, 'status' => 'approved']);
                     }
-                    $company->fill($business)->save();
+                    $company->fill($business + ['is_independent' => false])->save();
+                }
+
+                if (! empty($data['provider_status']) && $record->tradieCompany()->exists()) {
+                    $record->tradieCompany()->update(['status' => $data['provider_status']]);
+                }
+                if ($record->tradieCompany?->is_independent) {
+                    $record->tradieCompany->update(['business_name' => trim($record->first_name.' '.$record->last_name)]);
                 }
 
                 return $record;
@@ -48,6 +55,17 @@ final class SaveCrudRecord
                 throw ValidationException::withMessages(['member_user_id' => 'A property with jobs cannot be transferred to another member.']);
             }
             if ($resource === 'jobs') {
+                if ($id && ($record->offers()->exists() || $record->completionReport()->exists() || $record->review()->exists())) {
+                    foreach (['property_id', 'tradie_category_id', 'assigned_tradie_company_id', 'status'] as $field) {
+                        $current = $record->$field instanceof \BackedEnum ? $record->$field->value : $record->$field;
+                        if ((string) $current !== (string) ($data[$field] ?? '')) {
+                            throw ValidationException::withMessages([$field => 'This job is in a client/fundi workflow. Its assignment and status must be changed through that workflow.']);
+                        }
+                    }
+                    $record->fill(array_intersect_key($data, array_flip(['custom_issue', 'description', 'urgency'])))->save();
+
+                    return $record;
+                }
                 $property = Property::lockForUpdate()->findOrFail($data['property_id']);
                 $data['member_user_id'] = $property->member_user_id;
                 foreach (['in_progress' => 'started_at', 'completed' => 'completed_at', 'cancelled' => 'cancelled_at'] as $status => $column) {

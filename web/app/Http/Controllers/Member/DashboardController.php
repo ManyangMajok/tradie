@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Member;
 
 use App\Enums\SubscriptionStatus;
 use App\Http\Controllers\Controller;
+use App\Models\Job;
 use Illuminate\Http\Request;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -26,7 +27,8 @@ class DashboardController extends Controller
                 'plan_name' => $subscription->plan->name,
                 'end_date' => $subscription->end_date?->toDateString(),
             ] : null,
-            'recentJobs' => [],
+            'recentJobs' => Job::where('member_user_id', $user->id)->with('category')->latest('submitted_at')->limit(5)->get(['id', 'public_id', 'status', 'custom_issue', 'tradie_category_id']),
+            'propertyCount' => $user->properties()->count(),
         ]);
     }
 }

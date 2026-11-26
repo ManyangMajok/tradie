@@ -36,6 +36,7 @@ class HandleInertiaRequests extends Middleware
             'flash' => [
                 'success' => fn () => $request->session()->get('success'),
                 'error' => fn () => $request->session()->get('error'),
+                'setup_url' => fn () => $request->user()?->can('manage-records') ? $request->session()->get('setup_url') : null,
             ],
         ];
     }

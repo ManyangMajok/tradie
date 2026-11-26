@@ -2,9 +2,13 @@
 
 The **tradie-crud** branch of [ManyangMajok/tradie](https://github.com/ManyangMajok/tradie) is a web-only copy using Laravel 13, React 19, Inertia 3, TypeScript 6, Tailwind 4 and MySQL 8.4. No Expo apps, mobile workspaces or external services are required.
 
-Active admins can create, view, search, edit and delete **people, fundis (with optional business details), properties, jobs, locations, trade categories and issue types**. Lists have pagination. Forms validate inputs and relationships. Delete confirmation is required; referenced records cannot be deleted.
+The admin keeps full CRUD for people, fundis (optional business details), properties, jobs, locations, categories and issue types. **Clients and fundis also have their own web accounts and dashboards.** Mobile apps remain excluded.
 
-Jobs are manual records: Open, In progress, Completed or Cancelled. The job's member comes from its property. There is no automated dispatch, billing, checkout, registration, member/fundi portal, mobile API or background scheduler.
+- **Clients:** manage properties and profile/password, find available local fundis ranked by ratings, choose a fundi, track/cancel jobs, submit reviews, save fundis and activate a simulated membership.
+- **Fundis:** manage profile/password, optional business details, trades, service areas and availability; activate a simulated subscription; accept/decline leads, update job progress, submit completion reports and see performance from actual records.
+- **Admins:** retain the combined fundi form, manage records and generate private password setup links. Active workflow records are protected from destructive CRUD changes.
+
+Payments are simulated, emails go to the local log, files stay on local disk, and the queue uses MySQL. No Redis or external integration credentials are required.
 
 ## Clone and run
 
@@ -33,20 +37,43 @@ npm run build
 composer run dev
 ```
 
-Open **http://127.0.0.1:8000**. Keep MySQL and the server terminal running. Stop the web server with Ctrl+C. No Redis, queue worker, Expo, SMS, payment or email account is needed.
+Open **http://127.0.0.1:8000**. Keep MySQL and the server terminal running. Stop the web server with Ctrl+C. The launcher starts Laravel, the MySQL queue worker and the scheduler. Keep all three running so notifications and timed offer expiry work. No Redis, Expo, SMS, payment or email account is needed.
 
-Local demo login: **admin@tradify.dev** / **password**. Only active admins may sign in. Sample members and fundis are managed records, not portal users. Admin accounts cannot be edited or deleted in the CRUD UI. Demo seeding runs only in local/testing environments and preserves changed passwords when repeated.
+## Sign in and give users access
 
-## Try it
+All roles use the same `/login` page and are redirected to their own dashboard. Suspended/inactive accounts cannot sign in or continue using an existing session.
 
-1. Add a member under People.
-2. Open **Fundis → Add fundi** and enter their contact details. Business information is optional: leave that section blank for an independent fundi, or fill it in to save both records together. No portal password is needed.
-3. Add a property linked to the Member and a location.
-4. Add a job for that property, choose a category and optionally assign a business.
-5. Search for the job, view its details and edit its status or description.
-6. Delete the job with confirmation, then delete the property or fundi. Deleting a fundi also removes their optional business when neither is in use. Deleting a referenced person or location shows an explanation instead of breaking relationships.
+| Role | Demo email | Password | Dashboard |
+|---|---|---|---|
+| Admin | admin@tradify.dev | password | /admin |
+| Client | member@tradify.dev | password | /dashboard |
+| Fundi | tradie@tradify.dev | password | /tradie |
 
-Locations, categories and issue types have the same CRUD flow. Create reference records before selecting them in dependent forms. Category/issue slugs use lowercase letters, numbers and hyphens, for example `water-heater`.
+These credentials are local demo fixtures. Reseeding preserves changed passwords.
+
+For a newly added user:
+
+1. Add the client under **People** or add the fundi under **Fundis**. Business details remain optional.
+2. Open their record and click **Create password setup link**.
+3. Share the displayed link privately. It is single-use, expires in 60 minutes, and generating another invalidates the previous link. No email is sent by this button.
+4. The user opens the link, sets their password, then signs in with their email at `/login`.
+
+For another computer/phone, the app must run on a reachable LAN/host address; generate links from that reachable address. A `127.0.0.1` link only works on the computer hosting the app. Do not share an admin session with clients/fundis.
+
+Forgot password sends its reset message to `web/storage/logs/laravel.log`, because this demonstration does not send real emails. Alternatively the admin can generate a new private setup link.
+
+## Try the full workflow
+
+1. Sign in as the fundi. Set **Trade Categories**, **Service Areas** and **Availability**, then activate a **demo subscription**. The seeded fundi already has plumbing, Westlands and daily availability configured. New profiles should configure their own coverage.
+2. Sign in as a client in another browser profile/private window. Activate a demo membership and add a property if needed.
+3. Request a job, view fundis serving that location, compare ratings and choose one. Only the chosen fundi receives the offer.
+4. The fundi opens the lead and accepts or declines. On acceptance, update progress under **My Jobs** and submit the completion report.
+5. The client reviews the completed work. The fundi's rating and performance reflect actual saved records.
+6. The admin can still edit basic records. Jobs with offers, reports or reviews cannot have their assignment/status overwritten or be deleted through generic CRUD.
+
+Independent fundis use their own name as their service profile; business details are not required. The existing database's provider row holds service areas, offers and jobs for both independent and business fundis. They can add business information later without losing their job history.
+
+The old business-record URL remains available for compatibility; the main admin navigation uses the combined **Fundis** workflow. Existing business approval can be changed from **Fundis → Edit → Service profile approval**.
 
 ## Pull updates
 
@@ -84,7 +111,7 @@ php vendor/bin/pint --test
 php artisan test
 ```
 
-Coverage includes admin-only access, CRUD, passwords, relationship/unique-value validation, protected deletion and manual jobs. Original model/database and domain regression checks remain where applicable; tests for removed public workflows are replaced by CRUD coverage.
+Coverage includes role-isolated access, password setup, CRUD, relationship/unique-value validation, protected deletion, independent fundi setup, client selection, lead acceptance, completion, reviews and simulated billing. Original model/database and domain regression checks remain, with restored portal and billing tests.
 
 ## Layout
 
@@ -95,6 +122,4 @@ Coverage includes admin-only access, CRUD, passwords, relationship/unique-value 
 - `web/resources/js/Pages/Crud/`: admin pages.
 - `docs/CRUD.md`: branch behaviour and architecture notes.
 
-Original schema, models and internal domain services remain for compatibility and regression coverage. They are not exposed by the CRUD routes. The retained platform/production docs are historical references; this README and `docs/CRUD.md` are authoritative for this branch.
-
-Fundis can be edited from the same screen, including their business information. An independent fundi can add business details later. Existing business names cannot be blanked accidentally; their details are retained unless the business record is explicitly deleted. The separate business URL remains available for existing records, but the main navigation uses the combined Fundis workflow.
+The original schema and domain services support the restored web portals; the admin uses the explicit CRUD field allowlist. The retained platform/production docs are historical references; this README and `docs/CRUD.md` are authoritative for this branch.

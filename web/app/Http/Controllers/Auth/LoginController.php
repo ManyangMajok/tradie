@@ -23,7 +23,9 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('admin.dashboard'));
+        return redirect()->to(match ($request->user()->role->value) {
+            'admin' => '/admin', 'tradie' => '/tradie', default => '/dashboard'
+        });
     }
 
     public function destroy(Request $request): RedirectResponse

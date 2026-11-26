@@ -12,42 +12,30 @@ class PerformanceController extends Controller
     public function show(Request $request): Response
     {
         $company = $request->user()->tradieCompany;
-
-        $rows = $company->performanceDaily()
-            ->where('date', '>=', now()->subDays(29)->toDateString())
-            ->orderBy('date')
-            ->get();
-
+        $since = now()->subDays(29)->startOfDay();
+        // Derive the demo dashboard directly from real records; no aggregation daemon.
+        $offers = $company->offers()->where('offered_at', '>=', $since)->whereNotIn('status', ['pending', 'superseded'])->get();
+        $reports = $company->completionReports()->where('submitted_at', '>=', $since)->get();
+        $accepted = $offers->filter(fn ($offer) => $offer->status->value === 'accepted');
+        $response = $accepted->whereNotNull('response_time_seconds')->avg('response_time_seconds');
         $totals = [
-            'leads_offered' => $rows->sum('leads_offered'),
-            'leads_accepted' => $rows->sum('leads_accepted'),
-            'leads_declined' => $rows->sum('leads_declined'),
-            'leads_expired' => $rows->sum('leads_expired'),
-            'jobs_completed' => $rows->sum('jobs_completed'),
-            'jobs_disputed' => $rows->sum('jobs_disputed'),
-            'reported_revenue_cents' => $rows->sum('reported_revenue_cents'),
+            'leads_offered' => $offers->count(),
+            'leads_accepted' => $accepted->count(),
+            'leads_declined' => $offers->filter(fn ($offer) => $offer->status->value === 'declined')->count(),
+            'leads_expired' => $offers->filter(fn ($offer) => $offer->status->value === 'expired')->count(),
+            'jobs_completed' => $reports->count(),
+            'jobs_disputed' => $company->assignedJobs()->where('status', 'disputed')->where('updated_at', '>=', $since)->count(),
+            'reported_revenue_cents' => (int) $reports->sum('invoice_total_cents'),
+            'acceptance_rate' => $offers->count() ? round($accepted->count() / $offers->count() * 100, 1) : null,
+            'avg_response_minutes' => $response === null ? null : round($response / 60, 1),
         ];
+        $daily = collect(range(0, 29))->map(function ($day) use ($since, $offers, $reports) {
+            $date = $since->copy()->addDays($day)->toDateString();
+            $dayOffers = $offers->filter(fn ($offer) => $offer->offered_at->toDateString() === $date);
 
-        $offered = $totals['leads_offered'];
-        $totals['acceptance_rate'] = $offered > 0
-            ? round($totals['leads_accepted'] / $offered * 100, 1)
-            : null;
+            return ['date' => $date, 'leads_offered' => $dayOffers->count(), 'leads_accepted' => $dayOffers->filter(fn ($offer) => $offer->status->value === 'accepted')->count(), 'jobs_completed' => $reports->filter(fn ($report) => $report->submitted_at->toDateString() === $date)->count()];
+        });
 
-        $avgResponse = $rows->whereNotNull('avg_response_time_seconds')->avg('avg_response_time_seconds');
-        $totals['avg_response_minutes'] = $avgResponse !== null ? round($avgResponse / 60, 1) : null;
-
-        return Inertia::render('Tradie/Performance', [
-            'stats' => $totals,
-            'rating' => [
-                'average' => $company->rating_average,
-                'count' => $company->rating_count,
-            ],
-            'daily' => $rows->map(fn ($r) => [
-                'date' => $r->date->toDateString(),
-                'leads_offered' => $r->leads_offered,
-                'leads_accepted' => $r->leads_accepted,
-                'jobs_completed' => $r->jobs_completed,
-            ]),
-        ]);
+        return Inertia::render('Tradie/Performance', ['stats' => $totals, 'rating' => ['average' => $company->rating_average, 'count' => $company->rating_count], 'daily' => $daily]);
     }
 }

@@ -1,33 +1,35 @@
-# Web-only admin CRUD branch
+# CRUD branch with client and fundi portals
 
-Owner-approved scope, 26 November 2026: copy the web app into `tradie-crud`, remove mobile apps and simplify to basic admin CRUD. This supersedes original dispatch, registration, subscription and mobile requirements on this branch. The main checkout is preserved.
+Owner-approved scope, 26 November 2026: retain the web-only `tradie-crud` copy and simplified admin CRUD, combine fundi/contact and optional business entry, and restore clients' and fundis' web functionality. This document and the README supersede the earlier admin-only scope. Mobile apps and their APIs remain excluded. Original main checkout stays unchanged.
 
-## Access and records
+## Accounts
 
-Only active admins can authenticate or access records. `/` redirects to `/admin`, which redirects guests to login. Logout is a CSRF-protected POST. Login throttling and session regeneration are retained. Registration and API routes are removed.
+Active admin, member and tradie users share `/login`; successful authentication goes to /admin, /dashboard or /tradie respectively. Every authenticated web request rejects suspended/inactive users, including existing sessions. Logout remains available. Role middleware and record ownership policies protect each portal. There is no public registration: admins add users.
 
-The admin manages people (member/fundi roles), fundi businesses, properties, manual jobs, locations, categories and issue types. Admin records are excluded, preventing self-deletion and privilege escalation. Passwords are hashed, never sent in page props, required on creation and unchanged on blank update.
+Admins can create a Laravel password-broker setup link from a People or Fundis detail page. The token is hashed in the database, single-use and expires after 60 minutes. The raw URL is flashed only to the requesting admin and is never committed or sent externally. A replacement link invalidates the old token. Users choose their own password and then sign in. Forgot-password email is logged locally. Admin-created fundis retain random initial passwords until setup; existing member passwords remain usable. Passwords never appear in page data.
 
-A business must reference a fundi contact; a property must reference a member; a job derives its member from its property. Roles cannot change while properties, businesses or jobs depend on them. Properties with jobs cannot transfer to another member. References are validated server-side; unknown resources/IDs return 404. Only allowlisted fields are writable.
+## Independent fundis and optional businesses
 
-Jobs have four manually editable statuses: Open (stored as pending_dispatch), In progress, Completed and Cancelled. These edits never invoke dispatch/state-transition services, payments, notifications or queues. Current-status timestamps are set on entry and cleared on exit. Selecting a business records a manual assignment. There are no new financial calculations or performance reports. Multi-step writes are transactional.
+Fundis still have one combined contact/business form. Business fields remain optional. On first portal access, a fundi without a provider record gets an independent service profile under their personal name, marked `is_independent`. This uses the existing provider relationships for locations, categories, offers, subscriptions, jobs and ratings without requiring a business name or registration number. The profile is approved for an admin-created independent fundi. Existing provider approval is preserved; admins can manage it from the combined form.
 
-Deletion is permanent after confirmation. Database foreign keys reject removal of referenced parents and return a useful form error. Remove dependent records first. Existing cascades remove job-owned internal rows.
+Independent profiles display blank optional business fields in admin and fundi settings. Adding business information reuses the same profile ID. Fundis can keep operating independently by leaving the business name blank in their settings. No separate business-creation step is required. Suspension of a user also excludes their service profile from client selection.
 
-## Implementation
+## Portal workflows
 
-The React UI keeps the existing orange/navy brand. Shared CRUD pages consume a server-defined field allowlist; this is not an arbitrary table editor. Lists have search/pagination, forms show labels and errors, and a native modal alert dialog confirms deletion. No packages were added.
+Clients manage their own properties and profile/password, select local fundis ranked by ratings, submit and track jobs, cancel eligible jobs, review completed work, save fundis and use simulated membership activation. Fundis configure trades, service areas and opening hours, activate simulated subscriptions, accept/decline offers, progress jobs, submit completion reports and view ratings/performance. Performance totals and charts are derived directly from real offers and completion reports, not placeholder aggregation rows.
 
-The original schema, models, factories and internal domain services remain for compatibility and regression checks. Legacy portal controllers are unreachable; the frontend contains login and CRUD pages. Console scheduling is empty and `composer run dev` starts only Laravel. Mobile apps, native packages, Expo tooling and mobile design references are removed.
+The existing member-choice rules, timing windows, state transitions, money handling and review logic remain. Viewing a lead sets `viewed_at` while retaining the Offered status required by the existing acceptance/expiry actions; opening a lead therefore does not make it unacceptible. Browser/Inertia writes redirect to their resulting page; JSON clients retain JSON responses. Client property modifications are owner-scoped, and properties with jobs cannot be deleted.
 
-Seeding installs Kenyan reference data, one admin, one member, one fundi contact/business, one property and one example job. No subscriptions/payments/reviews are seeded. Repeated seeding preserves passwords and matching records. Use a new `tradie_crud` database. Tests force `tradie_crud_testing`. Environment files, dependencies, uploads, databases and builds remain ignored.
+MySQL-backed queued jobs handle delayed expiry and local notifications. `composer run dev` starts Laravel, the queue worker and scheduler. No Redis or external payment/email/SMS service is introduced. Emails are logs and payments are simulated. Do not set QUEUE_CONNECTION=sync for this workflow because delayed offers require the database queue.
 
-## Checks
+## Admin consistency
 
-Run the verification commands in the root README. Retained domain/model tests still run; endpoint tests for removed public workflows are retired and replaced with admin CRUD coverage. No browser automation is used, following the owner's preference.
+Admin CRUD remains available, with an explicit allowlist and transactional multi-step writes. Admin accounts are excluded from People editing/deletion. A business requires a fundi owner and a property requires a member. Contact roles cannot change while dependent records exist. The combined Fundis delete removes an unused business/contact in a transaction; database references prevent orphaned records.
 
-## Combined fundi workflow — owner update
+Jobs with offers, completion reports or reviews cannot have their relationship/status fields overwritten through generic CRUD, and cannot be deleted there. Basic description/title edits remain possible. This prevents admin forms from silently corrupting the restored portal state machine. The original manual CRUD behaviour remains for standalone records without workflow history.
 
-Fundis are created and edited at `/admin/fundis` with contact information and an optional business section in one form. An independent fundi has no business row. Providing a business name saves a linked business in the same transaction. Other business fields without a name are rejected, and a saved business name cannot be cleared inadvertently. Editing can add business information later. Existing business status is preserved.
+## Setup and tests
 
-Only fundi users appear in this resource; member/admin IDs are rejected. New fundis receive a random unusable-by-default portal password because the branch allows admin sign-in only; the admin does not need to invent a password for a managed contact. Deleting an unused fundi deletes their optional business and contact atomically. If another record references either, the transaction rolls back. People and legacy business URLs remain for compatibility, while the navigation presents Fundis as the combined workflow. Job assignment still references a business; independent contacts can be managed without one.
+Use separate MySQL databases: tradie_crud for the local app and tradie_crud_testing for tests. Run the incremental migration and seeder; never wipe the existing demo database. The new migration adds the independent-profile flag. Seeding creates Kenyan reference data, demo users, membership plans, a property/job and matching configuration for the sample fundi. It preserves changed passwords and existing matching settings. Users explicitly activate simulated plans.
+
+The test suite covers role separation, inactive accounts, private single-use setup links, independent fundis, property ownership, opening/viewing/accepting leads, full selection-to-review flow, performance totals, saved fundis, admin guards and the retained domain regressions. Build, TypeScript, lint and PHP formatting checks are required. HTTP verification is used without browser automation, per the owner's preference.
