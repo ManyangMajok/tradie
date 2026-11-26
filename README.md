@@ -129,12 +129,12 @@ For approximate nearest-area suggestions, add paired latitude/longitude values u
 
 ## OpenStreetMap pins
 
-Leaflet displays an optional OpenStreetMap map, loaded only after clicking Open map or Show map. No API key or OSM account is needed for the default modest-use demo. Internet is needed for map tiles; numeric coordinate entry and the normal fundi list remain available without them.
+Leaflet displays OpenStreetMap automatically when fundi search results appear. Pin-editing forms use Open map. No API key or OSM account is needed for the default modest-use demo. Internet is needed for map tiles; numeric coordinate entry and the normal fundi list remain available without them.
 
 - Admin: Locations → Add/Edit → Open map to pin an area centre.
 - Client: Properties → Add/Edit → Property pin. Click to place/move it, then save the form.
 - Fundi: Settings → Public base location. This pin is shown to clients in search; choose a location you are comfortable publishing. It does not change your service-area coverage.
-- Client search: Show map to see saved bases or labelled area centres. Select a fundi pin or its list entry. Property pins are not shown to other clients.
+- Client search: the map opens automatically with saved bases or labelled area centres. Select a fundi pin or its list entry. Property pins are not shown to other clients.
 
 Local coverage remains first. Within local results, known property-to-base straight-line distances come first, then rating; entries without a distance remain listed. Other-area suggestions appear only when no local fundi is eligible and still require travel confirmation. Area-centre estimates are clearly distinguished from saved-base estimates. This is not live GPS, driving routes, or travel-time estimation. No coordinates are fabricated for existing accounts.
 
