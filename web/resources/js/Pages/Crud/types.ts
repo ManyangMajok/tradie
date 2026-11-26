@@ -8,4 +8,4 @@ export function display(field: Field, value: Value): string {
     return field.options?.find(option => String(option.value) === String(value))?.label ?? String(value);
 }
 export const linkClass = 'font-medium text-brand-700 underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand-600';
-export const buttonClass = 'inline-flex items-center justify-center rounded-lg bg-brand-600 px-4 py-2 font-medium text-white hover:bg-brand-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 disabled:opacity-50';
+export const buttonClass = 'inline-flex items-center justify-center rounded-full bg-gray-900 px-4 py-2 font-medium text-white hover:bg-gray-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-brand-600 disabled:opacity-50';

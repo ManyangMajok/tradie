@@ -33,3 +33,7 @@ Jobs with offers, completion reports or reviews cannot have their relationship/s
 Use separate MySQL databases: tradie_crud for the local app and tradie_crud_testing for tests. Run the incremental migration and seeder; never wipe the existing demo database. The new migration adds the independent-profile flag. Seeding creates Kenyan reference data, demo users, membership plans, a property/job and matching configuration for the sample fundi. It preserves changed passwords and existing matching settings. Users explicitly activate simulated plans.
 
 The test suite covers role separation, inactive accounts, private single-use setup links, independent fundis, property ownership, opening/viewing/accepting leads, full selection-to-review flow, performance totals, saved fundis, admin guards and the retained domain regressions. Build, TypeScript, lint and PHP formatting checks are required. HTTP verification is used without browser automation, per the owner's preference.
+
+## UI direction
+
+The owner-provided dashboard reference informs the shared admin, client and fundi workspaces: a soft grey canvas, rounded white cards, compact icon navigation, dark pill actions and warm orange accents. Navigation stays labelled on small screens and icon links expose accessible names and keyboard focus. Sign-in and overview pages use the same visual system. Overview counts come from existing records; no synthetic financial charts or activity are introduced. Routes, validation and job rules are unchanged by this visual refresh.

@@ -9,7 +9,7 @@ export default function Form({resource,singular,fields,navigation,record,recordI
     const controlClass='w-full rounded-lg border border-gray-300 bg-white px-3 py-2 focus-visible:outline-2 focus-visible:outline-brand-600';
     return <Layout navigation={navigation}>
         <Head title={title} /><Link href={`/admin/${resource}`} className={linkClass}>← Back to list</Link><h1 className="mt-4 text-balance text-3xl font-semibold">{title}</h1>
-        <form className="mt-6 max-w-3xl space-y-5 rounded-xl border border-gray-200 bg-white p-5 sm:p-6" aria-busy={processing} onSubmit={event=>{event.preventDefault();if (recordId) put(`/admin/${resource}/${recordId}`); else post(`/admin/${resource}`);}}>
+        <form className="mt-6 max-w-3xl space-y-5 rounded-3xl border border-gray-100 bg-white p-5 sm:p-6" aria-busy={processing} onSubmit={event=>{event.preventDefault();if (recordId) put(`/admin/${resource}/${recordId}`); else post(`/admin/${resource}`);}}>
             {Object.keys(errors).length>0 && <div role="alert" className="rounded-lg bg-red-50 p-3 text-red-800">Please correct the errors below.{errors.record && <p>{errors.record}</p>}</div>}
             {fields.map((field,index)=>{
                 const required=field.required || (field.type==='password' && !recordId);

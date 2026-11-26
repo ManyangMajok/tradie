@@ -1,71 +1,20 @@
 import React from 'react';
 import MemberLayout from '../../Layouts/MemberLayout';
-import { Link } from '@inertiajs/react';
+import { Head, Link } from '@inertiajs/react';
 import { useAuth } from '../../Hooks/useAuth';
-import { Card, CardBody } from '../../Components/ui/Card';
-import { PlusCircle, Wrench } from 'lucide-react';
-
-export default function Dashboard({recentJobs,propertyCount}:{recentJobs:{id:number;public_id:string;status:string;custom_issue:string|null;category:{name:string}}[];propertyCount:number}) {
+import { ArrowUpRight, Plus, MapPin, House, Wrench, Star } from 'lucide-react';
+interface Props { recentJobs: { id: number; public_id: string; status: string; custom_issue: string | null; category: { name: string } }[]; propertyCount: number }
+export default function Dashboard({ recentJobs, propertyCount }: Props) {
     const { user } = useAuth();
-
-    return (
-        <div>
-            <h1 className="text-2xl font-bold text-gray-900">
-                Welcome back, {user?.first_name}
-            </h1>
-            <p className="mt-1 text-sm text-gray-500">
-                What do you need help with today?
-            </p>
-
-            {propertyCount === 0 && <p className="mt-4 rounded-lg bg-brand-50 p-4 text-brand-800"><Link href="/properties/create" className="font-medium underline">Add your first property</Link> to find fundis serving your location.</p>}
-            <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                <Card>
-                    <CardBody>
-                        <div className="flex items-start gap-4">
-                            <div className="rounded-lg bg-brand-50 p-3">
-                                <PlusCircle className="h-6 w-6 text-brand-500" />
-                            </div>
-                            <div className="flex-1">
-                                <h2 className="font-semibold text-gray-900">Book a tradie</h2>
-                                <p className="mt-1 text-sm text-gray-500">
-                                    No call-out fee. A tradie accepts or you pay nothing.
-                                </p>
-                                <Link
-                                    href="/jobs/new"
-                                    className="mt-4 inline-flex items-center justify-center gap-2 rounded-lg bg-brand-500 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-brand-600"
-                                >
-                                    Get a tradie
-                                </Link>
-                            </div>
-                        </div>
-                    </CardBody>
-                </Card>
-
-                <Card>
-                    <CardBody>
-                        <div className="flex items-start gap-4">
-                            <div className="rounded-lg bg-gray-100 p-3">
-                                <Wrench className="h-6 w-6 text-gray-500" />
-                            </div>
-                            <div className="flex-1">
-                                <h2 className="font-semibold text-gray-900">Your jobs</h2>
-                                <p className="mt-1 text-sm text-gray-500">
-                                    Track the status of open and past jobs.
-                                </p>
-                                <Link
-                                    href="/jobs"
-                                    className="mt-4 inline-flex items-center justify-center gap-2 rounded-lg border border-gray-300 bg-white px-3 py-1.5 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50"
-                                >
-                                    View jobs
-                                </Link>
-                            </div>
-                        </div>
-                    </CardBody>
-                </Card>
-            </div>
-            <section className="mt-6 rounded-xl border border-gray-200 bg-white p-5"><h2 className="text-lg font-semibold">Recent jobs</h2>{recentJobs.length ? <ul className="mt-3 divide-y divide-gray-100">{recentJobs.map(job=><li key={job.id} className="py-3"><Link href={`/jobs/${job.public_id}`} className="font-medium text-brand-700 underline">{job.custom_issue || job.category.name}</Link><span className="ml-3 text-sm text-gray-600">{job.status.replace(/_/g,' ')}</span></li>)}</ul> : <p className="mt-2 text-gray-600">No jobs yet.</p>}</section>
+    return <div>
+        <Head title="Your overview" />
+        <div className="mb-7 flex flex-wrap items-end justify-between gap-4"><div><p className="mb-2 text-sm text-gray-500">A little care goes a long way</p><h1 className="text-balance text-3xl font-semibold sm:text-4xl">Welcome back, {user?.first_name}.</h1><p className="mt-3 text-pretty text-gray-500">Your home, your jobs, your trusted local fundis.</p></div><Link href="/jobs/new" className="action-dark"><Plus className="size-4" aria-hidden="true" /> Request a fundi</Link></div>
+        <div className="grid gap-4 lg:grid-cols-3">
+            <section className="rounded-3xl bg-accent-500 p-7 text-gray-950"><span className="inline-flex rounded-full bg-white/30 p-3"><Wrench className="size-6" aria-hidden="true" /></span><h2 className="mt-8 text-balance text-3xl font-semibold">A helping hand,<br />close to home.</h2><p className="mt-4 text-pretty leading-6">Find available fundis in your area, compare their ratings and choose who works with you.</p><Link href={propertyCount ? '/jobs/new' : '/properties/create'} className="action-dark mt-7">{propertyCount ? 'Find a local fundi' : 'Add your first property'} <ArrowUpRight className="size-4" aria-hidden="true" /></Link></section>
+            <section className="rounded-3xl bg-white p-6"><div className="flex items-center justify-between"><h2 className="text-sm font-medium text-gray-500">Your properties</h2><House className="size-5 text-gray-500" aria-hidden="true" /></div><p className="mt-7 text-5xl font-medium tabular-nums">{propertyCount}</p><p className="mt-4 text-pretty text-sm leading-6 text-gray-500">{propertyCount ? 'Keep addresses up to date so you can find the right local help.' : 'Add an address to see fundis who serve your location.'}</p><Link href="/properties" className="action-light mt-6">Manage properties <ArrowUpRight className="size-4" aria-hidden="true" /></Link><div className="mt-6 flex items-center gap-2 rounded-2xl bg-gray-50 p-4 text-sm text-gray-600"><MapPin className="size-4 shrink-0" aria-hidden="true" /> Matched to your location</div></section>
+            <section className="rounded-3xl bg-white p-6"><h2 className="text-balance text-lg font-semibold">Make yourself at home</h2><p className="mt-2 text-pretty text-sm text-gray-500">Everything you need, within reach.</p><div className="mt-6 space-y-3">{[{ href: '/jobs', label: 'Track your jobs', detail: 'Follow each step of the work', icon: Wrench }, { href: '/saved-tradies', label: 'Your saved fundis', detail: 'Keep good people close', icon: Star }, { href: '/membership', label: 'Your membership', detail: 'View your plan and benefits', icon: House }].map(({ href, label, detail, icon: Icon }) => <Link key={href} href={href} className="flex items-center gap-3 rounded-2xl bg-gray-50 p-4 hover:bg-gray-100"><Icon className="size-5 shrink-0 text-gray-600" aria-hidden="true" /><span className="min-w-0 flex-1"><span className="block text-sm font-medium">{label}</span><span className="mt-1 block text-xs text-gray-500">{detail}</span></span><ArrowUpRight className="size-4 shrink-0" aria-hidden="true" /></Link>)}</div></section>
         </div>
-    );
+        <section className="mt-5 rounded-3xl bg-white p-5 sm:p-7"><div className="flex items-center justify-between gap-4"><h2 className="text-balance text-lg font-semibold">Recent jobs</h2><Link href="/jobs" className="action-light">View all <ArrowUpRight className="size-4" aria-hidden="true" /></Link></div>{recentJobs.length ? <div className="mt-5 overflow-x-auto rounded-2xl border border-gray-100"><table className="w-full text-left text-sm"><thead className="bg-gray-50 text-gray-500"><tr><th scope="col" className="px-5 py-4 font-medium">Job</th><th scope="col" className="px-5 py-4 font-medium">Trade</th><th scope="col" className="px-5 py-4 font-medium">Status</th></tr></thead><tbody className="divide-y divide-gray-100">{recentJobs.map(job => <tr key={job.id} className="hover:bg-gray-50"><th scope="row" className="px-5 py-4 font-medium"><Link href={`/jobs/${job.public_id}`} className="underline-offset-4 hover:underline">{job.custom_issue || job.category.name}</Link></th><td className="px-5 py-4 text-gray-500">{job.category.name}</td><td className="px-5 py-4"><span className="inline-flex whitespace-nowrap rounded-full bg-gray-100 px-3 py-1.5 text-xs capitalize text-gray-700">{job.status.replace(/_/g, ' ')}</span></td></tr>)}</tbody></table></div> : <div className="mt-5 rounded-2xl bg-gray-50 px-6 py-10 text-center"><Wrench className="mx-auto size-7 text-gray-500" aria-hidden="true" /><h3 className="mt-3 font-medium">Your next project starts here</h3><p className="mt-2 text-sm text-gray-500">Once you request a fundi, your jobs will appear here.</p><Link href="/jobs/new" className="mt-4 inline-block text-sm font-medium text-brand-700 underline">Request your first job</Link></div>}</section>
+    </div>;
 }
-
 Dashboard.layout = (page: React.ReactNode) => <MemberLayout>{page}</MemberLayout>;

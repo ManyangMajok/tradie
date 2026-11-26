@@ -26,3 +26,43 @@
     --color-navy-800: #0F172A;
     --color-navy-900: #020617;
 }
+
+/* Shared workspace palette, inspired by the owner's dashboard reference. */
+@theme {
+    --color-brand-50: #fff4ee;
+    --color-brand-100: #ffe6d8;
+    --color-brand-500: #c2410c;
+    --color-accent-500: #f36b45;
+    --color-brand-600: #d74522;
+    --color-brand-700: #ae361c;
+    --color-brand-800: #852c1a;
+    --color-gray-50: #f5f5f3;
+    --color-gray-100: #eeefeb;
+    --color-gray-200: #dedfd9;
+    --color-gray-500: #65675f;
+    --color-gray-600: #54564f;
+    --color-gray-700: #42443d;
+    --color-gray-900: #24261f;
+    --color-gray-950: #191b16;
+}
+@layer base {
+    body { background: #e9eae7; }
+    h1, h2, h3 { text-wrap: balance; }
+    p { text-wrap: pretty; }
+    a:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible, summary:focus-visible { outline: 2px solid var(--color-brand-700); outline-offset: 4px; }
+}
+@layer components {
+    .workspace { background: #e9eae7; }
+    .workspace-frame { background: #f6f7f4; }
+    .workspace-tab { @apply inline-flex min-h-10 items-center justify-center rounded-full px-4 py-2 text-sm font-medium text-gray-600 hover:bg-gray-100; }
+    .workspace-tab[data-active="true"] { @apply bg-gray-900 text-white; }
+    .workspace-rail-link { @apply relative flex size-11 items-center justify-center rounded-full text-gray-500 hover:bg-gray-100; }
+    .workspace-rail-link[data-active="true"] { @apply bg-gray-900 text-white; }
+    .rail-label { @apply pointer-events-none absolute left-full z-20 ml-3 hidden whitespace-nowrap rounded-lg bg-gray-900 px-3 py-2 text-xs text-white shadow-sm; }
+    .workspace-rail-link:hover .rail-label, .workspace-rail-link:focus-visible .rail-label { display: block; }
+    .action-dark { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gray-900 px-5 py-3 text-sm font-medium text-white hover:bg-gray-700; }
+    .action-light { @apply inline-flex min-h-11 items-center justify-center gap-2 rounded-full bg-gray-100 px-5 py-3 text-sm font-medium text-gray-700 hover:bg-gray-200; }
+    .metric-tile { @apply rounded-2xl bg-gray-50 p-5 text-gray-700 hover:bg-gray-100; }
+    .metric-tile[data-featured="true"] { @apply bg-accent-500 text-gray-950; }
+    .skip-link { @apply sr-only focus:not-sr-only focus:fixed focus:left-5 focus:top-5 focus:z-50 focus:rounded-full focus:bg-white focus:px-5 focus:py-3; }
+}

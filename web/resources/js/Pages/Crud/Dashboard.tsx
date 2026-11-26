@@ -1,22 +1,22 @@
 import React from 'react';
 import { Head, Link } from '@inertiajs/react';
+import { ArrowUpRight, Plus, Users, Wrench, House, Briefcase } from 'lucide-react';
 import Layout from './Layout';
-import { NavItem, linkClass } from './types';
-
-export default function Dashboard({ navigation, counts }: {navigation: NavItem[]; counts: Record<string, number>}) {
+import { NavItem } from './types';
+import { useAuth } from '../../Hooks/useAuth';
+const metrics = [{ key: 'fundis', label: 'Fundis', icon: Wrench }, { key: 'people', label: 'People', icon: Users }, { key: 'properties', label: 'Properties', icon: House }, { key: 'jobs', label: 'Jobs', icon: Briefcase }];
+export default function Dashboard({ navigation, counts }: { navigation: NavItem[]; counts: Record<string, number> }) {
+    const { user } = useAuth();
     return <Layout navigation={navigation}>
         <Head title="Admin overview" />
-        <h1 className="text-balance text-3xl font-semibold">Admin overview</h1>
-        <p className="mt-2 text-pretty text-gray-600">Manage your members, fundi businesses and service records.</p>
-        <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {navigation.map(item => <Link key={item.key} href={'/admin/'+item.key} className="rounded-xl border border-gray-200 bg-white p-5 hover:border-brand-500 focus-visible:outline-2 focus-visible:outline-brand-600">
-                <h2 className="text-balance font-medium text-gray-600">{item.label}</h2><p className="mt-3 text-3xl font-semibold tabular-nums">{counts[item.key]}</p><p className="mt-4 text-sm font-medium text-brand-700">View records →</p>
-            </Link>)}
+        <div className="mb-7 flex flex-wrap items-end justify-between gap-4"><div><p className="mb-2 text-sm text-gray-500">Your network at a glance</p><h1 className="text-balance text-3xl font-semibold sm:text-4xl">Welcome back, {user?.first_name}.</h1><p className="mt-3 text-pretty text-gray-500">Keep your people, properties and service requests in one place.</p></div><Link href="/admin/fundis/create" className="action-dark"><Plus className="size-4" aria-hidden="true" /> Add a fundi</Link></div>
+        <div className="grid gap-4 xl:grid-cols-3">
+            <section className="rounded-3xl bg-white p-6 sm:p-7"><div className="flex items-center justify-between"><span className="text-sm text-gray-500">People & businesses</span><span className="rounded-full bg-gray-100 p-2"><Users className="size-4" aria-hidden="true" /></span></div><h2 className="mt-6 text-balance text-2xl font-semibold">A better connection starts here.</h2><p className="mt-3 text-pretty text-sm leading-6 text-gray-500">Add a client or welcome a fundi to your network. Independent fundis can join with just their personal details.</p><div className="mt-7 flex flex-wrap gap-2"><Link href="/admin/people/create" className="action-dark">Add a client <Plus className="size-4" aria-hidden="true" /></Link><Link href="/admin/fundis" className="action-light">View fundis</Link></div><div className="mt-6 rounded-2xl bg-gray-50 p-4"><p className="text-sm font-medium">Make their first sign-in simple</p><p className="mt-1 text-pretty text-sm leading-6 text-gray-500">Open their record to create a private password setup link.</p></div></section>
+            <section aria-label="Record totals" className="grid grid-cols-2 gap-3 rounded-3xl bg-white p-3">
+                {metrics.map(({ key, label, icon: Icon }, index) => <Link key={key} href={'/admin/' + key} data-featured={index === 0} className="metric-tile"><div className="flex items-center justify-between gap-2 text-sm"><span>{label}</span><Icon className="size-4 shrink-0" aria-hidden="true" /></div><p className="mt-8 text-4xl font-medium tabular-nums">{(counts[key] ?? 0).toLocaleString()}</p><p className="mt-4 flex items-center gap-1 text-xs">View records <ArrowUpRight className="size-3" aria-hidden="true" /></p></Link>)}
+            </section>
+            <section className="rounded-3xl bg-white p-6"><h2 className="text-balance text-lg font-semibold">Service coverage</h2><p className="mt-1 text-pretty text-sm text-gray-500">The foundations of a local match.</p><dl className="mt-6 space-y-3">{[{ key: 'locations', label: 'Locations' }, { key: 'categories', label: 'Trade categories' }, { key: 'issue-types', label: 'Issue types' }].map(item => <div key={item.key} className="flex items-center justify-between gap-4 rounded-2xl bg-gray-50 px-4 py-4"><dt className="text-sm text-gray-600">{item.label}</dt><dd className="text-2xl font-medium tabular-nums">{counts[item.key] ?? 0}</dd></div>)}</dl><Link href="/admin/locations" className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-brand-700">Manage locations <ArrowUpRight className="size-4" aria-hidden="true" /></Link></section>
         </div>
-        <section className="mt-6 rounded-xl border border-gray-200 bg-white p-5">
-            <h2 className="text-balance text-lg font-semibold">Getting started</h2>
-            <p className="mt-2 text-pretty text-gray-600">Add members under People and fundis under Fundis. Add optional business details in the same fundi form, then manage properties and jobs.</p>
-            <Link href="/admin/people/create" className={'mt-3 inline-block '+linkClass}>Add a person</Link>
-        </section>
+        <section className="mt-5 rounded-3xl bg-white p-5 sm:p-7"><div className="mb-5"><h2 className="text-balance text-lg font-semibold">Your workspace</h2><p className="mt-1 text-sm text-gray-500">Browse and manage your records.</p></div><div className="overflow-x-auto rounded-2xl border border-gray-100"><table className="w-full text-left text-sm"><thead className="bg-gray-50 text-gray-500"><tr><th scope="col" className="px-5 py-4 font-medium">Collection</th><th scope="col" className="px-5 py-4 font-medium">Records</th><th scope="col" className="px-5 py-4 text-right font-medium">Manage</th></tr></thead><tbody className="divide-y divide-gray-100">{navigation.map(item => <tr key={item.key} className="hover:bg-gray-50"><th scope="row" className="px-5 py-4 font-medium">{item.label}</th><td className="px-5 py-4 tabular-nums">{counts[item.key] ?? 0}</td><td className="px-5 py-4 text-right"><Link href={'/admin/' + item.key} aria-label={`Open ${item.label}`} className="inline-flex items-center gap-2 rounded-full px-3 py-2 text-gray-600 hover:bg-gray-100">Open <ArrowUpRight className="size-4" aria-hidden="true" /></Link></td></tr>)}</tbody></table></div></section>
     </Layout>;
 }

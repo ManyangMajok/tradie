@@ -21,8 +21,8 @@ export function Logo({ className = '', showTagline = false, size = 'md' }: LogoP
                 <Wrench className="h-4 w-4 text-white" aria-hidden="true" />
             </span>
             <span className="flex flex-col leading-tight">
-                <span className={`font-extrabold tracking-tight text-navy-700 ${s.text}`}>
-                    Trade<span className="text-brand-500">Finder</span>
+                <span className={`font-semibold text-gray-900 ${s.text}`}>
+                    Trade<span className="text-gray-900">Finder</span>
                 </span>
                 {showTagline && (
                     <span className={`text-gray-400 ${s.tagline}`}>Find trusted local fundis near you</span>
