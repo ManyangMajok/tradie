@@ -30,6 +30,17 @@ final class CrudResources
                 $field('status', 'Status', 'select', true, ['choices' => ['active' => 'Active', 'suspended' => 'Suspended']]),
                 $field('password', 'Password', 'password', false, ['max' => 128, 'help' => 'Required for a new person (at least 8 characters). Leave blank when editing to keep the password.']),
             ]],
+            'fundis' => ['label' => 'Fundis', 'singular' => 'fundi', 'model' => User::class, 'search' => ['first_name', 'last_name', 'email', 'phone'], 'fields' => [
+                $field('first_name', 'First name', 'text', true, ['max' => 100]),
+                $field('last_name', 'Last name', 'text', true, ['max' => 100]),
+                $field('email', 'Email', 'email', true, ['max' => 255]),
+                $field('phone', 'Phone', 'tel', true, ['max' => 32]),
+                $field('status', 'Fundi status', 'select', true, ['choices' => ['active' => 'Active', 'suspended' => 'Suspended'], 'default' => 'active']),
+                $field('business_name', 'Business name', 'text', false, ['max' => 200, 'section' => 'Business information (optional)', 'help' => 'Leave all business fields blank for an independent fundi. Add a business name to save business information.']),
+                $field('trading_name', 'Trading name', 'text', false, ['max' => 200, 'section' => 'Business information (optional)']),
+                $field('abn', 'Business registration reference', 'text', false, ['max' => 20, 'section' => 'Business information (optional)']),
+                $field('about_text', 'About the business', 'textarea', false, ['max' => 2000, 'section' => 'Business information (optional)']),
+            ]],
             'tradies' => ['label' => 'Fundi businesses', 'singular' => 'fundi business', 'model' => TradieCompany::class, 'search' => ['business_name', 'trading_name'], 'fields' => [
                 $field('business_name', 'Business name', 'text', true, ['max' => 200]),
                 $field('owner_user_id', 'Fundi contact', 'select', true, ['reference' => 'fundis', 'help' => 'Create a person with the Fundi role first. Each contact can own one business.']),
@@ -85,12 +96,16 @@ final class CrudResources
     {
         $query = self::definition($resource)['model']::query();
 
+        if ($resource === 'fundis') {
+            return $query->where('role', 'tradie')->with('tradieCompany');
+        }
+
         return $resource === 'people' ? $query->whereIn('role', ['member', 'tradie']) : $query;
     }
 
     public static function navigation(): array
     {
-        return collect(self::definitions())->map(fn ($definition, $key) => ['key' => $key, 'label' => $definition['label']])->values()->all();
+        return collect(self::definitions())->except('tradies')->map(fn ($definition, $key) => ['key' => $key, 'label' => $definition['label']])->values()->all();
     }
 
     public static function fields(string $resource): array
@@ -127,7 +142,9 @@ final class CrudResources
     {
         $values = [];
         foreach (self::definition($resource)['fields'] as $field) {
-            $value = $record?->getAttribute($field['name']);
+            $value = $resource === 'fundis' && isset($field['section'])
+                ? $record?->tradieCompany?->getAttribute($field['name'])
+                : $record?->getAttribute($field['name']);
             $values[$field['name']] = $field['type'] === 'password' ? '' : ($value instanceof \BackedEnum ? $value->value : ($value ?? $field['default'] ?? ''));
         }
 

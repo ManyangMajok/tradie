@@ -52,11 +52,17 @@ class SaveRecordRequest extends FormRequest
             }
             $rules[$name] = $rule;
         }
-        if ($resource === 'people') {
+        if (in_array($resource, ['people', 'fundis'])) {
             foreach (['email', 'phone'] as $field) {
                 $rules[$field][] = Rule::unique('users', $field)->whereNull('deleted_at')->ignore($id);
             }
-            $rules['password'] = [$id ? 'nullable' : 'required', 'string', 'min:8', 'max:128'];
+            if ($resource === 'people') {
+                $rules['password'] = [$id ? 'nullable' : 'required', 'string', 'min:8', 'max:128'];
+            }
+        }
+        if ($resource === 'fundis') {
+            $existingBusiness = $id ? CrudResources::query('fundis')->findOrFail($id)->tradieCompany : null;
+            $rules['business_name'] = [Rule::requiredIf($existingBusiness !== null || $this->filled('trading_name') || $this->filled('abn') || $this->filled('about_text')), 'nullable', 'string', 'max:200'];
         }
         if ($resource === 'tradies') {
             $rules['owner_user_id'][] = Rule::unique('tradie_companies', 'owner_user_id')->whereNull('deleted_at')->ignore($id);

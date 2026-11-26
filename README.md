@@ -2,7 +2,7 @@
 
 The **tradie-crud** branch of [ManyangMajok/tradie](https://github.com/ManyangMajok/tradie) is a web-only copy using Laravel 13, React 19, Inertia 3, TypeScript 6, Tailwind 4 and MySQL 8.4. No Expo apps, mobile workspaces or external services are required.
 
-Active admins can create, view, search, edit and delete **people (members and fundi contacts), fundi businesses, properties, jobs, locations, trade categories and issue types**. Lists have pagination. Forms validate inputs and relationships. Delete confirmation is required; referenced records cannot be deleted.
+Active admins can create, view, search, edit and delete **people, fundis (with optional business details), properties, jobs, locations, trade categories and issue types**. Lists have pagination. Forms validate inputs and relationships. Delete confirmation is required; referenced records cannot be deleted.
 
 Jobs are manual records: Open, In progress, Completed or Cancelled. The job's member comes from its property. There is no automated dispatch, billing, checkout, registration, member/fundi portal, mobile API or background scheduler.
 
@@ -39,12 +39,12 @@ Local demo login: **admin@tradify.dev** / **password**. Only active admins may s
 
 ## Try it
 
-1. Add a person with role Member and another with role Fundi.
-2. Add a fundi business linked to the Fundi contact (one business per contact).
+1. Add a member under People.
+2. Open **Fundis → Add fundi** and enter their contact details. Business information is optional: leave that section blank for an independent fundi, or fill it in to save both records together. No portal password is needed.
 3. Add a property linked to the Member and a location.
 4. Add a job for that property, choose a category and optionally assign a business.
 5. Search for the job, view its details and edit its status or description.
-6. Delete the job with confirmation, then delete the property or business. Deleting a referenced person or location shows an explanation instead of breaking relationships.
+6. Delete the job with confirmation, then delete the property or fundi. Deleting a fundi also removes their optional business when neither is in use. Deleting a referenced person or location shows an explanation instead of breaking relationships.
 
 Locations, categories and issue types have the same CRUD flow. Create reference records before selecting them in dependent forms. Category/issue slugs use lowercase letters, numbers and hyphens, for example `water-heater`.
 
@@ -96,3 +96,5 @@ Coverage includes admin-only access, CRUD, passwords, relationship/unique-value 
 - `docs/CRUD.md`: branch behaviour and architecture notes.
 
 Original schema, models and internal domain services remain for compatibility and regression coverage. They are not exposed by the CRUD routes. The retained platform/production docs are historical references; this README and `docs/CRUD.md` are authoritative for this branch.
+
+Fundis can be edited from the same screen, including their business information. An independent fundi can add business details later. Existing business names cannot be blanked accidentally; their details are retained unless the business record is explicitly deleted. The separate business URL remains available for existing records, but the main navigation uses the combined Fundis workflow.

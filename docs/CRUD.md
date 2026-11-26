@@ -25,3 +25,9 @@ Seeding installs Kenyan reference data, one admin, one member, one fundi contact
 ## Checks
 
 Run the verification commands in the root README. Retained domain/model tests still run; endpoint tests for removed public workflows are retired and replaced with admin CRUD coverage. No browser automation is used, following the owner's preference.
+
+## Combined fundi workflow — owner update
+
+Fundis are created and edited at `/admin/fundis` with contact information and an optional business section in one form. An independent fundi has no business row. Providing a business name saves a linked business in the same transaction. Other business fields without a name are rejected, and a saved business name cannot be cleared inadvertently. Editing can add business information later. Existing business status is preserved.
+
+Only fundi users appear in this resource; member/admin IDs are rejected. New fundis receive a random unusable-by-default portal password because the branch allows admin sign-in only; the admin does not need to invent a password for a managed contact. Deleting an unused fundi deletes their optional business and contact atomically. If another record references either, the transaction rolls back. People and legacy business URLs remain for compatibility, while the navigation presents Fundis as the combined workflow. Job assignment still references a business; independent contacts can be managed without one.

@@ -15,7 +15,7 @@ export default function Dashboard({ navigation, counts }: {navigation: NavItem[]
         </div>
         <section className="mt-6 rounded-xl border border-gray-200 bg-white p-5">
             <h2 className="text-balance text-lg font-semibold">Getting started</h2>
-            <p className="mt-2 text-pretty text-gray-600">Add a person as a member or fundi. Link members to properties and fundis to businesses, then create and update jobs.</p>
+            <p className="mt-2 text-pretty text-gray-600">Add members under People and fundis under Fundis. Add optional business details in the same fundi form, then manage properties and jobs.</p>
             <Link href="/admin/people/create" className={'mt-3 inline-block '+linkClass}>Add a person</Link>
         </section>
     </Layout>;

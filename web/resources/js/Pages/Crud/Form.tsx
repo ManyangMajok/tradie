@@ -11,11 +11,12 @@ export default function Form({resource,singular,fields,navigation,record,recordI
         <Head title={title} /><Link href={`/admin/${resource}`} className={linkClass}>← Back to list</Link><h1 className="mt-4 text-balance text-3xl font-semibold">{title}</h1>
         <form className="mt-6 max-w-3xl space-y-5 rounded-xl border border-gray-200 bg-white p-5 sm:p-6" aria-busy={processing} onSubmit={event=>{event.preventDefault();if (recordId) put(`/admin/${resource}/${recordId}`); else post(`/admin/${resource}`);}}>
             {Object.keys(errors).length>0 && <div role="alert" className="rounded-lg bg-red-50 p-3 text-red-800">Please correct the errors below.{errors.record && <p>{errors.record}</p>}</div>}
-            {fields.map(field=>{
+            {fields.map((field,index)=>{
                 const required=field.required || (field.type==='password' && !recordId);
                 const describedBy=[field.help ? `${field.name}-help` : '',errors[field.name] ? `${field.name}-error` : ''].filter(Boolean).join(' ') || undefined;
                 const common={id:field.name,name:field.name,required,'aria-invalid':!!errors[field.name],'aria-describedby':describedBy};
                 return <div key={field.name}>
+                    {field.section && fields[index-1]?.section !== field.section && <h2 className="mb-4 border-t border-gray-200 pt-5 text-balance text-lg font-semibold">{field.section}</h2>}
                     <label htmlFor={field.name} className="mb-1 block text-sm font-medium">{field.label}{required ? ' *' : ' (optional)'}</label>
                     {field.type==='select' ? <select {...common} value={String(data[field.name] ?? '')} onChange={event=>setData(field.name,event.target.value)} className={controlClass}><option value="">Select {field.label.toLowerCase()}</option>{field.options?.map(option=><option key={option.value} value={option.value}>{option.label}</option>)}</select>
                     : field.type==='textarea' ? <textarea {...common} value={String(data[field.name] ?? '')} onChange={event=>setData(field.name,event.target.value)} maxLength={field.max} rows={4} className={controlClass} />

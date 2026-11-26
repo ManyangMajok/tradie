@@ -91,6 +91,10 @@ class CrudController extends Controller
         try {
             DB::transaction(function () use ($resource, $record) {
                 $model = CrudResources::query($resource)->lockForUpdate()->findOrFail($record);
+                if ($resource === 'fundis') {
+                    $company = $model->tradieCompany()->lockForUpdate()->first();
+                    $company?->forceDelete();
+                }
                 // Physical deletes allow the database's foreign keys to reject removal
                 // of referenced records instead of hiding parents of existing records.
                 method_exists($model, 'forceDelete') ? $model->forceDelete() : $model->delete();
@@ -102,6 +106,6 @@ class CrudController extends Controller
             throw ValidationException::withMessages(['record' => 'This record is still in use. Remove its related records first.']);
         }
 
-        return redirect("/admin/$resource")->with('success','Record deleted.');
+        return redirect("/admin/$resource")->with('success', 'Record deleted.');
     }
 }

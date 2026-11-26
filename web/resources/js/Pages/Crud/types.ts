@@ -1,5 +1,5 @@
 export type Value = string | number | boolean | null;
-export interface Field { name: string; label: string; type: string; required: boolean; help?: string; max?: number; min?: number; options?: {value: string | number; label: string}[] }
+export interface Field { name: string; label: string; type: string; required: boolean; help?: string; section?: string; max?: number; min?: number; options?: {value: string | number; label: string}[] }
 export interface NavItem { key: string; label: string }
 export interface ResourceProps { resource: string; label: string; singular: string; fields: Field[]; navigation: NavItem[] }
 export function display(field: Field, value: Value): string {

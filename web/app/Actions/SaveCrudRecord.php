@@ -8,6 +8,7 @@ use App\Models\TradieCompany;
 use App\Support\CrudResources;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
 final class SaveCrudRecord
@@ -17,6 +18,24 @@ final class SaveCrudRecord
         return DB::transaction(function () use ($resource, $data, $id) {
             $model = CrudResources::definition($resource)['model'];
             $record = $id ? CrudResources::query($resource)->lockForUpdate()->findOrFail($id) : new $model;
+            if ($resource === 'fundis') {
+                $business = array_intersect_key($data, array_flip(['business_name', 'trading_name', 'abn', 'about_text']));
+                $contact = array_intersect_key($data, array_flip(['first_name', 'last_name', 'email', 'phone', 'status']));
+                $contact['role'] = 'tradie';
+                if (! $id) {
+                    $contact['password'] = Str::random(48);
+                }
+                $record->fill($contact)->save();
+                if (! empty($business['business_name'])) {
+                    $company = TradieCompany::where('owner_user_id', $record->id)->lockForUpdate()->first();
+                    if (! $company) {
+                        $company = new TradieCompany(['owner_user_id' => $record->id]);
+                    }
+                    $company->fill($business)->save();
+                }
+
+                return $record;
+            }
             if ($resource === 'people') {
                 if (empty($data['password'])) {
                     unset($data['password']);
