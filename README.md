@@ -4,7 +4,7 @@ The **tradie-crud** branch of [ManyangMajok/tradie](https://github.com/ManyangMa
 
 The admin keeps full CRUD for people, fundis (optional business details), properties, jobs, locations, categories and issue types. **Clients and fundis also have their own web accounts and dashboards.** Mobile apps remain excluded.
 
-- **Clients:** manage properties and profile/password, find available local fundis ranked by ratings, choose a fundi, track/cancel jobs, submit reviews, save fundis and activate a simulated membership.
+- **Clients:** manage properties and profile/password, find available local fundis ranked by saved-pin distance and ratings, choose a fundi, track/cancel jobs, submit reviews, save fundis and activate a simulated membership.
 - **Fundis:** manage profile/password, optional business details, trades, service areas and availability; activate a simulated subscription; accept/decline leads, update job progress, submit completion reports and see performance from actual records.
 - **Admins:** retain the combined fundi form, manage records and generate private password setup links. Active workflow records are protected from destructive CRUD changes.
 
@@ -125,3 +125,19 @@ Coverage includes role-isolated access, password setup, CRUD, relationship/uniqu
 The original schema and domain services support the restored web portals; the admin uses the explicit CRUD field allowlist. The retained platform/production docs are historical references; this README and `docs/CRUD.md` are authoritative for this branch.
 
 For approximate nearest-area suggestions, add paired latitude/longitude values under Admin → Locations. Without coordinates, alternatives prioritise the same county and then ratings; no distance is fabricated. A map is not required for matching.
+
+
+## OpenStreetMap pins
+
+Leaflet displays an optional OpenStreetMap map, loaded only after clicking Open map or Show map. No API key or OSM account is needed for the default modest-use demo. Internet is needed for map tiles; numeric coordinate entry and the normal fundi list remain available without them.
+
+- Admin: Locations → Add/Edit → Open map to pin an area centre.
+- Client: Properties → Add/Edit → Property pin. Click to place/move it, then save the form.
+- Fundi: Settings → Public base location. This pin is shown to clients in search; choose a location you are comfortable publishing. It does not change your service-area coverage.
+- Client search: Show map to see saved bases or labelled area centres. Select a fundi pin or its list entry. Property pins are not shown to other clients.
+
+Local coverage remains first. Within local results, known property-to-base straight-line distances come first, then rating; entries without a distance remain listed. Other-area suggestions appear only when no local fundi is eligible and still require travel confirmation. Area-centre estimates are clearly distinguished from saved-base estimates. This is not live GPS, driving routes, or travel-time estimation. No coordinates are fabricated for existing accounts.
+
+To pull this update, run composer install, npm ci, php artisan migrate, npm run build and restart the app/worker. The migration adds nullable pin columns without resetting data. Clear pin plus Save removes stored coordinates.
+
+Default map tiles follow https://operations.osmfoundation.org/policies/tiles/: visible attribution, normal browser caching/referrer, no offline downloads or prefetching. For larger deployments, configure a suitable provider with VITE_MAP_TILE_URL and VITE_MAP_ATTRIBUTION in .env and rebuild. No address-search/geocoding service is integrated. Addresses and marker labels stay in the app; external requests fetch map tiles.

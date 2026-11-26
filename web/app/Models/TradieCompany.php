@@ -17,6 +17,7 @@ class TradieCompany extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'latitude', 'longitude',
         'is_independent',
         'owner_user_id',
         'business_name',
@@ -41,6 +42,7 @@ class TradieCompany extends Model
     protected function casts(): array
     {
         return [
+            'latitude' => 'float', 'longitude' => 'float',
             'is_independent' => 'boolean',
             'status' => TradieCompanyStatus::class,
             'rating_average' => 'float',

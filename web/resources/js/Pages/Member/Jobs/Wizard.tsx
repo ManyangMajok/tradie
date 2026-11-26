@@ -8,6 +8,8 @@ import { Button } from '../../../Components/ui/Button';
 import { ChevronLeft } from 'lucide-react';
 
 interface Property {
+    latitude: number | null;
+    longitude: number | null;
     id: number;
     label: string;
     address_line_1: string;
@@ -345,7 +347,7 @@ export default function JobsWizard({ properties, categories, issue_types }: Prop
                     )}
                     {step === 6 && (
                         <>
-                            <TradieChoices tradies={tradies} selected={state.selected_tradie_company_id}
+                            <TradieChoices origin={properties.find(property => property.id === state.property_id)} tradies={tradies} selected={state.selected_tradie_company_id}
                                 onChange={(id) => set('selected_tradie_company_id', id)} location={location}
                                 error={errors.selected_tradie_company_id} disabled={processing || loadingTradies} />
                             <Button icon="refresh" variant="secondary" onClick={() => void loadTradies()} disabled={processing} loading={loadingTradies}>

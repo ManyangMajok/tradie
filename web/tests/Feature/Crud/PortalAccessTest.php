@@ -130,3 +130,21 @@ it('does not list a suspended fundi as available', function () {
     $company->owner->update(['status' => 'suspended']);
     $this->actingAs($job->member)->getJson('/jobs/available-tradies?'.http_build_query(['property_id' => $job->property_id, 'tradie_category_id' => $job->tradie_category_id, 'urgency' => 'flexible']))->assertOk()->assertJsonCount(0, 'tradies');
 });
+
+it('saves optional property and fundi map pins with paired coordinate validation and ownership', function () {
+    $member = User::factory()->member()->create();
+    $property = Property::factory()->create(['member_user_id' => $member->id]);
+    $data = ['label' => 'Home', 'address_line_1' => 'Demo road', 'suburb_id' => $property->suburb_id, 'property_type' => 'house', 'latitude' => -1.28, 'longitude' => 36.82];
+    $this->actingAs($member)->put('/properties/'.$property->id, $data)->assertSessionHasNoErrors();
+    expect($property->fresh()->latitude)->toBe(-1.28);
+    $this->put('/properties/'.$property->id, [...$data, 'longitude' => null])->assertSessionHasErrors('longitude');
+    $this->actingAs(User::factory()->member()->create())->put('/properties/'.$property->id, $data)->assertForbidden();
+    $fundi = User::factory()->tradie()->create();
+    $this->actingAs($fundi)->get('/tradie/settings')->assertOk();
+    $data = ['business_name' => '', 'latitude' => -1.3, 'longitude' => 36.8];
+    $this->patch('/tradie/settings/company', $data)->assertSessionHasNoErrors();
+    expect($fundi->fresh()->tradieCompany->latitude)->toBe(-1.3);
+    $this->patch('/tradie/settings/company', [...$data, 'latitude' => 91])->assertSessionHasErrors('latitude');
+    $this->patch('/tradie/settings/company', [...$data, 'latitude' => null, 'longitude' => null])->assertSessionHasNoErrors();
+    expect($fundi->fresh()->tradieCompany->latitude)->toBeNull();
+});

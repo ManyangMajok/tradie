@@ -38,7 +38,7 @@ class JobController extends Controller
         $properties = $user->properties()
             ->with('suburb')
             ->whereNull('deleted_at')
-            ->get(['id', 'label', 'address_line_1', 'suburb_id']);
+            ->get(['id', 'label', 'address_line_1', 'suburb_id', 'latitude', 'longitude']);
 
         $categories = TradieCategory::where('is_active', true)
             ->get(['id', 'name', 'slug']);

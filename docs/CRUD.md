@@ -44,6 +44,14 @@ Actions use the shared Lucide ActionIcon component alongside visible labels. Sha
 
 The client sees all eligible fundis serving their area, ordered by ratings. Only when none are available do other active service areas appear as alternatives, labelled Travel needs confirmation. All other checks (trade, approval, subscription, hours, active account, existing offers and dispute flags) remain. Local availability is rechecked on submission. An outside-area offer records its travel flag; the fundi sees the warning and accepts to confirm travel, or declines. No automatic selection occurs.
 
-Where stored area coordinates exist, alternatives are ordered by approximate straight-line distance to their nearest service area. Unknown distances sort after known ones; county and rating break ties. Coordinates are not currently seeded for Kenyan areas, so the demo uses same-county and rating fallback, with Distance unavailable shown honestly. A map and live GPS positions are not part of this change.
+Where stored area coordinates exist, alternatives are ordered by approximate straight-line distance to their nearest service area. Unknown distances sort after known ones; county and rating break ties. Coordinates are not currently seeded for Kenyan areas, so the demo uses same-county and rating fallback, with Distance unavailable shown honestly. The map integration below adds saved pins; live GPS positions remain excluded.
 
 Admins can enter optional paired latitude/longitude values on Locations. These are area-centre coordinates, not home addresses or live fundi locations. Both coordinates are validated and must be supplied together.
+
+## Approved map integration
+
+Leaflet 1.9 provides user-requested pin placement and a selectable discovery map; @types/leaflet supplies build-time types. These packages are justified because Laravel/React do not provide geographic map rendering. Client properties and fundi companies have nullable latitude/longitude pairs, validated on their existing owner-scoped forms. Public fundi bases are labelled as public before saving. Admin area centres use the existing location fields. Clients' property pins are only returned through their own portal and existing job access controls.
+
+Saved property-to-base distances order local candidates nearest first, then rating, with unknown distances last. For alternatives, saved-pin distances are preferred per candidate; area estimates remain a labelled fallback. This approved ordering supersedes the earlier rating-only local sort. All eligibility and explicit-choice travel confirmation stay unchanged. Local results never mix in outside-area alternatives.
+
+Maps load on explicit open, include attribution, allow keyboard navigation, and retain list/coordinate entry alternatives. No browser automation or tile scraping is used for verification. Leaflet and styles are bundled locally; the only map service is configurable tile delivery. Existing records remain unpinned until a user saves coordinates. Migration 000003 is incremental.

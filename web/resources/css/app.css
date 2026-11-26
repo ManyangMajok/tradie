@@ -66,3 +66,8 @@
     .metric-tile[data-featured="true"] { @apply bg-accent-500 text-gray-950; }
     .skip-link { @apply sr-only focus:not-sr-only focus:fixed focus:left-5 focus:top-5 focus:z-50 focus:rounded-full focus:bg-white focus:px-5 focus:py-3; }
 }
+
+.map-pin { display: flex; align-items: center; justify-content: center; background: #fff; color: #ae361c; border: 2px solid #ae361c; border-radius: 50%; box-shadow: 0 1px 4px #0003; }
+.map-pin-selected { background: #24261f; color: #fff; border-color: #fff; }
+.leaflet-container { font-family: inherit; }
+.leaflet-container a { color: #174b79; }

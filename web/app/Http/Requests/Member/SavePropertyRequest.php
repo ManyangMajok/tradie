@@ -21,6 +21,8 @@ class SavePropertyRequest extends FormRequest
             'address_line_2' => ['nullable', 'string', 'max:200'],
             'suburb_id' => ['required', 'integer', Rule::exists('suburbs', 'id')->where('is_active', true)],
             'property_type' => ['required', Rule::enum(PropertyType::class)],
+            'latitude' => ['nullable', 'required_with:longitude', 'numeric', 'between:-90,90'],
+            'longitude' => ['nullable', 'required_with:latitude', 'numeric', 'between:-180,180'],
             'access_notes' => ['nullable', 'string', 'max:2000'],
         ];
     }

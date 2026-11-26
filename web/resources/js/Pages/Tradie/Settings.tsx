@@ -1,3 +1,4 @@
+import MapPinPicker from '../../Components/MapPinPicker';
 import { ActionIcon } from '../../Components/ui/ActionIcon';
 import React from 'react';
 import { FormField } from '../../Components/ui/FormField';
@@ -12,6 +13,8 @@ interface Profile {
 }
 
 interface Company {
+    latitude: number | null;
+    longitude: number | null;
     business_name: string;
     trading_name: string | null;
     about_text: string | null;
@@ -38,6 +41,8 @@ export default function Settings({ profile, company }: Props) {
     });
 
     const companyForm = useForm({
+        latitude: company.latitude?.toString() ?? '',
+        longitude: company.longitude?.toString() ?? '',
         business_name: company.business_name,
         trading_name:  company.trading_name ?? '',
         about_text:    company.about_text ?? '',
@@ -114,6 +119,7 @@ export default function Settings({ profile, company }: Props) {
                 <SectionHeading title="Business details (optional)" />
                 <p className="mb-4 text-sm text-gray-600">Leave the business name blank to work independently under your own name.</p>
                 <form onSubmit={submitCompany} className="space-y-4">
+                    <MapPinPicker title="Public base location" help="Optional: choose a base you are comfortable showing to clients. This saved pin is public in fundi search; it is not live tracking and does not change your service areas." latitude={companyForm.data.latitude} longitude={companyForm.data.longitude} errors={companyForm.errors} onChange={(latitude, longitude) => companyForm.setData(data => ({ ...data, latitude, longitude }))} />
                     <Field label="Business name" error={companyForm.errors.business_name}>
                         <input
                             className={inputCls}

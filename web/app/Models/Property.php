@@ -16,6 +16,7 @@ class Property extends Model
     use HasFactory, SoftDeletes;
 
     protected $fillable = [
+        'latitude', 'longitude',
         'member_user_id',
         'label',
         'address_line_1',
@@ -30,6 +31,7 @@ class Property extends Model
     protected function casts(): array
     {
         return [
+            'latitude' => 'float', 'longitude' => 'float',
             'property_type' => PropertyType::class,
             'is_primary' => 'boolean',
         ];

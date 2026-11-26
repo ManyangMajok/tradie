@@ -238,3 +238,19 @@ it('validates paired area coordinates through admin location editing', function 
     $this->put('/admin/locations/'.$area->id, [...$payload, 'latitude' => 91])->assertSessionHasErrors('latitude');
     $this->put('/admin/locations/'.$area->id, [...$payload, 'longitude' => null])->assertSessionHasErrors('longitude');
 });
+
+it('ranks local saved base pins by distance and labels them separately from area estimates', function () {
+    $job = choiceJob();
+    $job->property->update(['latitude' => 0, 'longitude' => 0]);
+    $near = choiceCandidate($job, 3.0);
+    $far = choiceCandidate($job, 5.0);
+    $unknown = choiceCandidate($job, 4.9);
+    $near->update(['latitude' => 0, 'longitude' => 0.1]);
+    $far->update(['latitude' => 0, 'longitude' => 1]);
+    $results = app(AvailableTradies::class)->forJob($job);
+    expect($results->pluck('id')->all())->toBe([$near->id, $far->id, $unknown->id])
+        ->and($results->first()->distance_km)->toBe(11.1)
+        ->and($results->first()->distance_basis)->toBe('base')
+        ->and($results->first()->map_latitude)->toBe(0.0)
+        ->and($results->last()->distance_km)->toBeNull();
+});

@@ -26,6 +26,7 @@ class SettingsController extends Controller
                 'phone' => $user->phone,
             ],
             'company' => [
+                'latitude' => $company->latitude, 'longitude' => $company->longitude,
                 'business_name' => $company->is_independent ? '' : $company->business_name,
                 'trading_name' => $company->trading_name,
                 'about_text' => $company->about_text,
@@ -48,6 +49,8 @@ class SettingsController extends Controller
     public function updateCompany(Request $request): RedirectResponse
     {
         $data = $request->validate([
+            'latitude' => ['nullable', 'required_with:longitude', 'numeric', 'between:-90,90'],
+            'longitude' => ['nullable', 'required_with:latitude', 'numeric', 'between:-180,180'],
             'business_name' => ['nullable', 'string', 'max:200'],
             'trading_name' => ['nullable', 'string', 'max:120'],
             'about_text' => ['nullable', 'string', 'max:2000'],

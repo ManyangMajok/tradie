@@ -8,7 +8,7 @@ import { Button } from '../../../Components/ui/Button';
 import { Clock, CheckCircle2, XCircle, AlertCircle, Loader2, Star } from 'lucide-react';
 
 interface Suburb { name: string; postcode: string; }
-interface Property { address_line_1: string; label: string; suburb: Suburb; }
+interface Property { latitude: number | null; longitude: number | null; address_line_1: string; label: string; suburb: Suburb; }
 interface Category { name: string; }
 interface IssueType { name: string; }
 interface StatusLog { id: number; from_status: string | null; to_status: string; note: string | null; created_at: string; }
@@ -265,7 +265,7 @@ export default function JobShow({ job, available_tradies }: Props) {
                 <Card><CardBody className="space-y-4">
                     <p className="text-sm text-gray-700">Your chosen tradie could not accept this request. Choose another below. Our team has also been notified.</p>
                     <form onSubmit={chooseTradie} className="space-y-4">
-                        <TradieChoices tradies={available_tradies} selected={selectedTradie}
+                        <TradieChoices origin={job.property} tradies={available_tradies} selected={selectedTradie}
                             onChange={(id) => { setSelectedTradie(id); setChoiceError(''); }}
                             location={job.property.suburb.name} error={choiceError} disabled={choosing} />
                         <Button icon="send" type="submit" loading={choosing} disabled={available_tradies.length === 0}>Send to chosen tradie</Button>

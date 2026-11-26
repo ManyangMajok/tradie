@@ -1,3 +1,4 @@
+import MapPinPicker from '../../Components/MapPinPicker';
 import { ActionIcon } from '../../Components/ui/ActionIcon';
 import React from 'react';
 import { Head, Link, useForm } from '@inertiajs/react';
@@ -12,6 +13,7 @@ export default function Form({resource,singular,fields,navigation,record,recordI
         <Head title={title} /><Link href={`/admin/${resource}`} className={linkClass}><ActionIcon name="back" inline />Back to list</Link><h1 className="mt-4 text-balance text-3xl font-semibold">{title}</h1>
         <form className="mt-6 max-w-3xl space-y-5 rounded-3xl border border-gray-100 bg-white p-5 sm:p-6" aria-busy={processing} onSubmit={event=>{event.preventDefault();if (recordId) put(`/admin/${resource}/${recordId}`); else post(`/admin/${resource}`);}}>
             {Object.keys(errors).length>0 && <div role="alert" className="rounded-lg bg-red-50 p-3 text-red-800">Please correct the errors below.{errors.record && <p>{errors.record}</p>}</div>}
+            {resource === 'locations' && <MapPinPicker title="Area centre" help="Place an approximate centre for this service area." latitude={String(data.latitude ?? '')} longitude={String(data.longitude ?? '')} showFields={false} onChange={(latitude,longitude)=>setData(values=>({...values,latitude,longitude}))} />}
             {fields.map((field,index)=>{
                 const required=field.required || (field.type==='password' && !recordId);
                 const describedBy=[field.help ? `${field.name}-help` : '',errors[field.name] ? `${field.name}-error` : ''].filter(Boolean).join(' ') || undefined;
