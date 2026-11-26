@@ -1,3 +1,5 @@
+> **Admin CRUD branch:** Read the root `README.md` and `docs/CRUD.md` first. The owner-requested web-only CRUD scope supersedes original platform/mobile requirements below.
+
 # Demonstration variant — approved 2 October 2026
 
 This document and the root README override the production infrastructure instructions in the copied specification pack. The owner requested a separate copy of the current app with Laravel and the same frontend, MySQL, simulated payments, locally logged email, and local file storage. The source `my-tradie` project is not modified.

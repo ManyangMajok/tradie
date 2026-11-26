@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Enums\UserRole;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use Illuminate\Http\RedirectResponse;
@@ -24,7 +23,7 @@ class LoginController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended($this->dashboardRoute($request->user()->role));
+        return redirect()->intended(route('admin.dashboard'));
     }
 
     public function destroy(Request $request): RedirectResponse
@@ -35,14 +34,5 @@ class LoginController extends Controller
         $request->session()->regenerateToken();
 
         return redirect()->route('login');
-    }
-
-    private function dashboardRoute(UserRole $role): string
-    {
-        return match ($role) {
-            UserRole::Admin => route('admin.dashboard'),
-            UserRole::Tradie => route('tradie.leads'),
-            UserRole::Member => route('member.dashboard'),
-        };
     }
 }

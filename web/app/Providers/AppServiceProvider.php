@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Enums\UserRole;
+use App\Enums\UserStatus;
 use App\Models\Job;
 use App\Models\JobOffer;
 use App\Models\MemberSubscription;
@@ -21,6 +23,7 @@ class AppServiceProvider extends ServiceProvider
 
     public function boot(): void
     {
+        Gate::define('manage-records', fn ($user) => $user->role === UserRole::Admin && $user->status === UserStatus::Active);
         Gate::policy(Job::class, JobPolicy::class);
         Gate::policy(Property::class, PropertyPolicy::class);
         Gate::policy(JobOffer::class, JobOfferPolicy::class);

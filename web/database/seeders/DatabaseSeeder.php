@@ -12,9 +12,7 @@ class DatabaseSeeder extends Seeder
             SuburbSeeder::class,
             TradieCategorySeeder::class,
             IssueTypeSeeder::class,
-            MemberPlanSeeder::class,
-            TradiePlanSeeder::class,
-            KenyanDemoSeeder::class,
+            CrudDemoSeeder::class,
         ]);
     }
 }

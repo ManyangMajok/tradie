@@ -1,3 +1,5 @@
+> **Admin CRUD branch:** Read the root `README.md` and `docs/CRUD.md` first. The owner-requested web-only CRUD scope supersedes original platform/mobile requirements below.
+
 > **Demo variant:** Read `docs/DEMO.md` and the root `README.md` first. Their owner-approved MySQL/local-integration choices supersede the production infrastructure and billing instructions below. Preserve all other business rules.
 
 # CLAUDE.md — Agent Operating Instructions

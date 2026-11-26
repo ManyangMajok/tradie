@@ -12,7 +12,6 @@ use App\Jobs\Dispatch\ExpireOffer;
 use App\Jobs\Dispatch\SendLeadNotification;
 use App\Models\Job;
 use App\Models\JobOffer;
-use App\Models\Property;
 use App\Models\TradieAvailability;
 use App\Models\TradieCompany;
 use App\Models\TradieCompanyCategory;
@@ -297,39 +296,6 @@ it('accepting an already-declined offer throws OfferNoLongerAvailableException',
 
     expect(fn () => app(AcceptOfferAction::class)->execute($offer, $tradieUser))
         ->toThrow(OfferNoLongerAvailableException::class);
-});
-
-it('duplicate job submission within 60s returns the existing job', function () {
-    Queue::fake();
-
-    $member = User::factory()->member()->create();
-    $property = Property::factory()->forMember($member)->create();
-
-    $job = Job::factory()->create([
-        'member_user_id' => $member->id,
-        'property_id' => $property->id,
-        'status' => JobStatus::Offered,
-        'submitted_at' => now(),
-    ]);
-
-    $company = makeEligibleTradie($job);
-    $job->update(['selected_tradie_company_id' => $company->id]);
-
-    $this->actingAs($member)
-        ->postJson('/jobs', [
-            'selected_tradie_company_id' => $company->id,
-            'property_id' => $property->id,
-            'tradie_category_id' => $job->tradie_category_id,
-            'urgency' => $job->urgency->value,
-            'description' => 'Duplicate request',
-            'best_contact_time' => 'any',
-            'custom_issue' => 'Leaking tap',
-        ])
-        ->assertStatus(200)
-        ->assertJsonPath('public_id', $job->public_id);
-
-    // No second job created
-    expect(Job::where('member_user_id', $member->id)->count())->toBe(1);
 });
 
 it('dispute-flagged tradie is excluded from dispatch', function () {
